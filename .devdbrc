@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "/mnt/DiskD/laragon/www/laravel-pos/database/database.sqlite"
+  }
+]

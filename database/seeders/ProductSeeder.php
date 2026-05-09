@@ -50,7 +50,9 @@ class ProductSeeder extends Seeder
 
         foreach ($productsByCategory as $categoryName => $products) {
             $category = Category::where('name', $categoryName)->first();
-            if (!$category) continue;
+            if (! $category) {
+                continue;
+            }
 
             foreach ($products as $product) {
                 Product::create([

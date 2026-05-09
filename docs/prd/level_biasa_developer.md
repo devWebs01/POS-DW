@@ -30,12 +30,12 @@
 
 ## Non-Functional Requirements
 
-| ID | Requirement | Target |
-|----|-------------|--------|
-| NFR-01 | Response time transaksi | < 2 detik |
-| NFR-02 | Bahasa antarmuka | Bahasa Indonesia |
-| NFR-03 | Arsitektur | Single-tenant |
-| NFR-04 | Cetak struk | Thermal printer / browser print |
+| ID     | Requirement             | Target                          |
+| --------| -------------------------| ---------------------------------|
+| NFR-01 | Response time transaksi | < 2 detik                       |
+| NFR-02 | Bahasa antarmuka        | Bahasa Indonesia                |
+| NFR-03 | Arsitektur              | Single-tenant                   |
+| NFR-04 | Cetak struk             | Thermal printer / browser print |
 
 ## Constraints
 

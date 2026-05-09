@@ -17,6 +17,7 @@ class TransactionSeeder extends Seeder
 
         if ($products->isEmpty()) {
             $this->command->warn('Tidak ada produk, lewati TransactionSeeder.');
+
             return;
         }
 
@@ -49,7 +50,7 @@ class TransactionSeeder extends Seeder
 
             $transaction = Transaction::create([
                 'user_id' => $user->id,
-                'invoice_number' => 'INV-' . $createdAt->format('YmdHis') . '-' . strtoupper(substr(uniqid(), -4)),
+                'invoice_number' => 'INV-'.$createdAt->format('YmdHis').'-'.strtoupper(substr(uniqid(), -4)),
                 'total_amount' => $totalAmount,
                 'paid_amount' => $paidAmount,
                 'change_amount' => $paidAmount - $totalAmount,

@@ -18,7 +18,7 @@ class TransactionFactory extends Factory
 
         return [
             'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
-            'invoice_number' => 'INV-' . now()->format('YmdHis') . '-' . strtoupper(fake()->unique()->bothify('####')),
+            'invoice_number' => 'INV-'.now()->format('YmdHis').'-'.strtoupper(fake()->unique()->bothify('####')),
             'total_amount' => $total,
             'paid_amount' => $paid,
             'change_amount' => $paid - $total,

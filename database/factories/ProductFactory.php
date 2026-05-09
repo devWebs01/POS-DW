@@ -19,7 +19,7 @@ class ProductFactory extends Factory
             'category_id' => Category::inRandomOrder()->first()?->id ?? Category::factory(),
             'name' => ucfirst($name),
             'slug' => str()->slug($name),
-            'sku' => 'SKU-' . strtoupper(fake()->unique()->bothify('???#####')),
+            'sku' => 'SKU-'.strtoupper(fake()->unique()->bothify('???#####')),
             'price' => fake()->randomFloat(2, 1000, 100000),
             'stock' => fake()->numberBetween(0, 100),
             'description' => fake()->optional()->sentence(),
