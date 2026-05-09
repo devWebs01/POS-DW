@@ -44,15 +44,14 @@ $transactions = computed(function () {
     return Transaction::query()
         ->withCount('items')
         ->where(function ($q) {
-            $q->where('invoice_number', 'like', '%' . $this->search . '%')
-              ->orWhere('customer', 'like', '%' . $this->search . '%');
+            $q->where('invoice_number', 'like', '%' . $this->search . '%')->orWhere('customer', 'like', '%' . $this->search . '%');
         })
         ->orderBy($this->sortBy, $this->sortDirection)
         ->paginate(10);
 });
 
 $viewTransaction = computed(function () {
-    if (! $this->viewingTransactionId) {
+    if (!$this->viewingTransactionId) {
         return null;
     }
 
@@ -114,11 +113,13 @@ $methodColors = [
                 </flux:button>
             </div>
 
-            <flux:input size="md" wire:model.live="search" type="search" placeholder="Search by invoice or customer..." />
+            <flux:input size="md" wire:model.live="search" type="search"
+                placeholder="Search by invoice or customer..." />
 
             <flux:table :paginate="$this->transactions">
                 <flux:table.columns>
-                    <flux:table.column sortable :sorted="$sortBy === 'id'" :direction="$sortDirection" wire:click="sort('id')">
+                    <flux:table.column sortable :sorted="$sortBy === 'id'" :direction="$sortDirection"
+                        wire:click="sort('id')">
                         Invoice
                     </flux:table.column>
 
@@ -130,7 +131,8 @@ $methodColors = [
                         Items
                     </flux:table.column>
 
-                    <flux:table.column sortable :sorted="$sortBy === 'total_amount'" :direction="$sortDirection" wire:click="sort('total_amount')">
+                    <flux:table.column sortable :sorted="$sortBy === 'total_amount'" :direction="$sortDirection"
+                        wire:click="sort('total_amount')">
                         Total
                     </flux:table.column>
 
@@ -149,7 +151,8 @@ $methodColors = [
                             <flux:table.cell>
                                 <div class="flex flex-col">
                                     <span class="font-medium">{{ $transaction->invoice_number }}</span>
-                                    <span class="text-xs text-zinc-500">{{ $transaction->created_at->format('d M Y, H:i') }}</span>
+                                    <span
+                                        class="text-xs text-zinc-500">{{ $transaction->created_at->format('d M Y, H:i') }}</span>
                                 </div>
                             </flux:table.cell>
 
@@ -168,23 +171,28 @@ $methodColors = [
                             </flux:table.cell>
 
                             <flux:table.cell>
-                                <flux:badge size="sm" :color="$methodColors[$transaction->payment_method] ?? 'gray'" inset="top bottom">
+                                <flux:badge size="sm" :color="$methodColors[$transaction->payment_method] ?? 'gray'"
+                                    inset="top bottom">
                                     {{ $methodLabels[$transaction->payment_method] ?? $transaction->payment_method }}
                                 </flux:badge>
                             </flux:table.cell>
 
                             <flux:table.cell>
                                 <flux:dropdown position="bottom" align="end">
-                                    <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom" />
+                                    <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal"
+                                        inset="top bottom" />
                                     <flux:menu>
                                         <flux:menu.item icon="eye" wire:click="viewDetail({{ $transaction->id }})">
                                             {{ __('View') }}
                                         </flux:menu.item>
-                                        <flux:menu.item icon="pencil-square" href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}" wire:navigate>
+                                        <flux:menu.item icon="pencil-square"
+                                            href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}"
+                                            wire:navigate>
                                             {{ __('Edit') }}
                                         </flux:menu.item>
                                         <flux:menu.separator />
-                                        <flux:menu.item icon="trash" variant="danger" wire:click="confirmDelete({{ $transaction->id }})">
+                                        <flux:menu.item icon="trash" variant="danger"
+                                            wire:click="confirmDelete({{ $transaction->id }})">
                                             {{ __('Delete') }}
                                         </flux:menu.item>
                                     </flux:menu>
@@ -227,33 +235,39 @@ $methodColors = [
                                     @foreach ($this->viewTransaction->items as $item)
                                         <tr class="border-b border-zinc-100 last:border-b-0 dark:border-zinc-800">
                                             <td class="px-3 py-2">{{ $item->product?->name ?? '-' }}</td>
-                                            <td class="px-3 py-2 text-right">{{ Number::currency($item->unit_price, 'IDR', 'id') }}</td>
+                                            <td class="px-3 py-2 text-right">
+                                                {{ Number::currency($item->unit_price, 'IDR', 'id') }}</td>
                                             <td class="px-3 py-2 text-center">{{ $item->quantity }}</td>
-                                            <td class="px-3 py-2 text-right font-medium">{{ Number::currency($item->subtotal, 'IDR', 'id') }}</td>
+                                            <td class="px-3 py-2 text-right font-medium">
+                                                {{ Number::currency($item->subtotal, 'IDR', 'id') }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr class="border-t bg-zinc-50 font-semibold dark:border-zinc-700 dark:bg-zinc-800">
                                         <td colspan="3" class="px-3 py-2 text-right">Total</td>
-                                        <td class="px-3 py-2 text-right">{{ Number::currency($this->viewTransaction->total_amount, 'IDR', 'id') }}</td>
+                                        <td class="px-3 py-2 text-right">
+                                            {{ Number::currency($this->viewTransaction->total_amount, 'IDR', 'id') }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-4 text-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                             <div>
                                 <span class="text-zinc-500">{{ __('Paid') }}</span>
-                                <p class="font-medium">{{ Number::currency($this->viewTransaction->paid_amount, 'IDR', 'id') }}</p>
+                                <p class="font-medium">
+                                    {{ Number::currency($this->viewTransaction->paid_amount, 'IDR', 'id') }}</p>
                             </div>
                             <div>
                                 <span class="text-zinc-500">{{ __('Change') }}</span>
-                                <p class="font-medium">{{ Number::currency($this->viewTransaction->change_amount, 'IDR', 'id') }}</p>
+                                <p class="font-medium">
+                                    {{ Number::currency($this->viewTransaction->change_amount, 'IDR', 'id') }}</p>
                             </div>
                             <div>
                                 <span class="text-zinc-500">{{ __('Items') }}</span>
-                                <p class="font-medium">{{ $this->viewTransaction->items->count() }} {{ Str::plural('item', $this->viewTransaction->items->count()) }}</p>
+                                <p class="font-medium">{{ $this->viewTransaction->items->count() }}
+                                    {{ Str::plural('item', $this->viewTransaction->items->count()) }}</p>
                             </div>
                         </div>
 
@@ -265,7 +279,8 @@ $methodColors = [
                         @endif
 
                         <div class="flex justify-end gap-2">
-                            <flux:button variant="filled" href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}" wire:navigate>
+                            <flux:button variant="filled"
+                                href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}" wire:navigate>
                                 {{ __('Edit Transaction') }}
                             </flux:button>
                             <flux:modal.close>
