@@ -225,6 +225,10 @@ $delete = function () {
                     </flux:table.column>
 
                     <flux:table.column>
+                        Customer
+                    </flux:table.column>
+
+                    <flux:table.column>
                         Items
                     </flux:table.column>
 
@@ -256,6 +260,11 @@ $delete = function () {
                                         class="text-xs text-zinc-500">{{ $transaction->created_at->format('d M Y, H:i') }}</span>
                                 </div>
                             </flux:table.cell>
+
+                            <flux:table.cell>
+                                {{ $transaction->customer }}
+                            </flux:table.cell>
+
 
                             <flux:table.cell>
                                 <flux:badge size="sm" inset="top bottom">

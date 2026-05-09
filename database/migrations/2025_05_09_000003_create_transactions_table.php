@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('customer');
             $table->string('invoice_number', 50)->unique();
             $table->decimal('total_amount', 12, 2);
             $table->decimal('paid_amount', 12, 2);
@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->index('user_id');
             $table->index('created_at');
         });
     }

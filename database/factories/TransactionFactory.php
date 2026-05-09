@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Transaction;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +16,7 @@ class TransactionFactory extends Factory
         $paid = $total + fake()->randomFloat(2, 0, 100000);
 
         return [
-            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'customer' => fake()->name,
             'invoice_number' => 'INV-'.now()->format('YmdHis').'-'.strtoupper(fake()->unique()->bothify('####')),
             'total_amount' => $total,
             'paid_amount' => $paid,

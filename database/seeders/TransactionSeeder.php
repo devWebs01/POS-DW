@@ -49,7 +49,7 @@ class TransactionSeeder extends Seeder
             $createdAt = now()->subDays(rand(0, 30))->setTime(rand(8, 20), rand(0, 59));
 
             $transaction = Transaction::create([
-                'user_id' => $user->id,
+                'customer' => fake()->name,
                 'invoice_number' => 'INV-'.$createdAt->format('YmdHis').'-'.strtoupper(substr(uniqid(), -4)),
                 'total_amount' => $totalAmount,
                 'paid_amount' => $paidAmount,
