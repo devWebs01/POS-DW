@@ -50,10 +50,10 @@ class TransactionsTest extends TestCase
             'stock' => 50,
         ]);
 
-        Livewire::test('transactions.index')
-            ->set('payment_method', 'cash')
+        Livewire::test('transactions.create')
             ->call('addToCart', $product->id)
             ->set('paid_amount', 50000)
+            ->call('confirmSave')
             ->call('save')
             ->assertOk();
 
@@ -77,10 +77,9 @@ class TransactionsTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        Livewire::test('transactions.index')
-            ->set('payment_method', 'cash')
+        Livewire::test('transactions.create')
             ->set('paid_amount', 10000)
-            ->call('save')
+            ->call('confirmSave')
             ->assertOk();
 
         $this->assertDatabaseCount('transactions', 0);
@@ -98,10 +97,10 @@ class TransactionsTest extends TestCase
             'stock' => 10,
         ]);
 
-        Livewire::test('transactions.index')
+        Livewire::test('transactions.create')
             ->call('addToCart', $product->id)
             ->set('paid_amount', 10000)
-            ->call('save')
+            ->call('confirmSave')
             ->assertOk();
 
         $this->assertDatabaseCount('transactions', 0);
@@ -116,10 +115,11 @@ class TransactionsTest extends TestCase
         $product1 = Product::factory()->create(['category_id' => $category->id, 'price' => 10000, 'stock' => 10]);
         $product2 = Product::factory()->create(['category_id' => $category->id, 'price' => 20000, 'stock' => 10]);
 
-        Livewire::test('transactions.index')
+        Livewire::test('transactions.create')
             ->call('addToCart', $product1->id)
             ->call('addToCart', $product2->id)
             ->set('paid_amount', 50000)
+            ->call('confirmSave')
             ->call('save')
             ->assertOk();
 
@@ -140,10 +140,12 @@ class TransactionsTest extends TestCase
         $category = Category::factory()->create();
         $product = Product::factory()->create(['category_id' => $category->id, 'price' => 10000, 'stock' => 10]);
 
-        Livewire::test('transactions.index')
+        Livewire::test('transactions.create')
             ->call('addToCart', $product->id)
-            ->call('updateCartQty', 0, 3)
+            ->call('incrementQty', 0)
+            ->call('incrementQty', 0)
             ->set('paid_amount', 50000)
+            ->call('confirmSave')
             ->call('save')
             ->assertOk();
 
@@ -158,6 +160,35 @@ class TransactionsTest extends TestCase
         ]);
     }
 
+    public function test_can_decrement_cart_item_quantity(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id, 'price' => 10000, 'stock' => 10]);
+
+        Livewire::test('transactions.create')
+            ->call('addToCart', $product->id)
+            ->call('incrementQty', 0)
+            ->call('incrementQty', 0)
+            ->set('paid_amount', 50000)
+            ->call('decrementQty', 0)
+            ->call('confirmSave')
+            ->call('save')
+            ->assertOk();
+
+        $this->assertDatabaseHas('transactions', [
+            'total_amount' => 20000,
+        ]);
+
+        $this->assertDatabaseHas('transaction_items', [
+            'product_id' => $product->id,
+            'quantity' => 2,
+            'subtotal' => 20000,
+        ]);
+    }
+
     public function test_can_remove_item_from_cart(): void
     {
         $user = User::factory()->create();
@@ -166,7 +197,7 @@ class TransactionsTest extends TestCase
         $category = Category::factory()->create();
         $product = Product::factory()->create(['category_id' => $category->id, 'price' => 10000, 'stock' => 10]);
 
-        Livewire::test('transactions.index')
+        Livewire::test('transactions.create')
             ->call('addToCart', $product->id)
             ->call('removeFromCart', 0)
             ->assertSet('cart', []);
@@ -180,16 +211,17 @@ class TransactionsTest extends TestCase
         $category = Category::factory()->create();
         $product = Product::factory()->create(['category_id' => $category->id, 'price' => 15000, 'stock' => 10]);
 
-        // Create a transaction first
-        Livewire::test('transactions.index')
+        // Create a transaction first using the create component
+        Livewire::test('transactions.create')
             ->call('addToCart', $product->id)
             ->set('paid_amount', 15000)
+            ->call('confirmSave')
             ->call('save')
             ->assertOk();
 
         $transaction = Transaction::first();
 
-        // View the detail
+        // View the detail on the index page
         Livewire::test('transactions.index')
             ->call('viewDetail', $transaction->id)
             ->assertSet('showDetailModal', true)
@@ -204,9 +236,10 @@ class TransactionsTest extends TestCase
         $category = Category::factory()->create();
         $product = Product::factory()->create(['category_id' => $category->id, 'price' => 10000, 'stock' => 10]);
 
-        Livewire::test('transactions.index')
+        Livewire::test('transactions.create')
             ->call('addToCart', $product->id)
             ->set('paid_amount', 10000)
+            ->call('confirmSave')
             ->call('save')
             ->assertOk();
 
@@ -227,11 +260,11 @@ class TransactionsTest extends TestCase
         $this->actingAs($user);
 
         Transaction::factory()->create([
-            'user_id' => $user->id,
+            'customer' => $user->name,
             'invoice_number' => 'INV-001',
         ]);
         Transaction::factory()->create([
-            'user_id' => $user->id,
+            'customer' => $user->name,
             'invoice_number' => 'INV-002',
         ]);
 

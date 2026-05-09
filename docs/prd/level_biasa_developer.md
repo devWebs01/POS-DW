@@ -17,16 +17,16 @@
 
 ## Functional Requirements
 
-| ID | Requirement | Prioritas |
-|----|-------------|-----------|
-| FR-01 | Sistem dapat menampilkan daftar produk dengan pencarian | HIGH |
-| FR-02 | Sistem dapat memproses transaksi dengan minimal 1 item | HIGH |
-| FR-03 | Sistem menghitung total dan kembalian secara otomatis | HIGH |
-| FR-04 | Sistem menyimpan riwayat transaksi | HIGH |
-| FR-05 | Sistem mendukung role admin dan kasir | HIGH |
-| FR-06 | Sistem dapat menampilkan laporan penjualan harian | MEDIUM |
-| FR-07 | Produk dapat difilter berdasarkan kategori | MEDIUM |
-| FR-08 | Stok otomatis berkurang saat transaksi | HIGH |
+| ID    | Requirement                                             | Prioritas |
+| -------| ---------------------------------------------------------| -----------|
+| FR-01 | Sistem dapat menampilkan daftar produk dengan pencarian | HIGH      |
+| FR-02 | Sistem dapat memproses transaksi dengan minimal 1 item  | HIGH      |
+| FR-03 | Sistem menghitung total dan kembalian secara otomatis   | HIGH      |
+| FR-04 | Sistem menyimpan riwayat transaksi                      | HIGH      |
+| FR-05 | Sistem mendukung role admin dan kasir                   | HIGH      |
+| FR-06 | Sistem dapat menampilkan laporan penjualan harian       | MEDIUM    |
+| FR-07 | Produk dapat difilter berdasarkan kategori              | MEDIUM    |
+| FR-08 | Stok otomatis berkurang saat transaksi                  | HIGH      |
 
 ## Non-Functional Requirements
 

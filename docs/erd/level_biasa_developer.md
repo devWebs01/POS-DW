@@ -34,7 +34,7 @@
 | Column         | Type            | Constraints              |
 | ----------------| -----------------| --------------------------|
 | id             | BIGINT UNSIGNED | PK, Auto Increment       |
-| user_id        | BIGINT UNSIGNED | FK → users.id, INDEX     |
+| customer        | BIGINT UNSIGNED | FK → users.id, INDEX     |
 | invoice_number | VARCHAR(50)     | NOT NULL, UNIQUE         |
 | total_amount   | DECIMAL(12,2)   | NOT NULL                 |
 | paid_amount    | DECIMAL(12,2)   | NOT NULL                 |
@@ -69,7 +69,7 @@ users      1──N transactions
 ## Indexes Required
 
 - **products**: `category_id`, `sku` (unique), `is_active`
-- **transactions**: `user_id`, `created_at`, `invoice_number` (unique)
+- **transactions**: `customer`, `created_at`, `invoice_number` (unique)
 - **transaction_items**: `transaction_id`, `product_id`
 - **categories**: `slug` (unique), `name` (unique)
 
