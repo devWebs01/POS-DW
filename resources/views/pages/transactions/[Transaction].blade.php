@@ -328,10 +328,10 @@ $paymentMethods = computed(function () {
 
                                     <!-- Menggunakan @class untuk kondisi warna -->
                                     <div @class([
-                                        'mt-1 text-lg font-bold',
-                                        'text-green-600 dark:text-green-400' => $this->changeAmount >= 0,
-                                        'text-red-600 dark:text-red-400' => $this->changeAmount < 0,
-                                    ])>
+    'mt-1 text-lg font-bold',
+    'text-green-600 dark:text-green-400' => $this->changeAmount >= 0,
+    'text-red-600 dark:text-red-400' => $this->changeAmount < 0,
+])>
                                         {{ Number::currency($this->changeAmount, 'IDR', 'id') }}
                                     </div>
                                 </div>
@@ -435,6 +435,9 @@ $paymentMethods = computed(function () {
                     <flux:modal.close>
                         <flux:button variant="filled">{{ __('Cancel') }}</flux:button>
                     </flux:modal.close>
+                     <flux:button variant="filled" href="/transactions/{{ $this->transaction->id }}/receipt" target="_blank">
+                        {{ __('Print Receipt') }}
+                    </flux:button>
                     <flux:button variant="primary" type="submit">{{ __('Confirm & Update') }}</flux:button>
                 </div>
             </form>

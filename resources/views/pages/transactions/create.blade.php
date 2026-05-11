@@ -428,6 +428,9 @@ $paymentMethods = ['cash', 'transfer', 'debit_card', 'credit_card'];
                     <flux:modal.close>
                         <flux:button variant="filled">{{ __('Cancel') }}</flux:button>
                     </flux:modal.close>
+                     <flux:button variant="filled" href="/transactions/{{ $this->transaction->id }}/receipt" target="_blank">
+                        {{ __('Print Receipt') }}
+                    </flux:button>
                     <flux:button variant="primary" type="submit">{{ __('Confirm & Save') }}</flux:button>
                 </div>
             </form>
