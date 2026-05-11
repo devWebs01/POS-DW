@@ -63,7 +63,11 @@ $totalAmount = computed(function () {
 });
 
 $changeAmount = computed(function () {
-    return max(0, ($this->paid_amount ?? 0) - $this->totalAmount);
+    $paid = (float) ($this->paid_amount ?: 0);
+    $total = (float) ($this->totalAmount ?: 0);
+    
+    // Langsung kembalikan hasil pengurangan
+    return $paid - $total;
 });
 
 $addToCart = function ($productId) {
@@ -192,7 +196,7 @@ $paymentMethods = computed(function () {
                 <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
                     {{-- LEFT COLUMN (2/3): Product Selection --}}
                     <div class="space-y-6 lg:col-span-2">
-                        <div class="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+                        <div class="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
                             <div class="mb-6">
                                 <flux:heading size="lg">{{ __('Select Products') }}</flux:heading>
                                 <flux:subheading>{{ __('Search and choose products to add to the transaction.') }}</flux:subheading>
@@ -210,10 +214,10 @@ $paymentMethods = computed(function () {
 
                             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
                                 @forelse ($this->products as $product)
-                                    <div class="group flex items-center justify-between rounded-lg border border-gray-200 p-3 transition-all hover:scale-[1.02] hover:border-blue-400 hover:shadow-sm active:scale-[0.98] dark:border-gray-700 dark:hover:border-blue-500">
+                                    <div class="group flex items-center justify-between rounded-lg border border-zinc-200 p-3 transition-all hover:scale-[1.02] hover:border-zinc-400 hover:shadow-sm active:scale-[0.98] dark:border-zinc-700 dark:hover:border-zinc-500">
                                         <div class="min-w-0 flex-1">
                                             <p class="truncate text-sm font-medium">{{ $product->name }}</p>
-                                            <p class="text-xs text-gray-500">{{ Number::currency($product->price, 'IDR', 'id') }}</p>
+                                            <p class="text-xs text-zinc-500">{{ Number::currency($product->price, 'IDR', 'id') }}</p>
                                             @if ($product->stock < 1)
                                                 <flux:badge size="xs" color="red" inset="top bottom">out of stock</flux:badge>
                                             @elseif ($product->stock <= 5)
@@ -223,7 +227,7 @@ $paymentMethods = computed(function () {
                                         <flux:button size="xs" variant="primary" icon="plus" wire:click="addToCart({{ $product->id }})" :disabled="$product->stock < 1" class="shrink-0" />
                                     </div>
                                 @empty
-                                    <div class="col-span-full rounded-lg border border-dashed border-gray-300 p-8 text-center text-sm text-gray-500 dark:border-gray-600">
+                                    <div class="col-span-full rounded-lg border border-dashed border-zinc-300 p-8 text-center text-sm text-zinc-500 dark:border-zinc-600">
                                         {{ __('No products found.') }}
                                     </div>
                                 @endforelse
@@ -239,8 +243,8 @@ $paymentMethods = computed(function () {
                     <div class="space-y-5 lg:col-span-1">
                         <div class="sticky top-6 space-y-5">
                             {{-- Order Summary --}}
-                            <div class="rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 p-5 shadow-sm dark:border-gray-600 dark:bg-gray-900/50">
-                                <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ __('Order Summary') }}</h3>
+                            <div class="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-800">
+                                <flux:heading size="lg">{{ __('Order Summary') }}</flux:heading>
 
                                 <div class="mt-4 space-y-4">
                                     {{-- Customer --}}
@@ -248,34 +252,34 @@ $paymentMethods = computed(function () {
 
                                     {{-- Cart Items --}}
                                     @if (count($this->cart) > 0)
-                                        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <div class="divide-y divide-zinc-200 dark:divide-zinc-700">
                                             @foreach ($this->cart as $index => $item)
                                                 <div class="flex items-center justify-between gap-2 py-2 first:pt-0 last:pb-0">
                                                     <div class="min-w-0 flex-1">
-                                                        <p class="truncate text-sm font-medium text-gray-900 dark:text-white">{{ $item['name'] }}</p>
-                                                        <p class="text-xs text-gray-500">{{ Number::currency($item['unit_price'], 'IDR', 'id') }}</p>
+                                                        <p class="truncate text-sm font-medium">{{ $item['name'] }}</p>
+                                                        <p class="text-xs text-zinc-500">{{ Number::currency($item['unit_price'], 'IDR', 'id') }}</p>
                                                     </div>
                                                     <div class="flex items-center gap-1">
                                                         <flux:button size="xs" variant="ghost" icon="minus" wire:click="decrementQty({{ $index }})" class="shrink-0" />
-                                                        <span class="w-5 text-center text-sm font-medium text-gray-900 dark:text-white">{{ $item['quantity'] }}</span>
+                                                        <span class="w-5 text-center text-sm font-medium">{{ $item['quantity'] }}</span>
                                                         <flux:button size="xs" variant="ghost" icon="plus" wire:click="incrementQty({{ $index }})" class="shrink-0" />
                                                     </div>
-                                                    <div class="min-w-[4.5rem] text-right text-sm font-medium text-gray-900 dark:text-white">
+                                                    <div class="min-w-[4.5rem] text-right text-sm font-medium">
                                                         {{ Number::currency($item['subtotal'], 'IDR', 'id') }}
                                                     </div>
-                                                    <button type="button" wire:click="removeFromCart({{ $index }})" class="shrink-0 rounded-full p-1 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20">
+                                                    <button type="button" wire:click="removeFromCart({{ $index }})" class="shrink-0 rounded-full p-1 text-zinc-400 transition-colors hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20">
                                                         <flux:icon name="x-mark" class="h-3.5 w-3.5" />
                                                     </button>
                                                 </div>
                                             @endforeach
                                         </div>
 
-                                        <div class="flex items-center justify-between border-t border-gray-300 pt-3 text-base font-bold dark:border-gray-600">
-                                            <span class="text-gray-900 dark:text-white">{{ __('Total') }}</span>
+                                        <div class="flex items-center justify-between border-t border-zinc-200 pt-3 text-base font-bold dark:border-zinc-700">
+                                            <span>{{ __('Total') }}</span>
                                             <span class="text-blue-600 dark:text-blue-400">{{ Number::currency($this->totalAmount, 'IDR', 'id') }}</span>
                                         </div>
                                     @else
-                                        <div class="rounded-lg border border-dashed border-gray-300 p-4 text-center text-sm text-gray-500 dark:border-gray-600">
+                                        <div class="rounded-lg border border-dashed border-zinc-300 p-4 text-center text-sm text-zinc-500 dark:border-zinc-600">
                                             {{ __('No products added yet.') }}
                                         </div>
                                     @endif
@@ -283,8 +287,8 @@ $paymentMethods = computed(function () {
                             </div>
 
                             {{-- Payment --}}
-                            <div class="rounded-xl border border-gray-200 bg-gray-50 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
-                                <h4 class="mb-3 text-sm font-semibold text-gray-900 dark:text-white">{{ __('Payment') }}</h4>
+                            <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
+                                <flux:heading size="sm" class="mb-3">{{ __('Payment') }}</flux:heading>
                                 <div class="space-y-3">
                                     <flux:select wire:model="payment_method" :label="__('Method')">
                                         @foreach ($this->paymentMethods as $method)
@@ -293,18 +297,23 @@ $paymentMethods = computed(function () {
                                     </flux:select>
 
                                     <flux:input wire:model.live="paid_amount" :label="__('Paid Amount')" type="number" step="0.01" min="0" />
-
-                                    <div>
-                                        <flux:label>{{ __('Change') }}</flux:label>
-                                        <div class="mt-1 text-lg font-bold text-green-600 dark:text-green-400">
-                                            {{ Number::currency($this->changeAmount, 'IDR', 'id') }}
-                                        </div>
-                                    </div>
+<div>
+    <flux:label>{{ __('Change') }}</flux:label>
+    
+    <!-- Menggunakan @class untuk kondisi warna -->
+    <div @class([
+        'mt-1 text-lg font-bold',
+        'text-green-600 dark:text-green-400' => $this->changeAmount >= 0,
+        'text-red-600 dark:text-red-400' => $this->changeAmount < 0,
+    ])>
+        {{ Number::currency($this->changeAmount, 'IDR', 'id') }}
+    </div>
+</div>
                                 </div>
                             </div>
 
                             {{-- Notes --}}
-                            <div class="rounded-xl border border-gray-200 bg-gray-50 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+                            <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                                 <flux:textarea wire:model="notes" :label="__('Notes')" placeholder="Optional..." rows="2" />
                             </div>
 
@@ -332,15 +341,15 @@ $paymentMethods = computed(function () {
 
                     @if ($customer)
                         <div class="text-sm">
-                            <span class="text-gray-500">{{ __('Customer') }}:</span>
+                            <span class="text-zinc-500">{{ __('Customer') }}:</span>
                             <span class="ml-2 font-medium">{{ $customer }}</span>
                         </div>
                     @endif
 
-                    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                    <div class="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
                         <table class="w-full text-sm">
                             <thead>
-                                <tr class="border-b bg-gray-50 dark:border-gray-700 dark:bg-gray-800">
+                                <tr class="border-b bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
                                     <th class="px-3 py-2 text-left font-medium">Product</th>
                                     <th class="px-3 py-2 text-center font-medium">Qty</th>
                                     <th class="px-3 py-2 text-right font-medium">Price</th>
@@ -349,7 +358,7 @@ $paymentMethods = computed(function () {
                             </thead>
                             <tbody>
                                 @foreach ($this->cart as $item)
-                                    <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <tr class="border-b border-zinc-100 last:border-b-0 dark:border-zinc-800">
                                         <td class="px-3 py-2">{{ $item['name'] }}</td>
                                         <td class="px-3 py-2 text-center">{{ $item['quantity'] }}</td>
                                         <td class="px-3 py-2 text-right">{{ Number::currency($item['unit_price'], 'IDR', 'id') }}</td>
@@ -358,7 +367,7 @@ $paymentMethods = computed(function () {
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <tr class="border-t bg-gray-50 font-semibold dark:border-gray-700 dark:bg-gray-800">
+                                <tr class="border-t bg-zinc-50 font-semibold dark:border-zinc-700 dark:bg-zinc-800">
                                     <td colspan="3" class="px-3 py-2 text-right">Total</td>
                                     <td class="px-3 py-2 text-right">{{ Number::currency($this->totalAmount, 'IDR', 'id') }}</td>
                                 </tr>
@@ -368,22 +377,22 @@ $paymentMethods = computed(function () {
 
                     <div class="grid grid-cols-3 gap-4 text-sm">
                         <div>
-                            <span class="text-gray-500">{{ __('Payment') }}</span>
+                            <span class="text-zinc-500">{{ __('Payment') }}</span>
                             <p class="font-medium">{{ $this->methodLabels[$payment_method] ?? $payment_method }}</p>
                         </div>
                         <div>
-                            <span class="text-gray-500">{{ __('Paid') }}</span>
+                            <span class="text-zinc-500">{{ __('Paid') }}</span>
                             <p class="font-medium">{{ Number::currency($paid_amount ?? 0, 'IDR', 'id') }}</p>
                         </div>
                         <div>
-                            <span class="text-gray-500">{{ __('Change') }}</span>
+                            <span class="text-zinc-500">{{ __('Change') }}</span>
                             <p class="font-medium">{{ Number::currency($this->changeAmount, 'IDR', 'id') }}</p>
                         </div>
                     </div>
 
                     @if ($notes)
                         <div class="text-sm">
-                            <span class="text-gray-500">{{ __('Notes') }}:</span>
+                            <span class="text-zinc-500">{{ __('Notes') }}:</span>
                             <p class="mt-1">{{ $notes }}</p>
                         </div>
                     @endif
