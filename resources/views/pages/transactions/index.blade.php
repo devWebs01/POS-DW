@@ -108,7 +108,7 @@ $methodColors = [
                     <flux:heading size="xl">{{ __('Transactions') }}</flux:heading>
                     <flux:subheading>{{ __('Manage sales transactions.') }}</flux:subheading>
                 </div>
-                <flux:button variant="primary" icon="plus" href="{{ route('transactions.create') }}" wire:navigate>
+                <flux:button variant="primary" icon="plus" href="{{ route('transactions.create') }}" >
                     {{ __('New Transaction') }}
                 </flux:button>
             </div>
@@ -116,93 +116,96 @@ $methodColors = [
             <flux:input size="md" wire:model.live="search" type="search"
                 placeholder="{{ __('Search by invoice or customer...') }}" />
 
-            <flux:table :paginate="$this->transactions">
-                <flux:table.columns>
-                    <flux:table.column sortable :sorted="$sortBy === 'id'" :direction="$sortDirection"
-                        wire:click="sort('id')">
-                        {{ __('Invoice') }}
-                    </flux:table.column>
+            <div
+                class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
 
-                    <flux:table.column>
-                        {{ __('Customer') }}
-                    </flux:table.column>
+                <flux:table :paginate="$this->transactions">
+                    <flux:table.columns>
+                        <flux:table.column sortable :sorted="$sortBy === 'id'" :direction="$sortDirection"
+                            wire:click="sort('id')">
+                            {{ __('Invoice') }}
+                        </flux:table.column>
 
-                    <flux:table.column>
-                        {{ __('Items') }}
-                    </flux:table.column>
+                        <flux:table.column>
+                            {{ __('Customer') }}
+                        </flux:table.column>
 
-                    <flux:table.column sortable :sorted="$sortBy === 'total_amount'" :direction="$sortDirection"
-                        wire:click="sort('total_amount')">
-                        {{ __('Total') }}
-                    </flux:table.column>
+                        <flux:table.column>
+                            {{ __('Items') }}
+                        </flux:table.column>
 
-                    <flux:table.column>
-                        {{ __('Payment') }}
-                    </flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'total_amount'" :direction="$sortDirection"
+                            wire:click="sort('total_amount')">
+                            {{ __('Total') }}
+                        </flux:table.column>
 
-                    <flux:table.column>
-                        {{ __('Actions') }}
-                    </flux:table.column>
-                </flux:table.columns>
+                        <flux:table.column>
+                            {{ __('Payment') }}
+                        </flux:table.column>
 
-                <flux:table.rows>
-                    @foreach ($this->transactions as $transaction)
-                        <flux:table.row :key="$transaction->id">
-                            <flux:table.cell>
-                                <div class="flex flex-col">
-                                    <span class="font-medium">{{ $transaction->invoice_number }}</span>
-                                    <span
-                                        class="text-xs text-zinc-500">{{ $transaction->created_at->format('d M Y, H:i') }}</span>
-                                </div>
-                            </flux:table.cell>
+                        <flux:table.column>
+                            {{ __('Actions') }}
+                        </flux:table.column>
+                    </flux:table.columns>
 
-                            <flux:table.cell>
-                                {{ $transaction->customer ?: '-' }}
-                            </flux:table.cell>
+                    <flux:table.rows>
+                        @foreach ($this->transactions as $transaction)
+                            <flux:table.row :key="$transaction->id">
+                                <flux:table.cell>
+                                    <div class="flex flex-col">
+                                        <span class="font-medium">{{ $transaction->invoice_number }}</span>
+                                        <span
+                                            class="text-xs text-zinc-500">{{ $transaction->created_at->format('d M Y, H:i') }}</span>
+                                    </div>
+                                </flux:table.cell>
 
-                            <flux:table.cell>
-                                <flux:badge size="sm" inset="top bottom">
-                                    {{ $transaction->items_count }} {{ __('item') }}
-                                </flux:badge>
-                            </flux:table.cell>
+                                <flux:table.cell>
+                                    {{ $transaction->customer ?: '-' }}
+                                </flux:table.cell>
 
-                            <flux:table.cell variant="strong">
-                                {{ Number::currency($transaction->total_amount, 'IDR', 'id') }}
-                            </flux:table.cell>
+                                <flux:table.cell>
+                                    <flux:badge size="sm" inset="top bottom">
+                                        {{ $transaction->items_count }} {{ __('item') }}
+                                    </flux:badge>
+                                </flux:table.cell>
 
-                            <flux:table.cell>
-                                <flux:badge size="sm" :color="$methodColors[$transaction->payment_method] ?? 'gray'"
-                                    inset="top bottom">
-                                    {{ $methodLabels[$transaction->payment_method] ?? $transaction->payment_method }}
-                                </flux:badge>
-                            </flux:table.cell>
+                                <flux:table.cell variant="strong">
+                                    {{ Number::currency($transaction->total_amount, 'IDR', 'id') }}
+                                </flux:table.cell>
 
-                            <flux:table.cell>
-                                <flux:dropdown position="bottom" align="end">
-                                    <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal"
-                                        inset="top bottom" />
-                                    <flux:menu>
-                                        <flux:menu.item icon="eye" wire:click="viewDetail({{ $transaction->id }})">
-                                            {{ __('View') }}
-                                        </flux:menu.item>
-                                        <flux:menu.item icon="pencil-square"
-                                            href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}"
-                                            wire:navigate>
-                                            {{ __('Edit') }}
-                                        </flux:menu.item>
-                                        <flux:menu.separator />
-                                        <flux:menu.item icon="trash" variant="danger"
-                                            wire:click="confirmDelete({{ $transaction->id }})">
-                                            {{ __('Delete') }}
-                                        </flux:menu.item>
-                                    </flux:menu>
-                                </flux:dropdown>
-                            </flux:table.cell>
-                        </flux:table.row>
-                    @endforeach
-                </flux:table.rows>
-            </flux:table>
+                                <flux:table.cell>
+                                    <flux:badge size="sm"
+                                        :color="$methodColors[$transaction->payment_method] ?? 'gray'" inset="top bottom">
+                                        {{ $methodLabels[$transaction->payment_method] ?? $transaction->payment_method }}
+                                    </flux:badge>
+                                </flux:table.cell>
 
+                                <flux:table.cell>
+                                    <flux:dropdown position="bottom" align="end">
+                                        <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal"
+                                            inset="top bottom" />
+                                        <flux:menu>
+                                            <flux:menu.item icon="eye" wire:click="viewDetail({{ $transaction->id }})">
+                                                {{ __('View') }}
+                                            </flux:menu.item>
+                                            <flux:menu.item icon="pencil-square"
+                                                href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}"
+                                                >
+                                                {{ __('Edit') }}
+                                            </flux:menu.item>
+                                            <flux:menu.separator />
+                                            <flux:menu.item icon="trash" variant="danger"
+                                                wire:click="confirmDelete({{ $transaction->id }})">
+                                                {{ __('Delete') }}
+                                            </flux:menu.item>
+                                        </flux:menu>
+                                    </flux:dropdown>
+                                </flux:table.cell>
+                            </flux:table.row>
+                        @endforeach
+                    </flux:table.rows>
+                </flux:table>
+            </div>
             {{-- Detail Modal --}}
             <flux:modal wire:model.self="showDetailModal" class="max-w-2xl">
                 @if ($this->viewTransaction)
@@ -280,7 +283,7 @@ $methodColors = [
 
                         <div class="flex justify-end gap-2">
                             <flux:button variant="filled"
-                                href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}" wire:navigate>
+                                href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}" >
                                 {{ __('Edit Transaction') }}
                             </flux:button>
                             <flux:modal.close>

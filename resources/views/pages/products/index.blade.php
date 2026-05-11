@@ -43,8 +43,7 @@ $products = computed(function () {
     return Product::query()
         ->with('category')
         ->where(function ($q) {
-            $q->where('name', 'like', '%'.$this->search.'%')
-                ->orWhere('sku', 'like', '%'.$this->search.'%');
+            $q->where('name', 'like', '%' . $this->search . '%')->orWhere('sku', 'like', '%' . $this->search . '%');
         })
         ->orderBy($this->sortBy, $this->sortDirection)
         ->paginate(10);
@@ -115,146 +114,144 @@ $delete = function () {
                 </div>
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                     <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">{{ __('Active') }}</p>
-                    <p class="mt-1 text-2xl font-semibold text-emerald-600 dark:text-emerald-400">{{ $this->activeProducts }}</p>
+                    <p class="mt-1 text-2xl font-semibold text-emerald-600 dark:text-emerald-400">
+                        {{ $this->activeProducts }}</p>
                 </div>
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                     <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">{{ __('Low Stock') }}</p>
-                    <p class="mt-1 text-2xl font-semibold text-amber-600 dark:text-amber-400">{{ $this->lowStockProducts }}</p>
+                    <p class="mt-1 text-2xl font-semibold text-amber-600 dark:text-amber-400">{{ $this->lowStockProducts }}
+                    </p>
                 </div>
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                     <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">{{ __('Out of Stock') }}</p>
-                    <p class="mt-1 text-2xl font-semibold text-rose-600 dark:text-rose-400">{{ $this->outOfStockProducts }}</p>
+                    <p class="mt-1 text-2xl font-semibold text-rose-600 dark:text-rose-400">{{ $this->outOfStockProducts }}
+                    </p>
                 </div>
             </div>
 
             {{-- Search --}}
-            <flux:input size="md" wire:model.live="search" type="search" placeholder="{{ __('Search by name or SKU...') }}" />
+            <flux:input size="md" wire:model.live="search" type="search"
+                placeholder="{{ __('Search by name or SKU...') }}" />
+            <div
+                class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
 
-            {{-- Table --}}
-            <flux:table :paginate="$this->products">
-                <flux:table.columns>
-                    <flux:table.column
-                        sortable
-                        :sorted="$sortBy === 'name'"
-                        :direction="$sortDirection"
-                        wire:click="sort('name')"
-                    >
-                        {{ __('Name') }}
-                    </flux:table.column>
+                {{-- Table --}}
+                <flux:table :paginate="$this->products">
+                    <flux:table.columns>
+                        <flux:table.column sortable :sorted="$sortBy === 'name'" :direction="$sortDirection"
+                            wire:click="sort('name')">
+                            {{ __('Name') }}
+                        </flux:table.column>
 
-                    <flux:table.column>
-                        {{ __('Category') }}
-                    </flux:table.column>
+                        <flux:table.column>
+                            {{ __('Category') }}
+                        </flux:table.column>
 
-                    <flux:table.column
-                        sortable
-                        :sorted="$sortBy === 'sku'"
-                        :direction="$sortDirection"
-                        wire:click="sort('sku')"
-                    >
-                        {{ __('SKU') }}
-                    </flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'sku'" :direction="$sortDirection"
+                            wire:click="sort('sku')">
+                            {{ __('SKU') }}
+                        </flux:table.column>
 
-                    <flux:table.column
-                        sortable
-                        :sorted="$sortBy === 'price'"
-                        :direction="$sortDirection"
-                        wire:click="sort('price')"
-                    >
-                        {{ __('Price') }}
-                    </flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'price'" :direction="$sortDirection"
+                            wire:click="sort('price')">
+                            {{ __('Price') }}
+                        </flux:table.column>
 
-                    <flux:table.column
-                        sortable
-                        :sorted="$sortBy === 'stock'"
-                        :direction="$sortDirection"
-                        wire:click="sort('stock')"
-                    >
-                        {{ __('Stock') }}
-                    </flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'stock'" :direction="$sortDirection"
+                            wire:click="sort('stock')">
+                            {{ __('Stock') }}
+                        </flux:table.column>
 
-                    <flux:table.column
-                        sortable
-                        :sorted="$sortBy === 'is_active'"
-                        :direction="$sortDirection"
-                        wire:click="sort('is_active')"
-                    >
-                        {{ __('Status') }}
-                    </flux:table.column>
+                        <flux:table.column sortable :sorted="$sortBy === 'is_active'" :direction="$sortDirection"
+                            wire:click="sort('is_active')">
+                            {{ __('Status') }}
+                        </flux:table.column>
 
-                    <flux:table.column>
-                        {{ __('Actions') }}
-                    </flux:table.column>
-                </flux:table.columns>
+                        <flux:table.column>
+                            {{ __('Actions') }}
+                        </flux:table.column>
+                    </flux:table.columns>
 
-                <flux:table.rows>
-                    @foreach ($this->products as $product)
-                        <flux:table.row :key="$product->id">
-                            <flux:table.cell class="font-medium">{{ $product->name }}</flux:table.cell>
+                    <flux:table.rows>
+                        @foreach ($this->products as $product)
+                            <flux:table.row :key="$product->id">
+                                <flux:table.cell class="font-medium">{{ $product->name }}</flux:table.cell>
 
-                            <flux:table.cell>
-                                <flux:badge size="sm" inset="top bottom">
-                                    {{ $product->category?->name ?? '-' }}
-                                </flux:badge>
-                            </flux:table.cell>
+                                <flux:table.cell>
+                                    <flux:badge size="sm" inset="top bottom">
+                                        {{ $product->category?->name ?? '-' }}
+                                    </flux:badge>
+                                </flux:table.cell>
 
-                            <flux:table.cell variant="strong">
-                                <code class="text-xs">{{ $product->sku }}</code>
-                            </flux:table.cell>
+                                <flux:table.cell variant="strong">
+                                    <code class="text-xs">{{ $product->sku }}</code>
+                                </flux:table.cell>
 
-                            <flux:table.cell>
-                                {{ Number::currency($product->price, 'IDR', 'id') }}
-                            </flux:table.cell>
+                                <flux:table.cell>
+                                    {{ Number::currency($product->price, 'IDR', 'id') }}
+                                </flux:table.cell>
 
-                             <flux:table.cell>
-                                @php
-                                    $stock = $product->stock;
-                                    $color = $stock <= 0 ? 'red' : ($stock < 5 ? 'amber' : 'green');
-                                    $bgClass = $stock <= 0 ? 'bg-rose-500' : ($stock < 5 ? 'bg-amber-500' : 'bg-emerald-500');
-                                    $percentage = min(100, ($stock / 20) * 100);
-                                @endphp
-                                <div class="flex w-32 flex-col gap-1.5">
-                                    <div class="flex items-center justify-between">
-                                        <flux:badge :color="$color" size="sm" inset="top bottom">
-                                            {{ $stock }}
-                                        </flux:badge>
-                                        <span class="text-[10px] font-medium text-zinc-500">
-                                            {{ $stock <= 0 ? __('Critical') : ($stock < 5 ? __('Low Stock') : __('Healthy')) }}
-                                        </span>
+                                <flux:table.cell>
+                                    @php
+                                        $stock = $product->stock;
+                                        $color = $stock <= 0 ? 'red' : ($stock < 5 ? 'amber' : 'green');
+                                        $bgClass =
+                                            $stock <= 0
+                                                ? 'bg-rose-500'
+                                                : ($stock < 5
+                                                    ? 'bg-amber-500'
+                                                    : 'bg-emerald-500');
+                                        $percentage = min(100, ($stock / 20) * 100);
+                                    @endphp
+                                    <div class="flex w-32 flex-col gap-1.5">
+                                        <div class="flex items-center justify-between">
+                                            <flux:badge :color="$color" size="sm" inset="top bottom">
+                                                {{ $stock }}
+                                            </flux:badge>
+                                            <span class="text-[10px] font-medium text-zinc-500">
+                                                {{ $stock <= 0 ? __('Critical') : ($stock < 5 ? __('Low Stock') : __('Healthy')) }}
+                                            </span>
+                                        </div>
+                                        <div class="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-700">
+                                            <div class="h-1.5 rounded-full {{ $bgClass }}"
+                                                style="width: {{ $percentage }}%"></div>
+                                        </div>
                                     </div>
-                                    <div class="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-700">
-                                        <div class="h-1.5 rounded-full {{ $bgClass }}" style="width: {{ $percentage }}%"></div>
-                                    </div>
-                                </div>
-                            </flux:table.cell>
+                                </flux:table.cell>
 
-                            <flux:table.cell>
-                                <flux:badge :color="$product->is_active ? 'green' : 'red'" size="sm" inset="top bottom">
-                                    {{ $product->is_active ? __('Active') : __('Inactive') }}
-                                </flux:badge>
-                            </flux:table.cell>
+                                <flux:table.cell>
+                                    <flux:badge :color="$product->is_active ? 'green' : 'red'" size="sm"
+                                        inset="top bottom">
+                                        {{ $product->is_active ? __('Active') : __('Inactive') }}
+                                    </flux:badge>
+                                </flux:table.cell>
 
-                            <flux:table.cell>
-                                <flux:dropdown position="bottom" align="end">
-                                    <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom" />
-                                    <flux:menu>
-                                        <flux:menu.item icon="eye" wire:click="viewProduct({{ $product->id }})">
-                                            {{ __('View') }}
-                                        </flux:menu.item>
-                                        <flux:menu.item icon="pencil" href="{{ route('products.edit', ['product' => $product->id]) }}">
-                                            {{ __('Edit') }}
-                                        </flux:menu.item>
-                                        <flux:menu.separator />
-                                        <flux:menu.item icon="trash" variant="danger" wire:click="confirmDelete({{ $product->id }})">
-                                            {{ __('Delete') }}
-                                        </flux:menu.item>
-                                    </flux:menu>
-                                </flux:dropdown>
-                            </flux:table.cell>
-                        </flux:table.row>
-                    @endforeach
-                </flux:table.rows>
-            </flux:table>
+                                <flux:table.cell>
+                                    <flux:dropdown position="bottom" align="end">
+                                        <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal"
+                                            inset="top bottom" />
+                                        <flux:menu>
+                                            <flux:menu.item icon="eye" wire:click="viewProduct({{ $product->id }})">
+                                                {{ __('View') }}
+                                            </flux:menu.item>
+                                            <flux:menu.item icon="pencil"
+                                                href="{{ route('products.edit', ['product' => $product->id]) }}">
+                                                {{ __('Edit') }}
+                                            </flux:menu.item>
+                                            <flux:menu.separator />
+                                            <flux:menu.item icon="trash" variant="danger"
+                                                wire:click="confirmDelete({{ $product->id }})">
+                                                {{ __('Delete') }}
+                                            </flux:menu.item>
+                                        </flux:menu>
+                                    </flux:dropdown>
+                                </flux:table.cell>
+                            </flux:table.row>
+                        @endforeach
+                    </flux:table.rows>
+                </flux:table>
+
+            </div>
 
             {{-- Detail Modal --}}
             <flux:modal wire:model.self="showDetailModal" class="max-w-4xl w-full">
@@ -274,23 +271,30 @@ $delete = function () {
                         {{-- Info Grid --}}
                         <div class="grid grid-cols-2 gap-x-10 gap-y-8">
                             <div>
-                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Category') }}</p>
+                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Category') }}
+                                </p>
                                 <p class="mt-1.5 text-base font-medium">{{ $detailProduct->category?->name ?? '-' }}</p>
                             </div>
                             <div>
-                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('SKU') }}</p>
+                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('SKU') }}
+                                </p>
                                 <p class="mt-1.5 text-base font-medium">
-                                    <code class="rounded-md bg-zinc-100 px-2 py-0.5 text-sm dark:bg-zinc-700">{{ $detailProduct->sku }}</code>
+                                    <code
+                                        class="rounded-md bg-zinc-100 px-2 py-0.5 text-sm dark:bg-zinc-700">{{ $detailProduct->sku }}</code>
                                 </p>
                             </div>
                             <div>
-                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Price') }}</p>
-                                <p class="mt-1.5 text-2xl font-semibold">{{ Number::currency($detailProduct->price, 'IDR', 'id') }}</p>
+                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Price') }}
+                                </p>
+                                <p class="mt-1.5 text-2xl font-semibold">
+                                    {{ Number::currency($detailProduct->price, 'IDR', 'id') }}</p>
                             </div>
                             <div>
-                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Stock') }}</p>
+                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Stock') }}
+                                </p>
                                 <p class="mt-1.5 text-2xl font-semibold">
-                                    <span :class="$detailProduct->stock < 5 ? 'text-red-600' : 'text-green-600'">{{ $detailProduct->stock }}</span>
+                                    <span
+                                        :class="$detailProduct->stock < 5 ? 'text-red-600' : 'text-green-600'">{{ $detailProduct->stock }}</span>
                                     <span class="text-sm font-normal text-zinc-400">{{ __('units') }}</span>
                                 </p>
                             </div>
@@ -299,8 +303,10 @@ $delete = function () {
                         {{-- Description --}}
                         @if ($detailProduct->description)
                             <div>
-                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Description') }}</p>
-                                <p class="mt-2 text-base leading-relaxed text-zinc-600 dark:text-zinc-300">{{ $detailProduct->description }}</p>
+                                <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">
+                                    {{ __('Description') }}</p>
+                                <p class="mt-2 text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
+                                    {{ $detailProduct->description }}</p>
                             </div>
                         @endif
 
@@ -322,7 +328,8 @@ $delete = function () {
             <flux:modal wire:model.self="showDeleteModal" class="max-w-lg">
                 <form wire:submit="delete" class="space-y-6">
                     <div class="flex items-start gap-4">
-                        <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+                        <div
+                            class="flex size-10 shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
                             <flux:icon name="exclamation-triangle" variant="micro" class="text-red-600" />
                         </div>
                         <div>

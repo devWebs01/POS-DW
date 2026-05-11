@@ -9,55 +9,55 @@
     <flux:sidebar sticky collapsible="mobile"
         class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.header>
-            <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
+            <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" />
             <flux:sidebar.collapse class="lg:hidden" />
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
             {{-- Analytics & Transactions --}}
             <flux:sidebar.group :heading="__('Analitik & Transaksi')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="document-text" href="{{ route('transactions.index') }}" wire:navigate>
+                <flux:sidebar.item icon="document-text" href="{{ route('transactions.index') }}">
                     {{ __('Transactions') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="chart-bar-square" href="{{ route('reports.index') }}" wire:navigate>
+                <flux:sidebar.item icon="chart-bar-square" href="{{ route('reports.index') }}">
                     {{ __('Laporan') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
             {{-- Product Management --}}
             <flux:sidebar.group :heading="__('Manajemen Produk')" class="grid mt-4">
-                <flux:sidebar.item icon="shopping-bag" href="{{ route('products.index') }}" wire:navigate>
+                <flux:sidebar.item icon="shopping-bag" href="{{ route('products.index') }}">
                     {{ __('Products') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="folder-git-2" href="{{ route('categories.index') }}" wire:navigate>
+                <flux:sidebar.item icon="folder-git-2" href="{{ route('categories.index') }}">
                     {{ __('Kategori Produk') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
             {{-- Security & Access --}}
             <flux:sidebar.group :heading="__('Keamanan & Akses')" class="grid mt-4">
-                <flux:sidebar.item icon="users" href="/users" wire:navigate>
+                <flux:sidebar.item icon="users" href="/users">
                     {{ __('Users') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="shield-check" href="/roles" wire:navigate>
+                <flux:sidebar.item icon="shield-check" href="/roles">
                     {{ __('Roles') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="key" href="/permissions" wire:navigate>
+                <flux:sidebar.item icon="key" href="/permissions">
                     {{ __('Permissions') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
             {{-- Configuration --}}
             <flux:sidebar.group :heading="__('Konfigurasi')" class="grid mt-4">
-                <flux:sidebar.item icon="cog-6-tooth" href="/settings/store" wire:navigate>
+                <flux:sidebar.item icon="cog-6-tooth" href="/settings/store">
                     {{ __('Store Settings') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
@@ -106,7 +106,7 @@
                 <flux:menu.separator />
 
                 <flux:menu.radio.group>
-                    <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>
+                    <flux:menu.item :href="route('profile.edit')" icon="cog">
                         {{ __('Settings') }}
                     </flux:menu.item>
                 </flux:menu.radio.group>
@@ -127,9 +127,9 @@
     {{ $slot }}
 
     @persist('toast')
-        <flux:toast.group position="top end">
-            <flux:toast />
-        </flux:toast.group>
+    <flux:toast.group position="top end">
+        <flux:toast />
+    </flux:toast.group>
     @endpersist
 
     @fluxScripts
