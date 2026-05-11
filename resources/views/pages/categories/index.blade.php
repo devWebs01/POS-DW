@@ -130,18 +130,18 @@ $delete = function () {
     @volt
         <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
             <flux:breadcrumbs>
-                <flux:breadcrumbs.item href="#">Home</flux:breadcrumbs.item>
-                <flux:breadcrumbs.item>Categories</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item href="#">{{ __('Home') }}</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item>{{ __('Categories') }}</flux:breadcrumbs.item>
             </flux:breadcrumbs>
 
             <div class="flex items-center justify-between">
-                <flux:heading size="lg">Categories</flux:heading>
+                <flux:heading size="lg">{{ __('Categories') }}</flux:heading>
                 <flux:button variant="primary" icon="plus" wire:click="create">
                     {{ __('Add') }}
                 </flux:button>
             </div>
 
-            <flux:input size="md" wire:model.live="search" type="search" placeholder="Filter by name..." />
+            <flux:input size="md" wire:model.live="search" type="search" placeholder="{{ __('Filter by name...') }}" />
 
             <div
                 class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
@@ -150,20 +150,20 @@ $delete = function () {
                     <flux:table.columns>
                         <flux:table.column sortable :sorted="$sortBy === 'name'" :direction="$sortDirection"
                             wire:click="sort('name')">
-                            Name
+                            {{ __('Name') }}
                         </flux:table.column>
 
                         <flux:table.column sortable :sorted="$sortBy === 'slug'" :direction="$sortDirection"
                             wire:click="sort('slug')">
-                            Slug
+                            {{ __('Slug') }}
                         </flux:table.column>
 
                         <flux:table.column>
-                            Description
+                            {{ __('Description') }}
                         </flux:table.column>
 
                         <flux:table.column>
-                            Actions
+                            {{ __('Actions') }}
                         </flux:table.column>
                     </flux:table.columns>
 

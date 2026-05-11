@@ -88,14 +88,14 @@ $delete = function () {
     @volt
         <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
             <flux:breadcrumbs>
-                <flux:breadcrumbs.item href="#">Home</flux:breadcrumbs.item>
-                <flux:breadcrumbs.item>Products</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item href="#">{{ __('Home') }}</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item>{{ __('Products') }}</flux:breadcrumbs.item>
             </flux:breadcrumbs>
 
             {{-- Header --}}
             <div class="flex items-center justify-between">
                 <div>
-                    <flux:heading size="xl">Products</flux:heading>
+                    <flux:heading size="xl">{{ __('Products') }}</flux:heading>
                     <flux:subheading>{{ __('Manage your product inventory') }}</flux:subheading>
                 </div>
                 <flux:button variant="primary" icon="plus" href="{{ route('products.create') }}">
@@ -120,7 +120,7 @@ $delete = function () {
             </div>
 
             {{-- Search --}}
-            <flux:input size="md" wire:model.live="search" type="search" placeholder="Search by name or SKU..." />
+            <flux:input size="md" wire:model.live="search" type="search" placeholder="{{ __('Search by name or SKU...') }}" />
 
             {{-- Table --}}
             <flux:table :paginate="$this->products">
@@ -131,11 +131,11 @@ $delete = function () {
                         :direction="$sortDirection"
                         wire:click="sort('name')"
                     >
-                        Name
+                        {{ __('Name') }}
                     </flux:table.column>
 
                     <flux:table.column>
-                        Category
+                        {{ __('Category') }}
                     </flux:table.column>
 
                     <flux:table.column
@@ -144,7 +144,7 @@ $delete = function () {
                         :direction="$sortDirection"
                         wire:click="sort('sku')"
                     >
-                        SKU
+                        {{ __('SKU') }}
                     </flux:table.column>
 
                     <flux:table.column
@@ -153,7 +153,7 @@ $delete = function () {
                         :direction="$sortDirection"
                         wire:click="sort('price')"
                     >
-                        Price
+                        {{ __('Price') }}
                     </flux:table.column>
 
                     <flux:table.column
@@ -162,7 +162,7 @@ $delete = function () {
                         :direction="$sortDirection"
                         wire:click="sort('stock')"
                     >
-                        Stock
+                        {{ __('Stock') }}
                     </flux:table.column>
 
                     <flux:table.column
@@ -171,11 +171,11 @@ $delete = function () {
                         :direction="$sortDirection"
                         wire:click="sort('is_active')"
                     >
-                        Status
+                        {{ __('Status') }}
                     </flux:table.column>
 
                     <flux:table.column>
-                        Actions
+                        {{ __('Actions') }}
                     </flux:table.column>
                 </flux:table.columns>
 
@@ -207,7 +207,7 @@ $delete = function () {
 
                             <flux:table.cell>
                                 <flux:badge :color="$product->is_active ? 'green' : 'red'" size="sm" inset="top bottom">
-                                    {{ $product->is_active ? 'Active' : 'Inactive' }}
+                                    {{ $product->is_active ? __('Active') : __('Inactive') }}
                                 </flux:badge>
                             </flux:table.cell>
 
@@ -244,7 +244,7 @@ $delete = function () {
                                 <flux:subheading>{{ __('Product details') }}</flux:subheading>
                             </div>
                             <flux:badge :color="$detailProduct->is_active ? 'emerald' : 'red'" size="lg">
-                                {{ $detailProduct->is_active ? 'Active' : 'Inactive' }}
+                                {{ $detailProduct->is_active ? __('Active') : __('Inactive') }}
                             </flux:badge>
                         </div>
 
@@ -268,7 +268,7 @@ $delete = function () {
                                 <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Stock') }}</p>
                                 <p class="mt-1.5 text-2xl font-semibold">
                                     <span :class="$detailProduct->stock < 5 ? 'text-red-600' : 'text-green-600'">{{ $detailProduct->stock }}</span>
-                                    <span class="text-sm font-normal text-zinc-400">units</span>
+                                    <span class="text-sm font-normal text-zinc-400">{{ __('units') }}</span>
                                 </p>
                             </div>
                         </div>

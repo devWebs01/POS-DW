@@ -99,8 +99,8 @@ $methodColors = [
     @volt
         <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
             <flux:breadcrumbs>
-                <flux:breadcrumbs.item href="#">Home</flux:breadcrumbs.item>
-                <flux:breadcrumbs.item>Transactions</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item href="#">{{ __('Home') }}</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item>{{ __('Transactions') }}</flux:breadcrumbs.item>
             </flux:breadcrumbs>
 
             <div class="flex items-center justify-between">
@@ -114,34 +114,34 @@ $methodColors = [
             </div>
 
             <flux:input size="md" wire:model.live="search" type="search"
-                placeholder="Search by invoice or customer..." />
+                placeholder="{{ __('Search by invoice or customer...') }}" />
 
             <flux:table :paginate="$this->transactions">
                 <flux:table.columns>
                     <flux:table.column sortable :sorted="$sortBy === 'id'" :direction="$sortDirection"
                         wire:click="sort('id')">
-                        Invoice
+                        {{ __('Invoice') }}
                     </flux:table.column>
 
                     <flux:table.column>
-                        Customer
+                        {{ __('Customer') }}
                     </flux:table.column>
 
                     <flux:table.column>
-                        Items
+                        {{ __('Items') }}
                     </flux:table.column>
 
                     <flux:table.column sortable :sorted="$sortBy === 'total_amount'" :direction="$sortDirection"
                         wire:click="sort('total_amount')">
-                        Total
+                        {{ __('Total') }}
                     </flux:table.column>
 
                     <flux:table.column>
-                        Payment
+                        {{ __('Payment') }}
                     </flux:table.column>
 
                     <flux:table.column>
-                        Actions
+                        {{ __('Actions') }}
                     </flux:table.column>
                 </flux:table.columns>
 
@@ -162,7 +162,7 @@ $methodColors = [
 
                             <flux:table.cell>
                                 <flux:badge size="sm" inset="top bottom">
-                                    {{ $transaction->items_count }} {{ Str::plural('item', $transaction->items_count) }}
+                                    {{ $transaction->items_count }} {{ __('item') }}
                                 </flux:badge>
                             </flux:table.cell>
 
@@ -267,7 +267,7 @@ $methodColors = [
                             <div>
                                 <span class="text-zinc-500">{{ __('Items') }}</span>
                                 <p class="font-medium">{{ $this->viewTransaction->items->count() }}
-                                    {{ Str::plural('item', $this->viewTransaction->items->count()) }}</p>
+                                    {{ __('item') }}</p>
                             </div>
                         </div>
 

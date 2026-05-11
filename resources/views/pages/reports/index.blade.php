@@ -107,8 +107,8 @@ $categoryBreakdown = computed(function () {
     @volt
         <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
             <flux:breadcrumbs>
-                <flux:breadcrumbs.item href="#">Home</flux:breadcrumbs.item>
-                <flux:breadcrumbs.item>Reports</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item href="#">{{ __('Home') }}</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item>{{ __('Reports') }}</flux:breadcrumbs.item>
             </flux:breadcrumbs>
 
             <div class="flex items-center justify-between">
@@ -161,9 +161,9 @@ $categoryBreakdown = computed(function () {
                 @if (count($dailyData) > 0)
                     <flux:table>
                         <flux:table.columns>
-                            <flux:table.column>Date</flux:table.column>
-                            <flux:table.column>Transactions</flux:table.column>
-                            <flux:table.column>Revenue</flux:table.column>
+                            <flux:table.column>{{ __('Date') }}</flux:table.column>
+                            <flux:table.column>{{ __('Transactions') }}</flux:table.column>
+                            <flux:table.column>{{ __('Revenue') }}</flux:table.column>
                         </flux:table.columns>
 
                         <flux:table.rows>
@@ -201,9 +201,9 @@ $categoryBreakdown = computed(function () {
                     @if (count($paymentData) > 0)
                         <flux:table>
                             <flux:table.columns>
-                                <flux:table.column>Method</flux:table.column>
-                                <flux:table.column>Count</flux:table.column>
-                                <flux:table.column>Total</flux:table.column>
+                                <flux:table.column>{{ __('Method') }}</flux:table.column>
+                                <flux:table.column>{{ __('Count') }}</flux:table.column>
+                                <flux:table.column>{{ __('Total') }}</flux:table.column>
                             </flux:table.columns>
 
                             <flux:table.rows>
@@ -237,9 +237,9 @@ $categoryBreakdown = computed(function () {
                     @if (count($topProductsData) > 0)
                         <flux:table>
                             <flux:table.columns>
-                                <flux:table.column>Product</flux:table.column>
-                                <flux:table.column>Sold</flux:table.column>
-                                <flux:table.column>Revenue</flux:table.column>
+                                <flux:table.column>{{ __('Product') }}</flux:table.column>
+                                <flux:table.column>{{ __('Sold') }}</flux:table.column>
+                                <flux:table.column>{{ __('Revenue') }}</flux:table.column>
                             </flux:table.columns>
 
                             <flux:table.rows>
@@ -274,9 +274,9 @@ $categoryBreakdown = computed(function () {
                 @if (count($categoryData) > 0)
                     <flux:table>
                         <flux:table.columns>
-                            <flux:table.column>Category</flux:table.column>
-                            <flux:table.column>Items Sold</flux:table.column>
-                            <flux:table.column>Revenue</flux:table.column>
+                            <flux:table.column>{{ __('Category') }}</flux:table.column>
+                            <flux:table.column>{{ __('Items Sold') }}</flux:table.column>
+                            <flux:table.column>{{ __('Revenue') }}</flux:table.column>
                         </flux:table.columns>
 
                         <flux:table.rows>

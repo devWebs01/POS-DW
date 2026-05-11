@@ -165,10 +165,10 @@ $save = function () {
 
 $methodLabels = computed(function () {
     return [
-        'cash' => 'Cash',
-        'transfer' => 'Transfer',
-        'debit_card' => 'Debit Card',
-        'credit_card' => 'Credit Card',
+        'cash' => __('Cash'),
+        'transfer' => __('Transfer'),
+        'debit_card' => __('Debit Card'),
+        'credit_card' => __('Credit Card'),
     ];
 });
 
@@ -182,8 +182,8 @@ $paymentMethods = computed(function () {
     @volt
         <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
             <flux:breadcrumbs>
-                <flux:breadcrumbs.item href="#">Home</flux:breadcrumbs.item>
-                <flux:breadcrumbs.item href="{{ route('transactions.index') }}">Transactions</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item href="#">{{ __('Home') }}</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item href="{{ route('transactions.index') }}">{{ __('Transactions') }}</flux:breadcrumbs.item>
                 <flux:breadcrumbs.item>{{ $transaction->invoice_number }}</flux:breadcrumbs.item>
             </flux:breadcrumbs>
 
@@ -209,7 +209,7 @@ $paymentMethods = computed(function () {
                                     @endforeach
                                 </flux:select>
 
-                                <flux:input wire:model.live="productSearch" :label="__('Search')" type="search" placeholder="Search by name or SKU..." />
+                                <flux:input wire:model.live="productSearch" :label="__('Search')" type="search" placeholder="{{ __('Search by name or SKU...') }}" />
                             </div>
 
                             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -219,9 +219,9 @@ $paymentMethods = computed(function () {
                                             <p class="truncate text-sm font-medium">{{ $product->name }}</p>
                                             <p class="text-xs text-zinc-500">{{ Number::currency($product->price, 'IDR', 'id') }}</p>
                                             @if ($product->stock < 1)
-                                                <flux:badge size="xs" color="red" inset="top bottom">out of stock</flux:badge>
+                                                <flux:badge size="xs" color="red" inset="top bottom">{{ __('out of stock') }}</flux:badge>
                                             @elseif ($product->stock <= 5)
-                                                <flux:badge size="xs" color="orange" inset="top bottom">{{ $product->stock }} left</flux:badge>
+                                                <flux:badge size="xs" color="orange" inset="top bottom">{{ $product->stock }} {{ __('left') }}</flux:badge>
                                             @endif
                                         </div>
                                         <flux:button size="xs" variant="primary" icon="plus" wire:click="addToCart({{ $product->id }})" :disabled="$product->stock < 1" class="shrink-0" />
@@ -248,7 +248,7 @@ $paymentMethods = computed(function () {
 
                                 <div class="mt-4 space-y-4">
                                     {{-- Customer --}}
-                                    <flux:input wire:model="customer" :label="__('Customer')" placeholder="Walk-in customer" />
+                                    <flux:input wire:model="customer" :label="__('Customer')" placeholder="{{ __('Walk-in customer') }}" />
 
                                     {{-- Cart Items --}}
                                     @if (count($this->cart) > 0)
@@ -314,7 +314,7 @@ $paymentMethods = computed(function () {
 
                             {{-- Notes --}}
                             <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
-                                <flux:textarea wire:model="notes" :label="__('Notes')" placeholder="Optional..." rows="2" />
+                                <flux:textarea wire:model="notes" :label="__('Notes')" placeholder="{{ __('Optional...') }}" rows="2" />
                             </div>
 
                             {{-- Actions --}}
@@ -350,10 +350,10 @@ $paymentMethods = computed(function () {
                         <table class="w-full text-sm">
                             <thead>
                                 <tr class="border-b bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
-                                    <th class="px-3 py-2 text-left font-medium">Product</th>
-                                    <th class="px-3 py-2 text-center font-medium">Qty</th>
-                                    <th class="px-3 py-2 text-right font-medium">Price</th>
-                                    <th class="px-3 py-2 text-right font-medium">Subtotal</th>
+                                    <th class="px-3 py-2 text-left font-medium">{{ __('Product') }}</th>
+                                    <th class="px-3 py-2 text-center font-medium">{{ __('Qty') }}</th>
+                                    <th class="px-3 py-2 text-right font-medium">{{ __('Price') }}</th>
+                                    <th class="px-3 py-2 text-right font-medium">{{ __('Subtotal') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
