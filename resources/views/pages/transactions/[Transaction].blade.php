@@ -257,7 +257,7 @@ $paymentMethods = computed(function () {
                     <div class="sticky top-6 space-y-5">
                         {{-- Order Summary --}}
                         <div
-                            class="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-800">
+                            class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                             <flux:heading size="lg">{{ __('Order Summary') }}</flux:heading>
 
                             <div class="mt-4 space-y-4">

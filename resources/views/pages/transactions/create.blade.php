@@ -165,13 +165,13 @@ $save = function () {
     @volt
     <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
         @php
-            $methodLabels = [
-                'cash' => __('Cash'),
-                'transfer' => __('Transfer'),
-                'debit_card' => __('Debit Card'),
-                'credit_card' => __('Credit Card'),
-            ];
-            $paymentMethods = ['cash', 'transfer', 'debit_card', 'credit_card'];
+$methodLabels = [
+    'cash' => __('Cash'),
+    'transfer' => __('Transfer'),
+    'debit_card' => __('Debit Card'),
+    'credit_card' => __('Credit Card'),
+];
+$paymentMethods = ['cash', 'transfer', 'debit_card', 'credit_card'];
         @endphp
 
         <flux:breadcrumbs>
@@ -249,7 +249,7 @@ $save = function () {
                     <div class="sticky top-6 space-y-5">
                         {{-- Order Summary --}}
                         <div
-                            class="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-800">
+                            class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                             <flux:heading size="lg">{{ __('Order Summary') }}</flux:heading>
 
                             <div class="mt-4 space-y-4">
@@ -304,8 +304,8 @@ $save = function () {
                         {{-- Payment --}}
                         <div
                             class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
-                            <flux:heading size="sm" class="mb-3">{{ __('Payment') }}</flux:heading>
-                            <div class="space-y-3">
+                            <flux:heading size="lg">{{ __('Payment') }}</flux:heading>
+                            <div class="mt-4 space-y-3">
                                 <flux:select wire:model="payment_method" :label="__('Method')">
                                     @foreach ($paymentMethods as $method)
                                         <flux:select.option value="{{ $method }}">{{ $methodLabels[$method] }}
@@ -321,10 +321,10 @@ $save = function () {
 
                                     <!-- Menggunakan @class untuk kondisi warna -->
                                     <div @class([
-                                        'mt-1 text-lg font-bold',
-                                        'text-green-600 dark:text-green-400' => $this->changeAmount >= 0,
-                                        'text-red-600 dark:text-red-400' => $this->changeAmount < 0,
-                                    ])>
+    'mt-1 text-lg font-bold',
+    'text-green-600 dark:text-green-400' => $this->changeAmount >= 0,
+    'text-red-600 dark:text-red-400' => $this->changeAmount < 0,
+])>
                                         {{ Number::currency($this->changeAmount, 'IDR', 'id') }}
                                     </div>
                                 </div>

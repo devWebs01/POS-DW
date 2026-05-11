@@ -177,5 +177,7 @@
     "Store Email": "Email Toko",
     "Receipt Footer": "Kaki Struk",
     "Update Settings": "Perbarui Pengaturan",
-    "Settings updated.": "Pengaturan berhasil diperbarui."
+    "Settings updated.": "Pengaturan berhasil diperbarui.",
+    "Print": "Cetak",
+    "Print Receipt": "Cetak Struk"
 }

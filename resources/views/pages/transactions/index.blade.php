@@ -80,10 +80,10 @@ $delete = function () {
 };
 
 $methodLabels = [
-    'cash' => 'Cash',
+    'cash' => 'Tunai',
     'transfer' => 'Transfer',
-    'debit_card' => 'Debit Card',
-    'credit_card' => 'Credit Card',
+    'debit_card' => 'Kartu Debit',
+    'credit_card' => 'Kartu Kredit',
 ];
 
 $methodColors = [
@@ -193,6 +193,12 @@ $methodColors = [
                                                 >
                                                 {{ __('Edit') }}
                                             </flux:menu.item>
+                                            <flux:menu.item icon="printer"
+                                                href="/transactions/{{ $transaction->id }}/receipt"
+                                                target="_blank"
+                                                >
+                                                {{ __('Print') }}
+                                            </flux:menu.item>
                                             <flux:menu.separator />
                                             <flux:menu.item icon="trash" variant="danger"
                                                 wire:click="confirmDelete({{ $transaction->id }})">
@@ -283,8 +289,14 @@ $methodColors = [
 
                         <div class="flex justify-end gap-2">
                             <flux:button variant="filled"
-                                href="{{ route('transactions.edit', ['transaction' => $transaction->id]) }}" >
+                                href="{{ route('transactions.edit', ['transaction' => $this->viewTransaction->id]) }}" >
                                 {{ __('Edit Transaction') }}
+                            </flux:button>
+                            <flux:button variant="filled"
+                                href="/transactions/{{ $this->viewTransaction->id }}/receipt"
+                                target="_blank"
+                                >
+                                {{ __('Print Receipt') }}
                             </flux:button>
                             <flux:modal.close>
                                 <flux:button variant="filled">{{ __('Close') }}</flux:button>
