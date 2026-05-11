@@ -14,35 +14,53 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-            <flux:sidebar.group :heading="__('Platform')" class="grid">
-                {{-- Dashboard --}}
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate>
+            {{-- Analytics & Transactions --}}
+            <flux:sidebar.group :heading="__('Analitik & Transaksi')" class="grid">
+                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
 
-                {{-- Transactions --}}
                 <flux:sidebar.item icon="document-text" href="{{ route('transactions.index') }}" wire:navigate>
                     {{ __('Transactions') }}
                 </flux:sidebar.item>
 
-                {{-- Reports --}}
                 <flux:sidebar.item icon="chart-bar-square" href="{{ route('reports.index') }}" wire:navigate>
                     {{ __('Laporan') }}
                 </flux:sidebar.item>
+            </flux:sidebar.group>
 
-                {{-- Products --}}
+            {{-- Product Management --}}
+            <flux:sidebar.group :heading="__('Manajemen Produk')" class="grid mt-4">
                 <flux:sidebar.item icon="shopping-bag" href="{{ route('products.index') }}" wire:navigate>
                     {{ __('Products') }}
                 </flux:sidebar.item>
 
-                {{-- Categories --}}
                 <flux:sidebar.item icon="folder-git-2" href="{{ route('categories.index') }}" wire:navigate>
                     {{ __('Kategori Produk') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
+            {{-- Security & Access --}}
+            <flux:sidebar.group :heading="__('Keamanan & Akses')" class="grid mt-4">
+                <flux:sidebar.item icon="users" href="/users" wire:navigate>
+                    {{ __('Users') }}
+                </flux:sidebar.item>
 
+                <flux:sidebar.item icon="shield-check" href="/roles" wire:navigate>
+                    {{ __('Roles') }}
+                </flux:sidebar.item>
+
+                <flux:sidebar.item icon="key" href="/permissions" wire:navigate>
+                    {{ __('Permissions') }}
+                </flux:sidebar.item>
+            </flux:sidebar.group>
+
+            {{-- Configuration --}}
+            <flux:sidebar.group :heading="__('Konfigurasi')" class="grid mt-4">
+                <flux:sidebar.item icon="cog-6-tooth" href="/settings/store" wire:navigate>
+                    {{ __('Store Settings') }}
+                </flux:sidebar.item>
+            </flux:sidebar.group>
         </flux:sidebar.nav>
 
         <flux:spacer />
