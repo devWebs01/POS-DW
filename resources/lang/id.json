@@ -125,5 +125,16 @@
     "Cash": "Tunai",
     "Transfer": "Transfer",
     "Debit Card": "Kartu Debit",
-    "Credit Card": "Kartu Kredit"
+    "Credit Card": "Kartu Kredit",
+    "Today's Revenue": "Pendapatan Hari Ini",
+    "Today's Transactions": "Transaksi Hari Ini",
+    "Low Stock Alerts": "Peringatan Stok Rendah",
+    "Sales Trend (Last 7 Days)": "Tren Penjualan (7 Hari Terakhir)",
+    "View All": "Lihat Semua",
+    "Showing data from": "Menampilkan data dari",
+    "to": "sampai",
+    "Top Products by Revenue": "Produk Terlaris berdasarkan Pendapatan",
+    "Out of Stock": "Stok Habis",
+    "Healthy": "Aman",
+    "Critical": "Kritis"
 }
