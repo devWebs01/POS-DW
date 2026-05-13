@@ -137,7 +137,7 @@ $topSellingProducts = computed(function () {
                 {{-- Recent Transactions --}}
                  <div class="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
                     <div class="mb-4 flex items-center justify-between">
-                        <flux:heading size="lg">{{ __('Recent Transactions') }}</flux:heading>
+                        <flux:heading size="lg">Transaksi Terbaru</flux:heading>
                         <flux:link href="{{ route('transactions.index') }}" class="text-xs font-semibold">
                             {{ __('View All') }}
                         </flux:link>
@@ -169,7 +169,7 @@ $topSellingProducts = computed(function () {
                 {{-- Top Selling Products --}}
                 <div class="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
                     <div class="mb-4 flex items-center justify-between">
-                        <flux:heading size="lg">{{ __('Top Selling Products') }}</flux:heading>
+                        <flux:heading size="lg">Produk Terlaris</flux:heading>
                     </div>
 
                     <div class="space-y-4">

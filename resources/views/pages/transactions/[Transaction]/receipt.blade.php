@@ -154,10 +154,10 @@ mount(function (Transaction $transaction) {
             style="padding: 8px 16px; cursor: pointer; background: #18181b; color: white; border: none; border-radius: 4px; font-weight: bold;">
             Cetak
         </button>
-        <button onclick="window.close()"
+        <a href="{{ route('transactions.index') }}"
             style="padding: 8px 16px; cursor: pointer; background: #e4e4e7; color: #18181b; border: none; border-radius: 4px; margin-left: 10px;">
             Tutup
-        </button>
+    </a>
     </div>
 
     @volt
