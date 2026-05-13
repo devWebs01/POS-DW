@@ -10,14 +10,11 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Makanan', 'slug' => 'makanan', 'description' => 'Makanan ringan dan berat'],
-            ['name' => 'Minuman', 'slug' => 'minuman', 'description' => 'Minuman kemasan dan segar'],
-            ['name' => 'Snack', 'slug' => 'snack', 'description' => 'Camilan dan kudapan'],
-            ['name' => 'Alat Tulis', 'slug' => 'alat-tulis', 'description' => 'Peralatan kantor dan sekolah'],
-            ['name' => 'Perawatan Diri', 'slug' => 'perawatan-diri', 'description' => 'Produk kebersihan dan kecantikan'],
-            ['name' => 'Rumah Tangga', 'slug' => 'rumah-tangga', 'description' => 'Kebutuhan rumah tangga'],
-            ['name' => 'Obat-obatan', 'slug' => 'obat-obatan', 'description' => 'Obat bebas dan vitamin'],
-            ['name' => 'Elektronik', 'slug' => 'elektronik', 'description' => 'Aksesoris dan perangkat elektronik'],
+            ['name' => 'Kopi & Espresso', 'slug' => 'kopi-espresso', 'description' => 'Kopi berbasis espresso dan racikan spesial'],
+            ['name' => 'Non-Coffee', 'slug' => 'non-coffee', 'description' => 'Minuman non-kopi seperti matcha, taro, coklat'],
+            ['name' => 'Makanan Ringan', 'slug' => 'makanan-ringan', 'description' => 'Pastry, cake, cookies, dan camilan'],
+            ['name' => 'Makanan Berat', 'slug' => 'makanan-berat', 'description' => 'Nasi, pasta, dan hidangan utama'],
+            ['name' => 'Minuman Segar', 'slug' => 'minuman-segar', 'description' => 'Jus, smoothies, es kelapa, dan minuman dingin'],
         ];
 
         foreach ($categories as $category) {

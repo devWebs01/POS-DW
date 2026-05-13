@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'stock' => fake()->numberBetween(0, 100),
             'description' => fake()->optional()->sentence(),
             'is_active' => true,
+            'is_unlimited_stock' => false,
         ];
     }
 

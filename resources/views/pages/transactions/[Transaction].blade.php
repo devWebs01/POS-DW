@@ -221,22 +221,27 @@ $paymentMethods = computed(function () {
                         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
                             @forelse ($this->products as $product)
                                 <div
-                                    class="group flex items-center justify-between rounded-lg border border-zinc-200 p-3 transition-all hover:scale-[1.02] hover:border-zinc-400 hover:shadow-sm active:scale-[0.98] dark:border-zinc-700 dark:hover:border-zinc-500">
-                                    <div class="min-w-0 flex-1">
-                                        <p class="truncate text-sm font-medium">{{ $product->name }}</p>
-                                        <p class="text-xs text-zinc-500">
+                                    class="group relative flex items-end justify-between rounded-lg border border-zinc-200 p-3 transition-all hover:scale-[1.02] hover:border-zinc-400 hover:shadow-sm active:scale-[0.98] dark:border-zinc-700 dark:hover:border-zinc-500"
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.05) 100%), url('{{ $product->image_url }}'); background-size: cover; background-position: center; min-height: 100px;">
+                                    <div class="min-w-0 flex-1 z-10">
+                                        <p class="truncate text-sm font-medium text-white drop-shadow-sm">{{ $product->name }}</p>
+                                        <p class="text-xs text-zinc-200 drop-shadow-sm">
                                             {{ Number::currency($product->price, 'IDR', 'id') }}</p>
-                                        @if ($product->stock < 1)
+                                        <div class="mt-1">
+                                        @if($product->is_unlimited_stock)
+                                            <flux:badge size="xs" color="purple" inset="top bottom">Tanpa Stok</flux:badge>
+                                        @elseif ($product->stock < 1)
                                             <flux:badge size="xs" color="red" inset="top bottom">{{ __('out of stock') }}
                                             </flux:badge>
                                         @elseif ($product->stock <= 5)
                                             <flux:badge size="xs" color="orange" inset="top bottom">{{ $product->stock }}
                                                 {{ __('left') }}</flux:badge>
                                         @endif
+                                        </div>
                                     </div>
                                     <flux:button size="xs" variant="primary" icon="plus"
-                                        wire:click="addToCart({{ $product->id }})" :disabled="$product->stock < 1"
-                                        class="shrink-0" />
+                                        wire:click="addToCart({{ $product->id }})" :disabled="!$product->is_unlimited_stock && $product->stock < 1"
+                                        class="shrink-0 z-10" />
                                 </div>
                             @empty
                                 <div

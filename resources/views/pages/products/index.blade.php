@@ -57,12 +57,16 @@ $activeProducts = computed(function () {
     return Product::where('is_active', true)->count();
 });
 
+$unlimitedStockProducts = computed(function () {
+    return Product::where('is_unlimited_stock', true)->count();
+});
+
 $lowStockProducts = computed(function () {
-    return Product::where('stock', '>', 0)->where('stock', '<', 5)->count();
+    return Product::where('is_unlimited_stock', false)->where('stock', '>', 0)->where('stock', '<', 5)->count();
 });
 
 $outOfStockProducts = computed(function () {
-    return Product::where('stock', '<=', 0)->count();
+    return Product::where('is_unlimited_stock', false)->where('stock', '<=', 0)->count();
 });
 
 $confirmDelete = function ($id) {
@@ -107,7 +111,7 @@ $delete = function () {
             </div>
 
             {{-- Stats --}}
-            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-5">
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                     <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">{{ __('Total Products') }}</p>
                     <p class="mt-1 text-2xl font-semibold">{{ $this->totalProducts }}</p>
@@ -120,6 +124,11 @@ $delete = function () {
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
                     <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">{{ __('Low Stock') }}</p>
                     <p class="mt-1 text-2xl font-semibold text-amber-600 dark:text-amber-400">{{ $this->lowStockProducts }}
+                    </p>
+                </div>
+                <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
+                    <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">Tanpa Stok</p>
+                    <p class="mt-1 text-2xl font-semibold text-purple-600 dark:text-purple-400">{{ $this->unlimitedStockProducts }}
                     </p>
                 </div>
                 <div class="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800">
@@ -138,6 +147,10 @@ $delete = function () {
                 {{-- Table --}}
                 <flux:table :paginate="$this->products">
                     <flux:table.columns>
+                        <flux:table.column>
+                            {{ __('Image') }}
+                        </flux:table.column>
+
                         <flux:table.column sortable :sorted="$sortBy === 'name'" :direction="$sortDirection"
                             wire:click="sort('name')">
                             {{ __('Name') }}
@@ -175,6 +188,10 @@ $delete = function () {
                     <flux:table.rows>
                         @foreach ($this->products as $product)
                             <flux:table.row :key="$product->id">
+                                <flux:table.cell>
+                                    <img src="{{ $product->image_url }}" class="h-10 w-10 rounded-lg border border-zinc-200 object-cover dark:border-zinc-700">
+                                </flux:table.cell>
+
                                 <flux:table.cell class="font-medium">{{ $product->name }}</flux:table.cell>
 
                                 <flux:table.cell>
@@ -192,31 +209,37 @@ $delete = function () {
                                 </flux:table.cell>
 
                                 <flux:table.cell>
-                                    @php
-                                        $stock = $product->stock;
-                                        $color = $stock <= 0 ? 'red' : ($stock < 5 ? 'amber' : 'green');
-                                        $bgClass =
-                                            $stock <= 0
-                                                ? 'bg-rose-500'
-                                                : ($stock < 5
-                                                    ? 'bg-amber-500'
-                                                    : 'bg-emerald-500');
-                                        $percentage = min(100, ($stock / 20) * 100);
-                                    @endphp
-                                    <div class="flex w-32 flex-col gap-1.5">
-                                        <div class="flex items-center justify-between">
-                                            <flux:badge :color="$color" size="sm" inset="top bottom">
-                                                {{ $stock }}
-                                            </flux:badge>
-                                            <span class="text-[10px] font-medium text-zinc-500">
-                                                {{ $stock <= 0 ? __('Critical') : ($stock < 5 ? __('Low Stock') : __('Healthy')) }}
-                                            </span>
+                                    @if($product->is_unlimited_stock)
+                                        <flux:badge color="purple" size="sm" inset="top bottom">
+                                            Tanpa Stok
+                                        </flux:badge>
+                                    @else
+                                        @php
+                                            $stock = $product->stock;
+                                            $color = $stock <= 0 ? 'red' : ($stock < 5 ? 'amber' : 'green');
+                                            $bgClass =
+                                                $stock <= 0
+                                                    ? 'bg-rose-500'
+                                                    : ($stock < 5
+                                                        ? 'bg-amber-500'
+                                                        : 'bg-emerald-500');
+                                            $percentage = min(100, ($stock / 20) * 100);
+                                        @endphp
+                                        <div class="flex w-32 flex-col gap-1.5">
+                                            <div class="flex items-center justify-between">
+                                                <flux:badge :color="$color" size="sm" inset="top bottom">
+                                                    {{ $stock }}
+                                                </flux:badge>
+                                                <span class="text-[10px] font-medium text-zinc-500">
+                                                    {{ $stock <= 0 ? __('Critical') : ($stock < 5 ? __('Low Stock') : __('Healthy')) }}
+                                                </span>
+                                            </div>
+                                            <div class="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-700">
+                                                <div class="h-1.5 rounded-full {{ $bgClass }}"
+                                                    style="width: {{ $percentage }}%"></div>
+                                            </div>
                                         </div>
-                                        <div class="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-700">
-                                            <div class="h-1.5 rounded-full {{ $bgClass }}"
-                                                style="width: {{ $percentage }}%"></div>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </flux:table.cell>
 
                                 <flux:table.cell>
@@ -292,11 +315,14 @@ $delete = function () {
                             <div>
                                 <p class="text-xs font-medium uppercase tracking-wider text-zinc-400">{{ __('Stock') }}
                                 </p>
-                                <p class="mt-1.5 text-2xl font-semibold">
-                                    <span
-                                        :class="$detailProduct->stock < 5 ? 'text-red-600' : 'text-green-600'">{{ $detailProduct->stock }}</span>
-                                    <span class="text-sm font-normal text-zinc-400">{{ __('units') }}</span>
-                                </p>
+                                @if($detailProduct->is_unlimited_stock)
+                                    <p class="mt-1.5 text-2xl font-semibold text-purple-600">Tanpa Stok</p>
+                                @else
+                                    <p class="mt-1.5 text-2xl font-semibold">
+                                        <span :class="$detailProduct->stock < 5 ? 'text-red-600' : 'text-green-600'">{{ $detailProduct->stock }}</span>
+                                        <span class="text-sm font-normal text-zinc-400">{{ __('units') }}</span>
+                                    </p>
+                                @endif
                             </div>
                         </div>
 

@@ -11,40 +11,49 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $productsByCategory = [
-            'Makanan' => [
-                ['name' => 'Nasi Goreng Instan', 'price' => 15000, 'sku' => 'SKU-MKN-001'],
-                ['name' => 'Mie Instant Goreng', 'price' => 5000, 'sku' => 'SKU-MKN-002'],
-                ['name' => 'Roti Tawar', 'price' => 12000, 'sku' => 'SKU-MKN-003'],
-                ['name' => 'Biskuit Coklat', 'price' => 8000, 'sku' => 'SKU-MKN-004'],
-                ['name' => 'Sarden Kaleng', 'price' => 18000, 'sku' => 'SKU-MKN-005'],
+            'Kopi & Espresso' => [
+                ['name' => 'Espresso', 'price' => 18000, 'sku' => 'SKU-KPI-001', 'is_unlimited_stock' => true],
+                ['name' => 'Americano', 'price' => 22000, 'sku' => 'SKU-KPI-002', 'is_unlimited_stock' => true],
+                ['name' => 'Cappuccino', 'price' => 28000, 'sku' => 'SKU-KPI-003', 'is_unlimited_stock' => true],
+                ['name' => 'Caffe Latte', 'price' => 30000, 'sku' => 'SKU-KPI-004', 'is_unlimited_stock' => true],
+                ['name' => 'Mocha Latte', 'price' => 32000, 'sku' => 'SKU-KPI-005', 'is_unlimited_stock' => true],
+                ['name' => 'Caramel Macchiato', 'price' => 35000, 'sku' => 'SKU-KPI-006', 'is_unlimited_stock' => true],
+                ['name' => 'Cold Brew', 'price' => 25000, 'sku' => 'SKU-KPI-007', 'is_unlimited_stock' => true],
+                ['name' => 'Affogato', 'price' => 28000, 'sku' => 'SKU-KPI-008', 'is_unlimited_stock' => true],
             ],
-            'Minuman' => [
-                ['name' => 'Air Mineral 600ml', 'price' => 3000, 'sku' => 'SKU-MNM-001'],
-                ['name' => 'Teh Botol', 'price' => 7000, 'sku' => 'SKU-MNM-002'],
-                ['name' => 'Kopi Sachet', 'price' => 2000, 'sku' => 'SKU-MNM-003'],
-                ['name' => 'Jus Jeruk Kemasan', 'price' => 10000, 'sku' => 'SKU-MNM-004'],
-                ['name' => 'Susu UHT 250ml', 'price' => 8000, 'sku' => 'SKU-MNM-005'],
+            'Non-Coffee' => [
+                ['name' => 'Matcha Latte', 'price' => 30000, 'sku' => 'SKU-NCF-001', 'is_unlimited_stock' => true],
+                ['name' => 'Taro Latte', 'price' => 30000, 'sku' => 'SKU-NCF-002', 'is_unlimited_stock' => true],
+                ['name' => 'Chocolate Hazelnut', 'price' => 32000, 'sku' => 'SKU-NCF-003', 'is_unlimited_stock' => true],
+                ['name' => 'Red Velvet Latte', 'price' => 32000, 'sku' => 'SKU-NCF-004', 'is_unlimited_stock' => true],
+                ['name' => 'Vanilla Latte', 'price' => 28000, 'sku' => 'SKU-NCF-005', 'is_unlimited_stock' => true],
+                ['name' => 'Bandrek Susu', 'price' => 25000, 'sku' => 'SKU-NCF-006', 'is_unlimited_stock' => true],
             ],
-            'Snack' => [
-                ['name' => 'Keripik Kentang', 'price' => 12000, 'sku' => 'SKU-SNC-001'],
-                ['name' => 'Wafer Coklat', 'price' => 10000, 'sku' => 'SKU-SNC-002'],
-                ['name' => 'Kacang Garuda', 'price' => 8000, 'sku' => 'SKU-SNC-003'],
-                ['name' => 'Permen Asem', 'price' => 5000, 'sku' => 'SKU-SNC-004'],
-                ['name' => 'Coklat Batang', 'price' => 15000, 'sku' => 'SKU-SNC-005'],
+            'Makanan Ringan' => [
+                ['name' => 'Croissant', 'price' => 20000, 'sku' => 'SKU-MRG-001', 'stock' => 8],
+                ['name' => 'Banana Bread', 'price' => 15000, 'sku' => 'SKU-MRG-002', 'stock' => 12],
+                ['name' => 'New York Cheesecake', 'price' => 35000, 'sku' => 'SKU-MRG-003', 'stock' => 3],
+                ['name' => 'Chocolate Cookies', 'price' => 12000, 'sku' => 'SKU-MRG-004', 'stock' => 25],
+                ['name' => 'Tiramisu', 'price' => 30000, 'sku' => 'SKU-MRG-005', 'stock' => 0],
+                ['name' => 'Roti Bakar', 'price' => 18000, 'sku' => 'SKU-MRG-006', 'stock' => 5],
+                ['name' => 'Pisang Goreng', 'price' => 12000, 'sku' => 'SKU-MRG-007', 'is_unlimited_stock' => true],
+                ['name' => 'Kentang Goreng', 'price' => 18000, 'sku' => 'SKU-MRG-008', 'is_unlimited_stock' => true],
             ],
-            'Alat Tulis' => [
-                ['name' => 'Pensil 2B', 'price' => 3000, 'sku' => 'SKU-ALT-001'],
-                ['name' => 'Buku Tulis 40 Lembar', 'price' => 5000, 'sku' => 'SKU-ALT-002'],
-                ['name' => 'Pulpen Biru', 'price' => 4000, 'sku' => 'SKU-ALT-003'],
-                ['name' => 'Penghapus', 'price' => 2000, 'sku' => 'SKU-ALT-004'],
-                ['name' => 'Spidol Hitam', 'price' => 8000, 'sku' => 'SKU-ALT-005'],
+            'Makanan Berat' => [
+                ['name' => 'Nasi Goreng Spesial', 'price' => 30000, 'sku' => 'SKU-MBR-001', 'is_unlimited_stock' => true],
+                ['name' => 'Spaghetti Aglio Olio', 'price' => 35000, 'sku' => 'SKU-MBR-002', 'is_unlimited_stock' => true],
+                ['name' => 'Chicken Steak', 'price' => 45000, 'sku' => 'SKU-MBR-003', 'is_unlimited_stock' => true],
+                ['name' => 'French Fries', 'price' => 20000, 'sku' => 'SKU-MBR-004', 'is_unlimited_stock' => true],
+                ['name' => 'Cireng Crispy', 'price' => 15000, 'sku' => 'SKU-MBR-005', 'is_unlimited_stock' => true],
+                ['name' => 'Indomie Goreng', 'price' => 12000, 'sku' => 'SKU-MBR-006', 'is_unlimited_stock' => true],
             ],
-            'Perawatan Diri' => [
-                ['name' => 'Sabun Mandi 100ml', 'price' => 15000, 'sku' => 'SKU-PRW-001'],
-                ['name' => 'Shampo Sachet', 'price' => 2000, 'sku' => 'SKU-PRW-002'],
-                ['name' => 'Pasta Gigi', 'price' => 12000, 'sku' => 'SKU-PRW-003'],
-                ['name' => 'Deodorant', 'price' => 18000, 'sku' => 'SKU-PRW-004'],
-                ['name' => 'Hand Body Lotion', 'price' => 22000, 'sku' => 'SKU-PRW-005'],
+            'Minuman Segar' => [
+                ['name' => 'Jus Alpukat', 'price' => 20000, 'sku' => 'SKU-SGR-001', 'is_unlimited_stock' => true],
+                ['name' => 'Jus Mangga', 'price' => 18000, 'sku' => 'SKU-SGR-002', 'is_unlimited_stock' => true],
+                ['name' => 'Smoothie Berry', 'price' => 25000, 'sku' => 'SKU-SGR-003', 'is_unlimited_stock' => true],
+                ['name' => 'Es Kelapa Muda', 'price' => 15000, 'sku' => 'SKU-SGR-004', 'stock' => 15],
+                ['name' => 'Lemon Tea', 'price' => 12000, 'sku' => 'SKU-SGR-005', 'stock' => 20],
+                ['name' => 'Es Cincau', 'price' => 13000, 'sku' => 'SKU-SGR-006', 'stock' => 10],
             ],
         ];
 
@@ -61,8 +70,9 @@ class ProductSeeder extends Seeder
                     'slug' => str()->slug($product['name']),
                     'sku' => $product['sku'],
                     'price' => $product['price'],
-                    'stock' => rand(10, 50),
-                    'description' => "Produk {$product['name']}",
+                    'stock' => $product['stock'] ?? 0,
+                    'is_unlimited_stock' => $product['is_unlimited_stock'] ?? false,
+                    'description' => $product['name'].' - Caffe Shop',
                     'is_active' => true,
                 ]);
             }

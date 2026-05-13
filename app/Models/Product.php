@@ -15,15 +15,26 @@ class Product extends Model
 
     protected $fillable = [
         'category_id', 'name', 'slug', 'sku',
-        'price', 'stock', 'description', 'is_active',
+        'price', 'stock', 'image', 'description', 'is_active',
+        'is_unlimited_stock',
     ];
 
     protected function casts(): array
     {
         return [
             'is_active' => 'boolean',
+            'is_unlimited_stock' => 'boolean',
             'price' => 'decimal:2',
         ];
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        if ($this->image && file_exists(storage_path('app/public/'.$this->image))) {
+            return asset('storage/'.$this->image);
+        }
+
+        return asset('images/product-default.svg');
     }
 
     public function category(): BelongsTo
