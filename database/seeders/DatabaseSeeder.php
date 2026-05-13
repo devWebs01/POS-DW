@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -12,19 +13,20 @@ class DatabaseSeeder extends Seeder
         // Admin user
         User::factory()->create([
             'name' => 'Admin POS',
-            'email' => 'admin@pos.test',
+            'email' => 'admin@testing.com',
         ]);
 
         // Kasir user
         User::factory()->create([
             'name' => 'Kasir Toko',
-            'email' => 'kasir@pos.test',
+            'email' => 'kasir@testing.com',
         ]);
 
         $this->call([
             CategorySeeder::class,
             ProductSeeder::class,
             TransactionSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }

@@ -14,7 +14,6 @@
         "fluxui-development",
         "livewire-development",
         "volt-development",
-        "tailwindcss-development",
         "deploying-laravel-cloud"
     ]
 }
