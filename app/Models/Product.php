@@ -24,13 +24,21 @@ class Product extends Model
         return [
             'is_active' => 'boolean',
             'is_unlimited_stock' => 'boolean',
-            'price' => 'decimal:2',
+            'price' => 'float',
         ];
     }
 
     public function getImageUrlAttribute(): string
     {
-        if ($this->image && file_exists(storage_path('app/public/'.$this->image))) {
+        if (! $this->image) {
+            return asset('images/product-default.svg');
+        }
+
+        if (str_starts_with($this->image, 'http')) {
+            return $this->image;
+        }
+
+        if (file_exists(storage_path('app/public/'.$this->image))) {
             return asset('storage/'.$this->image);
         }
 

@@ -252,7 +252,7 @@ $paymentMethods = computed(function () {
                         </div>
 
                         <div class="mt-4">
-                            {{ $this->products->links(data: ['navigate' => true]) }}
+                            {{ $this->products->links() }}
                         </div>
                     </div>
                 </div>
@@ -421,7 +421,7 @@ $paymentMethods = computed(function () {
                     </div>
                     <div>
                         <span class="text-zinc-500">{{ __('Paid') }}</span>
-                        <p class="font-medium">{{ Number::currency($paid_amount ?? 0, 'IDR', 'id') }}</p>
+                        <p class="font-medium">{{ Number::currency((float) ($paid_amount ?: 0), 'IDR', 'id') }}</p>
                     </div>
                     <div>
                         <span class="text-zinc-500">{{ __('Change') }}</span>

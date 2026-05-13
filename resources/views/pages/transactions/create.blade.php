@@ -12,6 +12,10 @@ use function Laravel\Folio\middleware;
 use function Laravel\Folio\name;
 use function Livewire\Volt\computed;
 use function Livewire\Volt\state;
+use function Livewire\Volt\usesPagination;
+
+
+usesPagination();
 
 name('transactions.create');
 
@@ -24,12 +28,11 @@ state([
     'productSearch' => '',
     'cart' => [],
     'payment_method' => 'cash',
-    'paid_amount' => (int) 0,
+    'paid_amount' => 0,
     'notes' => '',
     'showConfirmModal' => false,
 ]);
 
-state(['page' => 1])->url();
 
 $categoryOptions = computed(function () {
     return Category::orderBy('name')->get();
@@ -420,7 +423,7 @@ $save = function () {
                         </div>
                         <div>
                             <span class="text-zinc-500">{{ __('Paid') }}</span>
-                            <p class="font-medium">{{ Number::currency($paid_amount ?? 0, 'IDR', 'id') }}</p>
+                            <p class="font-medium">{{ Number::currency((float) ($paid_amount ?: 0), 'IDR', 'id') }}</p>
                         </div>
                         <div>
                             <span class="text-zinc-500">{{ __('Change') }}</span>

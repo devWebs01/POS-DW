@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Product;
 use Flux\Flux;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 use function Laravel\Folio\middleware;
@@ -79,7 +80,7 @@ $save = function () {
         $this->slug = str()->slug($this->name);
     }
 
-    $validated = $this->validate([
+    $rules = [
         'category_id' => 'required|exists:categories,id',
         'name' => 'required|string|max:200',
         'slug' => 'required|string|max:220|unique:products,slug,' . $this->product->id,
@@ -87,12 +88,19 @@ $save = function () {
         'price' => 'required|numeric|min:0',
         'stock' => 'required|integer|min:0',
         'description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         'is_active' => 'boolean',
         'is_unlimited_stock' => 'boolean',
-    ]);
+    ];
 
-    if ($this->image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+    if ($this->image instanceof TemporaryUploadedFile) {
+        $rules['image'] = 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048';
+    } else {
+        $rules['image'] = 'nullable|string';
+    }
+
+    $validated = $this->validate($rules);
+
+    if ($this->image instanceof TemporaryUploadedFile) {
         $validated['image'] = $this->image->store('products', 'public');
     }
 

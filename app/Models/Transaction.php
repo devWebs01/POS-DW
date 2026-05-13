@@ -21,9 +21,9 @@ class Transaction extends Model
     protected function casts(): array
     {
         return [
-            'total_amount' => 'decimal:2',
-            'paid_amount' => 'decimal:2',
-            'change_amount' => 'decimal:2',
+            'total_amount' => 'float',
+            'paid_amount' => 'float',
+            'change_amount' => 'float',
         ];
     }
 
