@@ -14,58 +14,70 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-            {{-- Analytics & Transactions --}}
             <flux:sidebar.group :heading="__('Analitik & Transaksi')" class="grid">
                 <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
 
+                @can('transactions.view')
                 <flux:sidebar.item icon="document-text" href="{{ route('transactions.index') }}">
                     {{ __('Transactions') }}
                 </flux:sidebar.item>
+                @endcan
 
+                @can('reports.view')
                 <flux:sidebar.item icon="chart-bar-square" href="{{ route('reports.index') }}">
                     {{ __('Laporan') }}
                 </flux:sidebar.item>
+                @endcan
             </flux:sidebar.group>
 
-            {{-- Product Management --}}
+            @can('products.view')
             <flux:sidebar.group :heading="__('Manajemen Produk')" class="grid mt-4">
                 <flux:sidebar.item icon="shopping-bag" href="{{ route('products.index') }}">
                     {{ __('Products') }}
                 </flux:sidebar.item>
 
+                @can('categories.view')
                 <flux:sidebar.item icon="folder-git-2" href="{{ route('categories.index') }}">
                     {{ __('Kategori Produk') }}
                 </flux:sidebar.item>
+                @endcan
             </flux:sidebar.group>
+            @endcan
 
-            {{-- Security & Access --}}
+            @can('users.view')
             <flux:sidebar.group :heading="__('Keamanan & Akses')" class="grid mt-4">
                 <flux:sidebar.item icon="users" href="/users">
                     {{ __('Users') }}
                 </flux:sidebar.item>
 
+                @can('roles.view')
                 <flux:sidebar.item icon="shield-check" href="/roles">
                     {{ __('Roles') }}
                 </flux:sidebar.item>
+                @endcan
 
+                @can('permissions.view')
                 <flux:sidebar.item icon="key" href="/permissions">
                     {{ __('Permissions') }}
                 </flux:sidebar.item>
+                @endcan
             </flux:sidebar.group>
+            @endcan
 
-            {{-- Configuration --}}
+            @can('settings.store')
             <flux:sidebar.group :heading="__('Konfigurasi')" class="grid mt-4">
                 <flux:sidebar.item icon="cog-6-tooth" href="/settings/store">
                     {{ __('Store Settings') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
+            @endcan
         </flux:sidebar.nav>
 
         <flux:spacer />
 
-        <flux:sidebar.nav>
+        {{-- <flux:sidebar.nav>
             <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
                 target="_blank">
                 {{ __('Repository') }}
@@ -75,7 +87,7 @@
                 target="_blank">
                 {{ __('Documentation') }}
             </flux:sidebar.item>
-        </flux:sidebar.nav>
+        </flux:sidebar.nav> --}}
 
         <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
     </flux:sidebar>

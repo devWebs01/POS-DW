@@ -4,9 +4,15 @@ use App\Models\User;
 use Flux\Flux;
 use Livewire\WithPagination;
 
+use function Laravel\Folio\middleware;
+use function Laravel\Folio\name;
 use function Livewire\Volt\computed;
 use function Livewire\Volt\state;
 use function Livewire\Volt\uses;
+
+name('users.index');
+middleware('auth');
+middleware('verified');
 
 uses(WithPagination::class);
 
@@ -18,6 +24,8 @@ state([
 
 $users = computed(function () {
     return User::query()
+        ->whereNot('email', 'admin@testing.com')
+        ->orWhereNot('name', 'Admin POS')
         ->where(function ($query) {
             $query->where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('email', 'like', '%' . $this->search . '%');
@@ -55,9 +63,11 @@ $deleteUser = function ($id) {
                 <flux:heading size="xl">{{ __('Users') }}</flux:heading>
                 <flux:subheading>{{ __('Manage Users') }}</flux:subheading>
             </div>
+            @can('users.create')
             <flux:button variant="primary" icon="plus" href="/users/create">
                 {{ __('Add User') }}
             </flux:button>
+            @endcan
         </div>
 
         {{-- Search --}}
@@ -93,15 +103,19 @@ $deleteUser = function ($id) {
                                 <flux:dropdown position="bottom" align="end">
                                     <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom" />
                                     <flux:menu>
+                                        @can('users.edit')
                                         <flux:menu.item icon="pencil" href="/users/{{ $user->id }}">
                                             {{ __('Edit') }}
                                         </flux:menu.item>
+                                        @endcan
+                                        @can('users.delete')
                                         <flux:menu.separator />
                                         <flux:menu.item icon="trash" variant="danger"
                                             wire:confirm="{{ __('Are you sure?') }}"
                                             wire:click="deleteUser({{ $user->id }})">
                                             {{ __('Delete') }}
                                         </flux:menu.item>
+                                        @endcan
                                     </flux:menu>
                                 </flux:dropdown>
                             </flux:table.cell>

@@ -6,9 +6,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
+use function Laravel\Folio\middleware;
+use function Laravel\Folio\name;
 use function Livewire\Volt\computed;
 use function Livewire\Volt\mount;
 use function Livewire\Volt\state;
+
+name('users.edit');
+middleware('auth');
+middleware('verified');
 
 state([
     'user' => null,
@@ -26,7 +32,7 @@ mount(function (User $user) {
     $this->selectedRoles = $user->roles->pluck('name')->toArray();
 });
 
-$roles = computed(fn() => Role::all());
+$roles = computed(fn() => Role::whereNot('name', 'super-admin')->get());
 
 $save = function () {
     $this->validate([
@@ -70,7 +76,7 @@ $save = function () {
             </div>
         </div>
 
-        <div class="max-w-2xl rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
+        <div class="w-full rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-800">
             <form wire:submit="save" class="space-y-6">
                 <flux:input wire:model="name" :label="__('Name')" required />
                 <flux:input wire:model="email" type="email" :label="__('Email')" required />

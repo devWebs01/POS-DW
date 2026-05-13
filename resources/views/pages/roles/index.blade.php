@@ -4,8 +4,14 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Flux\Flux;
 
+use function Laravel\Folio\middleware;
+use function Laravel\Folio\name;
 use function Livewire\Volt\computed;
 use function Livewire\Volt\state;
+
+name('roles.index');
+middleware('auth');
+middleware('verified');
 
 state([
     'search' => '',
@@ -37,9 +43,11 @@ $deleteRole = function ($id) {
                 <flux:heading size="xl">{{ __('Roles') }}</flux:heading>
                 <flux:subheading>{{ __('Manage Roles') }}</flux:subheading>
             </div>
+            @can('roles.create')
             <flux:button variant="primary" icon="plus" href="/roles/create">
                 {{ __('Add Role') }}
             </flux:button>
+            @endcan
         </div>
 
         {{-- Search --}}
@@ -74,15 +82,19 @@ $deleteRole = function ($id) {
                                 <flux:dropdown position="bottom" align="end">
                                     <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom" />
                                     <flux:menu>
+                                        @can('roles.edit')
                                         <flux:menu.item icon="pencil" href="/roles/{{ $role->id }}">
                                             {{ __('Edit') }}
                                         </flux:menu.item>
+                                        @endcan
+                                        @can('roles.delete')
                                         <flux:menu.separator />
                                         <flux:menu.item icon="trash" variant="danger"
                                             wire:confirm="{{ __('Are you sure?') }}"
                                             wire:click="deleteRole({{ $role->id }})">
                                             {{ __('Delete') }}
                                         </flux:menu.item>
+                                        @endcan
                                     </flux:menu>
                                 </flux:dropdown>
                             </flux:table.cell>

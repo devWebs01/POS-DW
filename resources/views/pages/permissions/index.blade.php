@@ -3,8 +3,14 @@
 use Spatie\Permission\Models\Permission;
 use Flux\Flux;
 
+use function Laravel\Folio\middleware;
+use function Laravel\Folio\name;
 use function Livewire\Volt\computed;
 use function Livewire\Volt\state;
+
+name('permissions.index');
+middleware('auth');
+middleware('verified');
 
 state([
     'search' => '',
@@ -32,9 +38,11 @@ $deletePermission = function ($id) {
                 <flux:heading size="xl">{{ __('Permissions') }}</flux:heading>
                 <flux:subheading>{{ __('Manage Permissions') }}</flux:subheading>
             </div>
+            @can('permissions.create')
             <flux:button variant="primary" icon="plus" href="/permissions/create">
                 {{ __('Add Permission') }}
             </flux:button>
+            @endcan
         </div>
 
         {{-- Search --}}
@@ -59,15 +67,19 @@ $deletePermission = function ($id) {
                                 <flux:dropdown position="bottom" align="end">
                                     <flux:button variant="ghost" size="sm" icon="ellipsis-horizontal" inset="top bottom" />
                                     <flux:menu>
+                                        @can('permissions.edit')
                                         <flux:menu.item icon="pencil" href="/permissions/{{ $permission->id }}">
                                             {{ __('Edit') }}
                                         </flux:menu.item>
+                                        @endcan
+                                        @can('permissions.delete')
                                         <flux:menu.separator />
                                         <flux:menu.item icon="trash" variant="danger"
                                             wire:confirm="{{ __('Are you sure?') }}"
                                             wire:click="deletePermission({{ $permission->id }})">
                                             {{ __('Delete') }}
                                         </flux:menu.item>
+                                        @endcan
                                     </flux:menu>
                                 </flux:dropdown>
                             </flux:table.cell>

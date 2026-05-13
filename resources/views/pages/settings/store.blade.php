@@ -3,8 +3,14 @@
 use App\Models\Setting;
 use Flux\Flux;
 
+use function Laravel\Folio\middleware;
+use function Laravel\Folio\name;
 use function Livewire\Volt\state;
 use function Livewire\Volt\mount;
+
+name('settings.store');
+middleware('auth');
+middleware('verified');
 
 state([
     'store_name' => '',
