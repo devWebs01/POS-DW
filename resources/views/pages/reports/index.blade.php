@@ -207,8 +207,8 @@ $categoryData = computed(function () {
                     // Area Chart for Daily Revenue
                     const dailyRevenueChart = new ApexCharts(document.querySelector("#dailyRevenueChart"), {
                         series: [{
-                            name: 'Revenue',
-                            data: @js($this->dailyRevenueData['series'])
+                        name: '{{ __('Revenue') }}',
+                        data: @js($this->dailyRevenueData['series'])
                         }],
                         chart: {
                             type: 'area',
@@ -322,8 +322,8 @@ $categoryData = computed(function () {
                     // Bar Chart for Top Products
                     const topProductsChart = new ApexCharts(document.querySelector("#topProductsChart"), {
                         series: [{
-                            name: 'Revenue',
-                            data: @js($this->topProductsData['series'])
+                        name: '{{ __('Revenue') }}',
+                        data: @js($this->topProductsData['series'])
                         }],
                         chart: {
                             type: 'bar',

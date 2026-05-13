@@ -234,10 +234,10 @@ $methodColors = [
                             <table class="w-full text-sm">
                                 <thead>
                                     <tr class="border-b bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
-                                        <th class="px-3 py-2 text-left font-medium">Product</th>
-                                        <th class="px-3 py-2 text-right font-medium">Price</th>
-                                        <th class="px-3 py-2 text-center font-medium">Qty</th>
-                                        <th class="px-3 py-2 text-right font-medium">Subtotal</th>
+                                        <th class="px-3 py-2 text-left font-medium">{{ __('Product') }}</th>
+                                        <th class="px-3 py-2 text-right font-medium">{{ __('Price') }}</th>
+                                        <th class="px-3 py-2 text-center font-medium">{{ __('Qty') }}</th>
+                                        <th class="px-3 py-2 text-right font-medium">{{ __('Subtotal') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -254,7 +254,7 @@ $methodColors = [
                                 </tbody>
                                 <tfoot>
                                     <tr class="border-t bg-zinc-50 font-semibold dark:border-zinc-700 dark:bg-zinc-800">
-                                        <td colspan="3" class="px-3 py-2 text-right">Total</td>
+                                        <td colspan="3" class="px-3 py-2 text-right">{{ __('Total') }}</td>
                                         <td class="px-3 py-2 text-right">
                                             {{ Number::currency($this->viewTransaction->total_amount, 'IDR', 'id') }}</td>
                                     </tr>

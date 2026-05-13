@@ -94,7 +94,7 @@ $clearErrors = function () {
                         </div>
 
                         <div class="space-y-5">
-                            <flux:select wire:model="category_id" :label="__('Category')" placeholder="Choose category...">
+                            <flux:select wire:model="category_id" :label="__('Category')" placeholder="{{ __('Pilih kategori...') }}">
                                 @foreach ($this->categoryOptions as $category)
                                     <flux:select.option value="{{ $category->id }}">
                                         {{ $category->name }}
@@ -102,12 +102,12 @@ $clearErrors = function () {
                                 @endforeach
                             </flux:select>
 
-                            <flux:input wire:model="name" :label="__('Product Name')" placeholder="Enter product name" required autofocus />
+                            <flux:input wire:model="name" :label="__('Product Name')" placeholder="{{ __('Masukkan nama produk') }}" required autofocus />
 
-                            <flux:input wire:model="slug" :label="__('Slug')" placeholder="auto-generated from name" />
+                            <flux:input wire:model="slug" :label="__('Slug')" placeholder="{{ __('otomatis dari nama') }}" />
 
                             <div class="grid grid-cols-2 gap-5">
-                                <flux:input wire:model="sku" :label="__('SKU')" placeholder="auto-generated if empty" />
+                                <flux:input wire:model="sku" :label="__('SKU')" placeholder="{{ __('otomatis jika kosong') }}" />
                                 <flux:input wire:model="stock" :label="__('Stock')" type="number" min="0" placeholder="0" />
                             </div>
                         </div>
@@ -131,7 +131,7 @@ $clearErrors = function () {
                         </div>
 
                         <div class="space-y-5">
-                            <flux:textarea wire:model="description" :label="__('Description')" placeholder="Enter product description..." />
+                            <flux:textarea wire:model="description" :label="__('Description')" placeholder="{{ __('Masukkan deskripsi produk...') }}" />
 
                             <flux:field variant="inline">
                                 <flux:label>{{ __('Active') }}</flux:label>

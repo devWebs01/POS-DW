@@ -199,7 +199,7 @@ $paymentMethods = ['cash', 'transfer', 'debit_card', 'credit_card'];
 
                         <div class="mb-4 grid gap-4 sm:grid-cols-2">
                             <flux:select wire:model.live="category_id" :label="__('Category')"
-                                placeholder="All categories">
+                                placeholder="{{ __('All categories') }}">
                                 @foreach ($this->categoryOptions as $category)
                                     <flux:select.option value="{{ $category->id }}">{{ $category->name }}
                                     </flux:select.option>
@@ -394,7 +394,7 @@ $paymentMethods = ['cash', 'transfer', 'debit_card', 'credit_card'];
                         </tbody>
                         <tfoot>
                             <tr class="border-t bg-zinc-50 font-semibold dark:border-zinc-700 dark:bg-zinc-800">
-                                <td colspan="3" class="px-3 py-2 text-right">Total</td>
+                                <td colspan="3" class="px-3 py-2 text-right">{{ __('Total') }}</td>
                                 <td class="px-3 py-2 text-right">{{ Number::currency($this->totalAmount, 'IDR', 'id') }}
                                 </td>
                             </tr>

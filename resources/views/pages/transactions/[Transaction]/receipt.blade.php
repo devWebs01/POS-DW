@@ -185,7 +185,7 @@ mount(function (Transaction $transaction) {
             <thead>
                 <tr>
                     <th>Item</th>
-                    <th class="text-right">Qty</th>
+                    <th class="text-right">Jml</th>
                     <th class="text-right">Total</th>
                 </tr>
             </thead>

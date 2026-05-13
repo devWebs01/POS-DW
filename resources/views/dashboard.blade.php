@@ -207,7 +207,7 @@ $topSellingProducts = computed(function () {
 
                 const options = {
                     series: [{
-                        name: 'Revenue',
+                        name: '{{ __('Revenue') }}',
                         data: @js($this->salesTrendData['series'])
                     }],
                     chart: {
