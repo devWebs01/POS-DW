@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -v)",
+      "Bash(php -l app/Livewire/Categories/CategoriesList.php)",
+      "Bash(php -l app/Livewire/Products/ProductsList.php)",
+      "Bash(php -l app/Livewire/Pos/Checkout.php)",
+      "Bash(php -l app/Livewire/Reports/DailyReport.php)",
+      "mcp__laravel-boost__database-schema",
+      "Bash(vendor/bin/pint --format agent resources/views/pages/categories/index.blade.php)",
+      "mcp__laravel-boost__search-docs",
+      "Bash(vendor/bin/pint --format agent resources/views/pages/products/index.blade.php)",
+      "Bash(vendor/bin/pint --format agent resources/views/pages/transactions/index.blade.php)",
+      "Bash(grep *)",
+      "Bash(vendor/bin/pint *)",
+      "Bash(php *)",
+      "Bash(xxd /mnt/DiskD/laragon/www/laravel-pos/resources/views/livewire/products/product-create-form.blade.php)",
+      "mcp__laravel-boost__application-info",
+      "Read(//home/adptra01/.config/fish/**)",
+      "Read(//home/adptra01/.config/fish/conf.d/**)",
+      "Bash(awk 'NR==194{print; printf \"LENGTH=%d\\\\n\", length}' resources/views/pages/products/index.blade.php)",
+      "Bash(awk 'NR==192' resources/views/pages/products/index.blade.php)",
+      "Bash(sed -i '/^     $/d' resources/views/pages/products/index.blade.php)",
+      "Bash(sed -i '/^            $/d' resources/views/pages/products/index.blade.php)",
+      "mcp__laravel-boost__get-absolute-url",
+      "Bash(curl *)",
+      "Bash(python3 *)"
+    ]
+  }
+}
