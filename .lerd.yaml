@@ -1,6 +1,6 @@
 domains:
     - laravel-pos
-php_version: "8.5"
+php_version: "8.3"
 framework: laravel
 framework_version: "13"
 secured: true
