@@ -147,7 +147,8 @@ Sistem POS DW mengadopsi arsitektur **MVC (Model-View-Controller)** dengan enhan
 
 ## Navigasi Dokumen
 
-📖 **Mulai dari sini:** [4.1 Analisis Kebutuhan Sistem →](./4.1-analisis-kebutuhan-sistem.md)
+| [← Daftar Isi](./README.md) | [Mulai: 4.1 →](./4.1-analisis-kebutuhan-sistem.md) | [Bab V →](./BAB-V-KESIMPULAN-DAN-SARAN.md) |
+|:---:|:---:|:---:|
 
 ---
 

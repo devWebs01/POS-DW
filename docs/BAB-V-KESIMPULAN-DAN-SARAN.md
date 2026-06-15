@@ -29,7 +29,8 @@
 
 ## Navigasi Dokumen
 
-📖 **Kembali:** [BAB IV Perancangan dan Implementasi Sistem →](./BAB-IV-PERANCANGAN-DAN-IMPLEMENTASI.md)
+| [← Daftar Isi](./README.md) | [← Bab IV](./BAB-IV-PERANCANGAN-DAN-IMPLEMENTASI.md) | [Mulai: 5.1 →](./5.1-kesimpulan.md) |
+|:---:|:---:|:---:|
 
 ---
 
