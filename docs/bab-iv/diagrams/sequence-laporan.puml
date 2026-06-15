@@ -1,0 +1,105 @@
+@startuml sequence-laporan
+!theme plain
+skinparam backgroundColor #FFFFFF
+
+actor Manager
+participant Browser
+participant "Livewire\nReportComponent" as Livewire
+participant "Transaction\nModel" as TrxModel
+participant "Product\nModel" as ProdModel
+participant "PDF\nGenerator" as PDF
+participant "Excel\nExporter" as Excel
+database MySQL
+
+Manager -> Browser: Akses halaman laporan
+Browser -> Livewire: Mount component
+Livewire --> Browser: Render report interface\n+ filter form
+
+Manager -> Browser: Pilih jenis laporan\n(Penjualan/Stok/Terlaris)
+Browser -> Livewire: wire:model="reportType"
+Livewire --> Browser: Update form sesuai tipe
+
+Manager -> Browser: Set date range\n(start_date, end_date)
+Browser -> Livewire: wire:model="dateRange"
+
+Manager -> Browser: Pilih filter kategori (optional)
+Browser -> Livewire: wire:model="categoryId"
+
+Manager -> Browser: Klik "Generate Report"
+Browser -> Livewire: wire:click="generateReport()"
+
+Livewire -> Livewire: Validate date range
+alt Date range invalid
+  Livewire --> Browser: Emit validation error
+  Browser --> Manager: Tampilkan error message
+else Date range valid
+  
+  alt Report Type: Penjualan
+    Livewire -> TrxModel: Transaction::with('items.product')\n->whereBetween('created_at', [$start, $end])
+    TrxModel -> MySQL: SELECT t.*, ti.*, p.*\nFROM transactions t\nJOIN transaction_items ti\nJOIN products p\nWHERE t.created_at BETWEEN ? AND ?
+    MySQL --> TrxModel: Transaction data
+    TrxModel --> Livewire: Collection
+    
+    Livewire -> Livewire: Calculate statistics:\n- Total sales\n- Total transactions\n- Average per transaction\n- Group by date
+    
+  else Report Type: Stok
+    Livewire -> ProdModel: Product::with('category')\n->select('*')\n->selectRaw('CASE WHEN stock < 10\nTHEN "Low" ELSE "OK" END as status')
+    ProdModel -> MySQL: SELECT p.*, c.*,\nCASE WHEN stock < 10\nTHEN 'Low' ELSE 'OK' END\nFROM products p\nJOIN categories c
+    MySQL --> ProdModel: Product stock data
+    ProdModel --> Livewire: Collection
+    
+    Livewire -> Livewire: Group by category\nCount low stock items
+    
+  else Report Type: Produk Terlaris
+    Livewire -> TrxModel: DB::table('transaction_items')\n->join('products')\n->whereBetween('transactions.created_at')\n->groupBy('product_id')\n->orderBy('total_qty', 'desc')\n->limit(10)
+    TrxModel -> MySQL: SELECT p.name, p.sku,\nSUM(ti.quantity) as total_qty,\nSUM(ti.subtotal) as total_sales\nFROM transaction_items ti\nJOIN products p\nJOIN transactions t\nWHERE t.created_at BETWEEN ? AND ?\nGROUP BY p.id\nORDER BY total_qty DESC\nLIMIT 10
+    MySQL --> TrxModel: Top products data
+    TrxModel --> Livewire: Collection
+  end
+  
+  Livewire -> Livewire: Format data for display
+  Livewire --> Browser: Render table + chart
+  Browser --> Manager: Tampilkan hasil laporan
+end
+
+Manager -> Browser: Review hasil laporan
+
+alt Manager ingin export
+  Manager -> Browser: Pilih format export\n(PDF / Excel)
+  
+  alt Format: PDF
+    Browser -> Livewire: wire:click="exportPDF()"
+    Livewire -> PDF: Generate PDF
+    PDF -> PDF: Create TCPDF instance
+    PDF -> PDF: Set document info\n(title, author, subject)
+    PDF -> PDF: Add header with logo
+    PDF -> PDF: Add report title
+    PDF -> PDF: Create table with data
+    PDF -> PDF: Add footer with page numbers
+    PDF -> PDF: Add timestamp
+    PDF --> Livewire: PDF binary
+    Livewire --> Browser: Download response\nContent-Type: application/pdf
+    Browser --> Manager: Download file\n"laporan-{type}-{date}.pdf"
+    
+  else Format: Excel
+    Browser -> Livewire: wire:click="exportExcel()"
+    Livewire -> Excel: Generate Excel
+    Excel -> Excel: Create Spreadsheet
+    Excel -> Excel: Set worksheet name
+    Excel -> Excel: Add header row (bold, colored)
+    Excel -> Excel: Add data rows
+    Excel -> Excel: Apply borders & styling
+    Excel -> Excel: Auto-size columns
+    Excel -> Excel: Add formulas (SUM, AVERAGE)
+    Excel -> Excel: Freeze header row
+    Excel --> Livewire: Excel binary
+    Livewire --> Browser: Download response\nContent-Type: application/vnd.ms-excel
+    Browser --> Manager: Download file\n"laporan-{type}-{date}.xlsx"
+  end
+  
+  Livewire -> MySQL: INSERT INTO activity_log\n(user_id, action, description)
+  MySQL --> Livewire: Log saved
+  
+end
+
+@enduml

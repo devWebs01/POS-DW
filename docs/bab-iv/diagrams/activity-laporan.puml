@@ -1,0 +1,120 @@
+@startuml activity-laporan
+!theme plain
+skinparam backgroundColor #FFFFFF
+
+|User (Manager/Admin)|
+start
+:Buka halaman laporan;
+
+|Sistem|
+:Tampilkan interface laporan;
+:Tampilkan pilihan jenis laporan;
+
+|User|
+:Pilih jenis laporan;
+
+if (Jenis laporan?) then (Penjualan)
+  :Pilih "Laporan Penjualan";
+elseif (Stok)
+  :Pilih "Laporan Stok";
+elseif (Produk Terlaris)
+  :Pilih "Laporan Produk Terlaris";
+endif
+
+|Sistem|
+:Tampilkan form filter;
+
+|User|
+:Set date range\n(tanggal mulai - tanggal akhir);
+
+if (Filter kategori?) then (Ya)
+  :Pilih kategori;
+endif
+
+if (Filter produk?) then (Ya)
+  :Pilih produk spesifik;
+endif
+
+:Klik "Generate Report";
+
+|Sistem|
+:Validasi input;
+
+if (Date range valid?) then (Tidak)
+  :Tampilkan error\n"Rentang tanggal tidak valid";
+  stop
+endif
+
+:Tampilkan loading indicator;
+
+partition "Query Database" {
+  if (Jenis laporan?) then (Penjualan)
+    :Query transactions\ndengan filter periode;
+    :Join dengan transaction_items;
+    :Join dengan products;
+    :Hitung total penjualan;
+    :Hitung jumlah transaksi;
+    :Group by tanggal;
+  elseif (Stok)
+    :Query products;
+    :Hitung stok tersedia;
+    :Flag stok menipis (< 10);
+    :Join dengan categories;
+  elseif (Produk Terlaris)
+    :Query transaction_items;
+    :Group by product_id;
+    :Sum quantity;
+    :Order by quantity DESC;
+    :Limit 10;
+  endif
+}
+
+:Format data hasil query;
+:Generate tabel laporan;
+
+if (Ada data?) then (Tidak)
+  :Tampilkan pesan\n"Tidak ada data";
+  stop
+else (Ya)
+  :Tampilkan tabel hasil;
+  :Generate chart/grafik;
+  :Tampilkan summary statistics;
+endif
+
+|User|
+:Review hasil laporan;
+
+if (Ingin export?) then (Tidak)
+  stop
+else (Ya)
+  :Pilih format export;
+  
+  if (Format?) then (PDF)
+    |Sistem|
+    :Generate PDF dengan TCPDF;
+    :Set header dengan logo toko;
+    :Format tabel laporan;
+    :Add page numbers;
+    :Add timestamp;
+    
+  elseif (Excel)
+    |Sistem|
+    :Generate Excel dengan PhpSpreadsheet;
+    :Create worksheet;
+    :Format cells;
+    :Add styling (borders, colors);
+    :Set column width auto;
+  endif
+  
+  :Generate file;
+  :Download file ke browser;
+  :Log export activity;
+  
+  |User|
+  :Simpan file;
+  :Buka dan review file;
+endif
+
+stop
+
+@enduml

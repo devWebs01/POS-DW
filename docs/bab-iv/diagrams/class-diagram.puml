@@ -1,0 +1,133 @@
+@startuml class-diagram
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam classAttributeIconSize 0
+
+class User {
+  - id: bigint
+  - name: string
+  - email: string
+  - email_verified_at: timestamp
+  - password: string
+  - two_factor_secret: text
+  - two_factor_recovery_codes: text
+  - two_factor_confirmed_at: timestamp
+  - remember_token: string
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + initials(): string
+  + transactions(): HasMany
+  + roles(): BelongsToMany
+}
+
+class Role {
+  - id: bigint
+  - name: string
+  - guard_name: string
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + permissions(): BelongsToMany
+  + users(): BelongsToMany
+}
+
+class Permission {
+  - id: bigint
+  - name: string
+  - guard_name: string
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + roles(): BelongsToMany
+}
+
+class Category {
+  - id: bigint
+  - name: string
+  - slug: string
+  - description: text
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + products(): HasMany
+}
+
+class Product {
+  - id: bigint
+  - category_id: bigint
+  - name: string
+  - slug: string
+  - sku: string
+  - price: decimal(12,2)
+  - stock: integer
+  - is_unlimited_stock: boolean
+  - image: string
+  - description: text
+  - is_active: boolean
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + getImageUrlAttribute(): string
+  + category(): BelongsTo
+  + transactionItems(): HasMany
+}
+
+class Transaction {
+  - id: bigint
+  - user_id: bigint
+  - customer: string
+  - invoice_number: string
+  - total_amount: decimal(12,2)
+  - paid_amount: decimal(12,2)
+  - change_amount: decimal(12,2)
+  - payment_method: string
+  - notes: text
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + user(): BelongsTo
+  + items(): HasMany
+  + generateInvoiceNumber(): string
+}
+
+class TransactionItem {
+  - id: bigint
+  - transaction_id: bigint
+  - product_id: bigint
+  - quantity: integer
+  - unit_price: decimal(12,2)
+  - subtotal: decimal(12,2)
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + transaction(): BelongsTo
+  + product(): BelongsTo
+}
+
+class Setting {
+  - id: bigint
+  - key: string
+  - value: text
+  - created_at: timestamp
+  - updated_at: timestamp
+  --
+  + {static} get(key): mixed
+  + {static} set(key, value): void
+}
+
+' Relationships
+User "1" --> "0..*" Transaction : creates
+User "0..*" --> "0..*" Role : has
+Role "0..*" --> "0..*" Permission : has
+
+Category "1" --> "0..*" Product : contains
+Product "1" --> "0..*" TransactionItem : sold in
+Transaction "1" --> "1..*" TransactionItem : contains
+
+Transaction "0..*" --> "1" User : created by
+TransactionItem "0..*" --> "1" Product : references
+TransactionItem "0..*" --> "1" Transaction : belongs to
+Product "0..*" --> "1" Category : categorized by
+
+@enduml

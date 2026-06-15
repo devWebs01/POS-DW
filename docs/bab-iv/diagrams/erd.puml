@@ -1,0 +1,138 @@
+@startuml erd
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam linetype ortho
+
+entity "users" as users {
+  * id : BIGINT <<PK>>
+  --
+  * name : VARCHAR(255)
+  * email : VARCHAR(255) <<UNIQUE>>
+  email_verified_at : TIMESTAMP
+  * password : VARCHAR(255)
+  two_factor_secret : TEXT
+  two_factor_recovery_codes : TEXT
+  two_factor_confirmed_at : TIMESTAMP
+  remember_token : VARCHAR(100)
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "roles" as roles {
+  * id : BIGINT <<PK>>
+  --
+  * name : VARCHAR(255)
+  * guard_name : VARCHAR(255)
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "permissions" as permissions {
+  * id : BIGINT <<PK>>
+  --
+  * name : VARCHAR(255)
+  * guard_name : VARCHAR(255)
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "model_has_roles" as model_has_roles {
+  * role_id : BIGINT <<PK,FK>>
+  * model_type : VARCHAR(255) <<PK>>
+  * model_id : BIGINT <<PK>>
+}
+
+entity "role_has_permissions" as role_has_permissions {
+  * permission_id : BIGINT <<PK,FK>>
+  * role_id : BIGINT <<PK,FK>>
+}
+
+entity "categories" as categories {
+  * id : BIGINT <<PK>>
+  --
+  * name : VARCHAR(100) <<UNIQUE>>
+  * slug : VARCHAR(120) <<UNIQUE,INDEX>>
+  description : TEXT
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "products" as products {
+  * id : BIGINT <<PK>>
+  --
+  * category_id : BIGINT <<FK,INDEX>>
+  * name : VARCHAR(200)
+  * slug : VARCHAR(220) <<UNIQUE>>
+  * sku : VARCHAR(50) <<UNIQUE,INDEX>>
+  * price : DECIMAL(12,2)
+  * stock : INT
+  * is_unlimited_stock : BOOLEAN
+  image : VARCHAR(255)
+  description : TEXT
+  * is_active : BOOLEAN <<INDEX>>
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "transactions" as transactions {
+  * id : BIGINT <<PK>>
+  --
+  user_id : BIGINT <<FK>>
+  * customer : VARCHAR(255)
+  * invoice_number : VARCHAR(50) <<UNIQUE>>
+  * total_amount : DECIMAL(12,2)
+  * paid_amount : DECIMAL(12,2)
+  * change_amount : DECIMAL(12,2)
+  * payment_method : VARCHAR(20)
+  notes : TEXT
+  * created_at : TIMESTAMP <<INDEX>>
+  * updated_at : TIMESTAMP
+}
+
+entity "transaction_items" as transaction_items {
+  * id : BIGINT <<PK>>
+  --
+  * transaction_id : BIGINT <<FK,INDEX>>
+  * product_id : BIGINT <<FK,INDEX>>
+  * quantity : INT
+  * unit_price : DECIMAL(12,2)
+  * subtotal : DECIMAL(12,2)
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "sessions" as sessions {
+  * id : VARCHAR(255) <<PK>>
+  --
+  user_id : BIGINT <<FK,INDEX>>
+  ip_address : VARCHAR(45)
+  user_agent : TEXT
+  * payload : LONGTEXT
+  * last_activity : INT <<INDEX>>
+}
+
+entity "settings" as settings {
+  * id : BIGINT <<PK>>
+  --
+  * key : VARCHAR(255) <<UNIQUE>>
+  value : TEXT
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+' Relationships with cardinality
+users ||--o{ transactions : "creates"
+users ||--o{ sessions : "has"
+users }o--o{ roles : "has"
+roles }o--o{ permissions : "has"
+
+users ||--o{ model_has_roles : ""
+roles ||--o{ model_has_roles : ""
+roles ||--o{ role_has_permissions : ""
+permissions ||--o{ role_has_permissions : ""
+
+categories ||--o{ products : "contains"
+products ||--o{ transaction_items : "sold in"
+transactions ||--|{ transaction_items : "contains"
+
+@enduml

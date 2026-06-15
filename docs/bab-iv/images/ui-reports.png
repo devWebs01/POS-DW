@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <rect width="200" height="60" fill="#f8fafc" rx="8"/>
+  <text x="100" y="25" font-family="system-ui,sans-serif" font-size="11" fill="#64748b" text-anchor="middle">📱 UI Screenshot placeholder</text>
+  <text x="100" y="42" font-family="system-ui,sans-serif" font-size="12" fill="#3b82f6" font-weight="bold" text-anchor="middle">Lihat file: ui-reports.svg</text>
+</svg>

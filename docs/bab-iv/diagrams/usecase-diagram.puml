@@ -1,0 +1,117 @@
+@startuml usecase-diagram
+!theme plain
+skinparam backgroundColor #FFFFFF
+
+left to right direction
+
+actor "Admin" as admin
+actor "Kasir" as kasir
+actor "Manager" as manager
+
+rectangle "Sistem POS DW" {
+  
+  package "Autentikasi" {
+    usecase "UC-01: Login" as UC01
+    usecase "UC-02: Setup 2FA" as UC02
+    usecase "UC-03: Logout" as UC03
+  }
+  
+  package "Master Data" {
+    usecase "UC-04: Kelola Kategori" as UC04
+    usecase "UC-05: Kelola Produk" as UC05
+    usecase "UC-06: Upload Gambar Produk" as UC06
+    usecase "UC-07: Kelola Stok" as UC07
+  }
+  
+  package "Transaksi" {
+    usecase "UC-08: Transaksi Penjualan" as UC08
+    usecase "UC-09: Tambah Item ke Cart" as UC09
+    usecase "UC-10: Proses Pembayaran" as UC10
+    usecase "UC-11: Cetak Struk" as UC11
+    usecase "UC-12: Lihat Riwayat Transaksi" as UC12
+  }
+  
+  package "Laporan" {
+    usecase "UC-13: Laporan Penjualan" as UC13
+    usecase "UC-14: Laporan Stok" as UC14
+    usecase "UC-15: Laporan Produk Terlaris" as UC15
+    usecase "UC-16: Export PDF" as UC16
+    usecase "UC-17: Export Excel" as UC17
+  }
+  
+  package "Manajemen User" {
+    usecase "UC-18: Kelola User" as UC18
+    usecase "UC-19: Kelola Role" as UC19
+    usecase "UC-20: Kelola Permission" as UC20
+  }
+  
+  package "Settings" {
+    usecase "UC-21: Settings Toko" as UC21
+    usecase "UC-22: Settings Profil" as UC22
+    usecase "UC-23: Ubah Password" as UC23
+  }
+}
+
+' Admin relationships
+admin --> UC01
+admin --> UC02
+admin --> UC03
+admin --> UC04
+admin --> UC05
+admin --> UC06
+admin --> UC07
+admin --> UC08
+admin --> UC09
+admin --> UC10
+admin --> UC11
+admin --> UC12
+admin --> UC13
+admin --> UC14
+admin --> UC15
+admin --> UC16
+admin --> UC17
+admin --> UC18
+admin --> UC19
+admin --> UC20
+admin --> UC21
+admin --> UC22
+admin --> UC23
+
+' Kasir relationships
+kasir --> UC01
+kasir --> UC02
+kasir --> UC03
+kasir --> UC08
+kasir --> UC09
+kasir --> UC10
+kasir --> UC11
+kasir --> UC12
+kasir --> UC22
+kasir --> UC23
+
+' Manager relationships
+manager --> UC01
+manager --> UC02
+manager --> UC03
+manager --> UC12
+manager --> UC13
+manager --> UC14
+manager --> UC15
+manager --> UC16
+manager --> UC17
+manager --> UC22
+manager --> UC23
+
+' Include relationships
+UC08 ..> UC09 : <<include>>
+UC08 ..> UC10 : <<include>>
+UC10 ..> UC11 : <<include>>
+UC05 ..> UC06 : <<include>>
+UC13 ..> UC16 : <<extend>>
+UC13 ..> UC17 : <<extend>>
+UC14 ..> UC16 : <<extend>>
+UC14 ..> UC17 : <<extend>>
+UC15 ..> UC16 : <<extend>>
+UC15 ..> UC17 : <<extend>>
+
+@enduml

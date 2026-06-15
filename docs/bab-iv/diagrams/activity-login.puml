@@ -1,0 +1,72 @@
+@startuml activity-login
+!theme plain
+skinparam backgroundColor #FFFFFF
+
+|User|
+start
+:Buka aplikasi;
+:Klik halaman login;
+
+|Sistem|
+:Tampilkan form login;
+
+|User|
+:Input email dan password;
+:Klik tombol "Login";
+
+|Sistem|
+:Validasi input;
+
+if (Format email valid?) then (Tidak)
+  :Tampilkan error\n"Email tidak valid";
+  stop
+endif
+
+if (Password tidak kosong?) then (Tidak)
+  :Tampilkan error\n"Password wajib diisi";
+  stop
+endif
+
+:Cek kredensial di database;
+
+if (Kredensial cocok?) then (Tidak)
+  :Tampilkan error\n"Email atau password salah";
+  :Increment login attempt;
+  if (Attempt > 5?) then (Ya)
+    :Lock akun selama 15 menit;
+    stop
+  endif
+  stop
+else (Ya)
+  :Reset login attempt;
+  
+  if (2FA aktif?) then (Ya)
+    :Tampilkan form OTP;
+    
+    |User|
+    :Input 6-digit OTP;
+    :Submit OTP;
+    
+    |Sistem|
+    :Validasi OTP;
+    
+    if (OTP valid?) then (Tidak)
+      :Tampilkan error\n"OTP tidak valid";
+      stop
+    endif
+  endif
+  
+  :Buat session baru;
+  :Simpan user data ke session;
+  :Generate CSRF token;
+  :Set cookie;
+  :Log login activity;
+  :Redirect ke dashboard;
+endif
+
+|User|
+:Melihat dashboard;
+
+stop
+
+@enduml

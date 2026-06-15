@@ -1,0 +1,113 @@
+@startuml activity-transaksi
+!theme plain
+skinparam backgroundColor #FFFFFF
+
+|Kasir|
+start
+:Buka halaman transaksi POS;
+
+|Sistem|
+:Tampilkan interface POS;
+:Load daftar produk;
+:Inisialisasi keranjang kosong;
+
+|Kasir|
+:Cari produk (ketik nama/SKU);
+
+|Sistem|
+:Filter produk real-time;
+:Tampilkan hasil pencarian;
+
+|Kasir|
+:Pilih produk;
+
+|Sistem|
+:Cek ketersediaan stok;
+
+if (Stok tersedia?) then (Tidak)
+  :Tampilkan notifikasi\n"Stok habis";
+  stop
+else (Ya)
+  :Tambahkan ke keranjang;
+  :Set quantity = 1;
+  
+  |Kasir|
+  if (Ingin ubah quantity?) then (Ya)
+    :Input quantity baru;
+    
+    |Sistem|
+    if (Quantity > stok?) then (Ya)
+      :Tampilkan error\n"Melebihi stok tersedia";
+      :Set quantity = stok maksimal;
+    endif
+  endif
+  
+  :Hitung subtotal\n(quantity × price);
+  :Update keranjang;
+  :Hitung total keseluruhan;
+  :Tampilkan total;
+endif
+
+|Kasir|
+if (Ada produk lain?) then (Ya)
+  :Pilih produk lagi;
+  detach
+else (Tidak)
+endif
+
+:Input nama customer;
+:Pilih metode pembayaran\n(Cash/Debit/Credit/E-Wallet);
+
+|Sistem|
+:Tampilkan total amount;
+
+|Kasir|
+:Input paid amount;
+
+|Sistem|
+:Validasi pembayaran;
+
+if (Paid ≥ Total?) then (Tidak)
+  :Tampilkan error\n"Pembayaran kurang";
+  stop
+else (Ya)
+  :Hitung kembalian\n(change = paid - total);
+  :Tampilkan kembalian;
+endif
+
+|Kasir|
+:Konfirmasi transaksi;
+:Klik "Process Payment";
+
+|Sistem|
+:Mulai database transaction;
+:Generate invoice number;
+:Simpan data transaksi;
+:Simpan transaction items;
+
+partition "Update Stok" {
+  repeat
+    :Kurangi stok produk;
+  repeat while (Untuk setiap item) is (Ada lagi) not (Selesai)
+}
+
+:Commit transaction;
+:Log transaksi berhasil;
+:Generate struk PDF;
+
+|Kasir|
+:Review struk;
+:Klik "Print";
+
+|Sistem|
+:Cetak/download struk;
+:Tampilkan notifikasi sukses;
+:Kosongkan keranjang;
+:Reset form;
+
+|Kasir|
+:Serahkan struk ke customer;
+
+stop
+
+@enduml

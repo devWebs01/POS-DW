@@ -1,0 +1,77 @@
+@startuml sequence-login
+!theme plain
+skinparam backgroundColor #FFFFFF
+
+actor User
+participant Browser
+participant "Laravel\nRouter" as Router
+participant "Fortify\nAuthController" as Auth
+participant "User\nModel" as Model
+database MySQL
+
+User -> Browser: Akses halaman login
+Browser -> Router: GET /login
+Router -> Browser: Tampilkan form login
+
+User -> Browser: Input email & password\nKlik "Login"
+Browser -> Router: POST /login\n{email, password, _token}
+
+Router -> Auth: Validasi CSRF token
+Auth -> Auth: Validasi format email
+Auth -> Auth: Validasi password required
+
+Auth -> Model: Attempt login\nwhere('email', $email)
+Model -> MySQL: SELECT * FROM users\nWHERE email = ?
+MySQL --> Model: User data
+
+alt User tidak ditemukan
+  Model --> Auth: null
+  Auth --> Browser: 422 Validation Error\n"Invalid credentials"
+  Browser --> User: Tampilkan error
+else User ditemukan
+  Model --> Auth: User object
+  
+  Auth -> Auth: Hash::check($password, $user->password)
+  
+  alt Password salah
+    Auth --> Browser: 422 Validation Error\n"Invalid credentials"
+    Browser --> User: Tampilkan error
+  else Password benar
+    
+    alt 2FA aktif
+      Auth -> MySQL: SELECT two_factor_secret\nFROM users WHERE id = ?
+      MySQL --> Auth: Secret exists
+      Auth --> Browser: Redirect /two-factor-challenge
+      Browser --> User: Tampilkan form OTP
+      
+      User -> Browser: Input 6-digit OTP
+      Browser -> Router: POST /two-factor-challenge\n{code, _token}
+      Router -> Auth: Validasi OTP
+      
+      Auth -> Auth: Google2FA::verifyKey(\n  $secret, $code\n)
+      
+      alt OTP tidak valid
+        Auth --> Browser: 422 Validation Error\n"Invalid OTP"
+        Browser --> User: Tampilkan error
+      else OTP valid
+        Auth -> Auth: Auth::login($user)
+      end
+      
+    else 2FA tidak aktif
+      Auth -> Auth: Auth::login($user)
+    end
+    
+    Auth -> MySQL: INSERT INTO sessions\n(id, user_id, payload)
+    MySQL --> Auth: Session created
+    
+    Auth -> Auth: Regenerate session ID
+    Auth -> Auth: Log login activity
+    
+    Auth --> Browser: 302 Redirect /dashboard\nSet-Cookie: laravel_session
+    Browser -> Router: GET /dashboard
+    Router -> Browser: Dashboard view
+    Browser --> User: Tampilkan dashboard
+  end
+end
+
+@enduml

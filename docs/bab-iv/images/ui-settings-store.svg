@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f8fafc" stroke="none" rx="0" ry="0"/>
+  <rect width="0" height="0" fill="240" stroke="700" rx="#1e293b" ry="#1e293b"/>
+  <text x="120" y="35" font-family="system-ui,sans-serif" font-size="22" fill="#ffffff" font-weight="bold" text-anchor="middle">POS DW</text>
+  <g><rect width="8" height="80" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="106" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Dashboard</text></g>
+<g><rect width="8" height="128" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="154" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Kategori</text></g>
+<g><rect width="8" height="176" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="202" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Produk</text></g>
+<g><rect width="8" height="224" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="250" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Transaksi</text></g>
+<g><rect width="8" height="272" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="298" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Laporan</text></g>
+<g><rect width="8" height="320" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="346" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Pengguna</text></g>
+<g><rect width="8" height="368" fill="224" stroke="40" rx="#3b82f6" ry="#3b82f6"/><text x="48" y="394" font-family="system-ui,sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">Pengaturan</text></g>
+  <rect width="240" height="0" fill="960" stroke="64" rx="#ffffff" ry="#ffffff"/>
+  <text x="270" y="38" font-family="system-ui,sans-serif" font-size="20" fill="#1e293b" font-weight="bold" text-anchor="start">Pengaturan</text>
+  <!-- Settings tabs -->
+  <g><rect width="270" height="80" fill="120" stroke="36" rx="#3b82f6" ry="#3b82f6"/><text x="330" y="103" font-family="system-ui,sans-serif" font-size="13" fill="#ffffff" font-weight="bold" text-anchor="middle">Toko</text></g>
+<g><rect width="400" height="80" fill="120" stroke="36" rx="#ffffff" ry="#ffffff"/><text x="460" y="103" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="normal" text-anchor="middle">Profil</text></g>
+<g><rect width="530" height="80" fill="120" stroke="36" rx="#ffffff" ry="#ffffff"/><text x="590" y="103" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="normal" text-anchor="middle">Keamanan</text></g>
+  <!-- Settings form -->
+  <rect width="270" height="130" fill="680" stroke="500" rx="#ffffff" ry="#ffffff"/>
+  <g transform="translate(300, 150)">
+    <g><text x="0" y="15" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Nama Toko</text><rect width="0" height="24" fill="300" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/></g>
+<g><text x="0" y="75" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Alamat</text><rect width="0" height="84" fill="300" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/></g>
+<g><text x="0" y="135" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Telepon</text><rect width="0" height="144" fill="300" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/></g>
+<g><text x="0" y="195" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Zona Waktu</text><rect width="0" height="204" fill="300" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/></g>
+    <!-- Logo upload -->
+    <text x="0" y="300" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Logo Toko</text>
+    <rect width="0" height="310" fill="200" stroke="100" rx="#f1f5f9" ry="#f1f5f9"/>
+    <text x="100" y="355" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" font-weight="normal" text-anchor="middle">Upload Logo</text>
+    <!-- Save button -->
+    <rect width="0" height="440" fill="200" stroke="44" rx="#3b82f6" ry="#3b82f6"/>
+    <text x="100" y="467" font-family="system-ui,sans-serif" font-size="15" fill="#ffffff" font-weight="bold" text-anchor="middle">Simpan</text>
+  </g>
+</svg>

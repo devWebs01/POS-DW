@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#f8fafc" stroke="none" rx="0" ry="0"/>
+  <!-- Header -->
+  <rect width="0" height="0" fill="1200" stroke="60" rx="#ffffff" ry="#ffffff"/>
+  <text x="25" y="38" font-family="system-ui,sans-serif" font-size="20" fill="#1e293b" font-weight="bold" text-anchor="start">Transaksi POS</text>
+  <!-- Left Panel - Products -->
+  <rect width="10" height="70" fill="780" stroke="720" rx="#ffffff" ry="#ffffff"/>
+  <!-- Search bar -->
+  <rect width="25" height="85" fill="300" stroke="40" rx="#f1f5f9" ry="#f1f5f9"/>
+  <text x="40" y="110" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" font-weight="normal" text-anchor="start">Cari produk...</text>
+  <!-- Filter -->
+  <rect width="340" height="85" fill="150" stroke="40" rx="#ffffff" ry="#ffffff"/>
+  <text x="415" y="110" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" font-weight="normal" text-anchor="start">Kategori</text>
+  <!-- Products grid -->
+  <g><rect width="30" height="145" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="38" height="153" fill="214" stroke="70" rx="#3b82f6" ry="#3b82f6"/><text x="145" y="193" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">K</text><text x="45" y="250" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Keripik</text><text x="45" y="275" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 10.000</text><rect width="45" height="285" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="75" y="299" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="280" height="145" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="288" height="153" fill="214" stroke="70" rx="#22c55e" ry="#22c55e"/><text x="395" y="193" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">K</text><text x="295" y="250" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Kacang</text><text x="295" y="275" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 13.000</text><rect width="295" height="285" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="325" y="299" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="530" height="145" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="538" height="153" fill="214" stroke="70" rx="#f59e0b" ry="#f59e0b"/><text x="645" y="193" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">P</text><text x="545" y="250" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Permen</text><text x="545" y="275" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 16.000</text><rect width="545" height="285" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="575" y="299" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="30" height="330" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="38" height="338" fill="214" stroke="70" rx="#ef4444" ry="#ef4444"/><text x="145" y="378" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">R</text><text x="45" y="435" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Roti</text><text x="45" y="460" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 19.000</text><rect width="45" height="470" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="75" y="484" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="280" height="330" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="288" height="338" fill="214" stroke="70" rx="#6366f1" ry="#6366f1"/><text x="395" y="378" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">K</text><text x="295" y="435" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Kopi</text><text x="295" y="460" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 22.000</text><rect width="295" height="470" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="325" y="484" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="530" height="330" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="538" height="338" fill="214" stroke="70" rx="#ec4899" ry="#ec4899"/><text x="645" y="378" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">T</text><text x="545" y="435" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Teh</text><text x="545" y="460" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 25.000</text><rect width="545" height="470" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="575" y="484" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="30" height="515" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="38" height="523" fill="214" stroke="70" rx="#14b8a6" ry="#14b8a6"/><text x="145" y="563" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">S</text><text x="45" y="620" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Susu</text><text x="45" y="645" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 28.000</text><rect width="45" height="655" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="75" y="669" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="280" height="515" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="288" height="523" fill="214" stroke="70" rx="#f97316" ry="#f97316"/><text x="395" y="563" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">B</text><text x="295" y="620" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Biskuit</text><text x="295" y="645" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 31.000</text><rect width="295" height="655" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="325" y="669" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+<g><rect width="530" height="515" fill="230" stroke="165" rx="#ffffff" ry="#ffffff"/><rect width="538" height="523" fill="214" stroke="70" rx="#8b5cf6" ry="#8b5cf6"/><text x="645" y="563" font-size="24" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">C</text><text x="545" y="620" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="bold" text-anchor="start">Cokelat</text><text x="545" y="645" font-size="12" fill="#3b82f6" font-weight="bold" font-family="system-ui,sans-serif">Rp 34.000</text><rect width="545" height="655" fill="60" stroke="20" rx="#3b82f6" ry="#3b82f6"/><text x="575" y="669" font-size="11" fill="#ffffff" text-anchor="middle" font-family="system-ui,sans-serif">Tambah</text></g>
+  <!-- Right Panel - Cart -->
+  <rect width="800" height="70" fill="390" stroke="720" rx="#ffffff" ry="#ffffff"/>
+  <g transform="translate(800, 70)">
+    <text x="20" y="30" font-family="system-ui,sans-serif" font-size="16" fill="#1e293b" font-weight="bold" text-anchor="start">Keranjang</text>
+    <line x1="0" y1="45" x2="390" y2="45" stroke="#e2e8f0"/>
+    <!-- Cart items -->
+    <g><text x="20" y="90" font-family="system-ui,sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="start">Keripik Singkong</text><text x="20" y="112" font-size="12" fill="#94a3b8" font-family="system-ui,sans-serif">Rp 24.000 × 2</text><rect width="20" height="125" fill="50" stroke="28" rx="#f1f5f9" ry="#f1f5f9"/><text x="45" y="144" font-size="13" fill="#1e293b" text-anchor="middle" font-family="system-ui,sans-serif">2</text><text x="320" y="140" font-size="16" fill="#ef4444" font-weight="bold" font-family="system-ui,sans-serif">×</text></g>
+<g><text x="20" y="180" font-family="system-ui,sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="start">Kacang Garuda</text><text x="20" y="202" font-size="12" fill="#94a3b8" font-family="system-ui,sans-serif">Rp 15.000 × 1</text><rect width="20" height="215" fill="50" stroke="28" rx="#f1f5f9" ry="#f1f5f9"/><text x="45" y="234" font-size="13" fill="#1e293b" text-anchor="middle" font-family="system-ui,sans-serif">1</text><text x="320" y="230" font-size="16" fill="#ef4444" font-weight="bold" font-family="system-ui,sans-serif">×</text></g>
+    <!-- Divider -->
+    <line x1="20" y1="240" x2="370" y2="240" stroke="#e2e8f0"/>
+    <!-- Total -->
+    <text x="20" y="270" font-family="system-ui,sans-serif" font-size="16" fill="#1e293b" font-weight="bold" text-anchor="start">Total</text>
+    <text x="370" y="270" font-size="22" fill="#1e293b" font-weight="bold" text-anchor="end" font-family="system-ui,sans-serif">Rp 39.000</text>
+    <!-- Customer -->
+    <g transform="translate(20, 290)">
+      <text x="0" y="15" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Customer</text>
+      <rect width="0" height="22" fill="350" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/>
+      <text x="12" y="45" font-family="system-ui,sans-serif" font-size="13" fill="#94a3b8" font-weight="normal" text-anchor="start">Nama customer</text>
+    </g>
+    <!-- Payment method -->
+    <g transform="translate(20, 360)">
+      <text x="0" y="15" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Metode Pembayaran</text>
+      <rect width="0" height="22" fill="350" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/>
+      <text x="12" y="45" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="normal" text-anchor="start">Cash</text>
+    </g>
+    <!-- Payment input -->
+    <g transform="translate(20, 430)">
+      <text x="0" y="15" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Jumlah Bayar</text>
+      <rect width="0" height="22" fill="350" stroke="36" rx="#f1f5f9" ry="#f1f5f9"/>
+      <text x="12" y="45" font-family="system-ui,sans-serif" font-size="14" fill="#1e293b" font-weight="normal" text-anchor="start">Rp 50.000</text>
+    </g>
+    <!-- Change -->
+    <g transform="translate(20, 500)">
+      <text x="0" y="15" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Kembalian</text>
+      <text x="0" y="50" font-size="28" fill="#22c55e" font-weight="bold" font-family="system-ui,sans-serif">Rp 11.000</text>
+    </g>
+    <!-- Process button -->
+    <rect width="20" height="580" fill="350" stroke="50" rx="#22c55e" ry="#22c55e"/>
+    <text x="195" y="610" font-family="system-ui,sans-serif" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">Proses Pembayaran</text>
+    <!-- Clear button -->
+    <rect width="20" height="640" fill="350" stroke="40" rx="#fee2e2" ry="#fee2e2"/>
+    <text x="195" y="665" font-family="system-ui,sans-serif" font-size="14" fill="#ef4444" font-weight="bold" text-anchor="middle">Kosongkan Keranjang</text>
+  </g>
+</svg>

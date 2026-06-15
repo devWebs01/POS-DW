@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f8fafc" stroke="none" rx="0" ry="0"/>
+  <rect width="0" height="0" fill="240" stroke="700" rx="#1e293b" ry="#1e293b"/>
+  <text x="120" y="35" font-family="system-ui,sans-serif" font-size="22" fill="#ffffff" font-weight="bold" text-anchor="middle">POS DW</text>
+  <g><rect width="8" height="80" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="106" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Dashboard</text></g>
+<g><rect width="8" height="128" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="154" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Kategori</text></g>
+<g><rect width="8" height="176" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="202" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Produk</text></g>
+<g><rect width="8" height="224" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="250" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Transaksi</text></g>
+<g><rect width="8" height="272" fill="224" stroke="40" rx="#3b82f6" ry="#3b82f6"/><text x="48" y="298" font-family="system-ui,sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">Laporan</text></g>
+<g><rect width="8" height="320" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="346" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Pengguna</text></g>
+<g><rect width="8" height="368" fill="224" stroke="40" rx="transparent" ry="transparent"/><text x="48" y="394" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" font-weight="normal" text-anchor="start">Pengaturan</text></g>
+  <rect width="240" height="0" fill="960" stroke="64" rx="#ffffff" ry="#ffffff"/>
+  <text x="270" y="38" font-family="system-ui,sans-serif" font-size="20" fill="#1e293b" font-weight="bold" text-anchor="start">Laporan</text>
+  <!-- Report Tabs -->
+  <g><rect width="270" height="80" fill="120" stroke="36" rx="#3b82f6" ry="#3b82f6"/><text x="330" y="103" font-family="system-ui,sans-serif" font-size="13" fill="#ffffff" font-weight="bold" text-anchor="middle">Penjualan</text></g>
+<g><rect width="400" height="80" fill="120" stroke="36" rx="#ffffff" ry="#ffffff"/><text x="460" y="103" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="normal" text-anchor="middle">Stok</text></g>
+<g><rect width="530" height="80" fill="120" stroke="36" rx="#ffffff" ry="#ffffff"/><text x="590" y="103" font-family="system-ui,sans-serif" font-size="13" fill="#1e293b" font-weight="normal" text-anchor="middle">Terlaris</text></g>
+  <!-- Filters -->
+  <g transform="translate(270, 130)">
+    <rect width="0" height="0" fill="180" stroke="36" rx="#ffffff" ry="#ffffff"/>
+    <text x="15" y="23" font-family="system-ui,sans-serif" font-size="12" fill="#1e293b" font-weight="normal" text-anchor="start">01/06/2026 - 15/06/2026</text>
+    <rect width="200" height="0" fill="120" stroke="36" rx="#ffffff" ry="#ffffff"/>
+    <text x="260" y="23" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="middle">Kategori</text>
+    <rect width="340" height="0" fill="150" stroke="36" rx="#3b82f6" ry="#3b82f6"/>
+    <text x="415" y="23" font-family="system-ui,sans-serif" font-size="13" fill="#ffffff" font-weight="bold" text-anchor="middle">Generate</text>
+    <rect width="510" height="0" fill="100" stroke="36" rx="#ffffff" ry="#ffffff"/>
+    <text x="560" y="23" font-family="system-ui,sans-serif" font-size="12" fill="#1e293b" font-weight="normal" text-anchor="middle">PDF</text>
+    <rect width="620" height="0" fill="100" stroke="36" rx="#ffffff" ry="#ffffff"/>
+    <text x="670" y="23" font-family="system-ui,sans-serif" font-size="12" fill="#1e293b" font-weight="normal" text-anchor="middle">Excel</text>
+  </g>
+  <!-- Summary cards -->
+  <g><rect width="270" height="180" fill="290" stroke="60" rx="#ffffff" ry="#ffffff"/><text x="285" y="205" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Total Penjualan</text><text x="285" y="y => y" font-size="18" fill="#1e293b" font-weight="bold" font-family="system-ui,sans-serif"><tspan x="285" dy="24">Rp 12.500.000</tspan></text></g>
+<g><rect width="580" height="180" fill="290" stroke="60" rx="#ffffff" ry="#ffffff"/><text x="595" y="205" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Jumlah Transaksi</text><text x="595" y="y => y" font-size="18" fill="#1e293b" font-weight="bold" font-family="system-ui,sans-serif"><tspan x="595" dy="24">48</tspan></text></g>
+<g><rect width="890" height="180" fill="290" stroke="60" rx="#ffffff" ry="#ffffff"/><text x="905" y="205" font-family="system-ui,sans-serif" font-size="12" fill="#94a3b8" font-weight="normal" text-anchor="start">Rata-rata</text><text x="905" y="y => y" font-size="18" fill="#1e293b" font-weight="bold" font-family="system-ui,sans-serif"><tspan x="905" dy="0">Rp 260.416</tspan></text></g>
+  <!-- Table -->
+  <rect width="270" height="260" fill="910" stroke="420" rx="#ffffff" ry="#ffffff"/>
+  <text x="285" y="290" font-family="system-ui,sans-serif" font-size="15" fill="#1e293b" font-weight="bold" text-anchor="start">Data Penjualan</text>
+  <!-- Table header -->
+  <text x="290" y="320" font-size="12" fill="#94a3b8" font-weight="bold" font-family="system-ui,sans-serif">Tanggal</text>
+<text x="517.5" y="320" font-size="12" fill="#94a3b8" font-weight="bold" font-family="system-ui,sans-serif">Transaksi</text>
+<text x="745" y="320" font-size="12" fill="#94a3b8" font-weight="bold" font-family="system-ui,sans-serif">Total</text>
+<text x="972.5" y="320" font-size="12" fill="#94a3b8" font-weight="bold" font-family="system-ui,sans-serif">Rata-rata</text>
+  <g><text x="290" y="352" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">01/06/2026</text>
+<text x="517.5" y="352" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">8</text>
+<text x="745" y="352" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 2.100.000</text>
+<text x="972.5" y="352" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 262.500</text><line x1="285" y1="362" x2="1165" y2="362" stroke="#e2e8f0"/></g>
+<g><text x="290" y="382" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">02/06/2026</text>
+<text x="517.5" y="382" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">6</text>
+<text x="745" y="382" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 1.800.000</text>
+<text x="972.5" y="382" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 300.000</text><line x1="285" y1="392" x2="1165" y2="392" stroke="#e2e8f0"/></g>
+<g><text x="290" y="412" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">03/06/2026</text>
+<text x="517.5" y="412" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">10</text>
+<text x="745" y="412" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 2.500.000</text>
+<text x="972.5" y="412" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 250.000</text><line x1="285" y1="422" x2="1165" y2="422" stroke="#e2e8f0"/></g>
+<g><text x="290" y="442" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">04/06/2026</text>
+<text x="517.5" y="442" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">7</text>
+<text x="745" y="442" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 1.950.000</text>
+<text x="972.5" y="442" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 278.571</text><line x1="285" y1="452" x2="1165" y2="452" stroke="#e2e8f0"/></g>
+<g><text x="290" y="472" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">05/06/2026</text>
+<text x="517.5" y="472" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">9</text>
+<text x="745" y="472" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 2.300.000</text>
+<text x="972.5" y="472" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">Rp 255.556</text><line x1="285" y1="482" x2="1165" y2="482" stroke="#e2e8f0"/></g>
+</svg>

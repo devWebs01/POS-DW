@@ -1,0 +1,60 @@
+@startuml flowchart-sistem
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam handwritten false
+
+start
+
+:User membuka aplikasi;
+
+:Sistem menampilkan halaman login;
+
+:User memasukkan email dan password;
+
+if (Kredensial valid?) then (Ya)
+  if (2FA aktif?) then (Ya)
+    :Tampilkan halaman 2FA;
+    :User input OTP code;
+    if (OTP valid?) then (Ya)
+      :Buat session user;
+      :Redirect ke dashboard;
+    else (Tidak)
+      :Tampilkan error "Invalid OTP";
+      stop
+    endif
+  else (Tidak)
+    :Buat session user;
+    :Redirect ke dashboard;
+  endif
+else (Tidak)
+  :Tampilkan error "Invalid credentials";
+  stop
+endif
+
+:Tampilkan dashboard;
+
+partition "Menu Utama" {
+  if (User memilih menu?) then (Master Data)
+    :Kelola Kategori/Produk;
+  elseif (Transaksi)
+    :Buka halaman POS;
+    :Pilih produk;
+    :Input pembayaran;
+    :Proses transaksi;
+    :Update stok;
+    :Cetak struk;
+  elseif (Laporan)
+    :Filter data laporan;
+    :Generate laporan;
+    :Export PDF/Excel;
+  elseif (Settings)
+    :Ubah konfigurasi;
+  elseif (Logout)
+    :Hapus session;
+    stop
+  endif
+}
+
+:Kembali ke dashboard;
+
+@enduml
