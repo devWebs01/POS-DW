@@ -1,0 +1,19 @@
+flowchart TD
+  start((Mulai))
+  A_A["Admin: Pilih menu Settings Toko"]
+  start --> A_A
+  S_A["Sistem: Tampilkan halaman settings"]
+  A_A --> S_A
+  A_B["Admin: Ubah nama toko, alamat, telepon, logo"]
+  S_A --> A_B
+  A_C["Admin: Klik tombol Simpan"]
+  A_B --> A_C
+  S_B["Sistem: Validasi input"]
+  A_C --> S_B
+  D_A{{"Data valid?"}}
+  S_B --> D_A
+  D_A -->|Tidak| E_A["Sistem: Tampilkan error validasi"]
+  E_A --> A_B
+  D_A -->|Ya| S_C["Sistem: Simpan pengaturan ke database"]
+  S_C --> S_D["Sistem: Tampilkan notifikasi sukses"]
+  S_D --> end_success([Selesai])

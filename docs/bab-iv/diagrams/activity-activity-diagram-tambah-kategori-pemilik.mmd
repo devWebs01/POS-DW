@@ -1,0 +1,23 @@
+flowchart TD
+  start((Mulai))
+  A_A["Pemilik: Pilih menu Kategori"]
+  start --> A_A
+  S_A["Sistem: Tampilkan halaman daftar kategori"]
+  A_A --> S_A
+  A_B["Pemilik: Klik tombol Tambah"]
+  S_A --> A_B
+  S_B["Sistem: Tampilkan form tambah kategori"]
+  A_B --> S_B
+  A_C["Pemilik: Isi nama kategori"]
+  S_B --> A_C
+  A_D["Pemilik: Klik tombol Simpan"]
+  A_C --> A_D
+  S_C["Sistem: Validasi input"]
+  A_D --> S_C
+  D_A{{"Data valid?"}}
+  S_C --> D_A
+  D_A -->|Tidak| E_A["Sistem: Tampilkan error validasi"]
+  E_A --> A_C
+  D_A -->|Ya| S_D["Sistem: Simpan kategori ke database"]
+  S_D --> S_E["Sistem: Tampilkan notifikasi sukses"]
+  S_E --> end_success([Selesai])

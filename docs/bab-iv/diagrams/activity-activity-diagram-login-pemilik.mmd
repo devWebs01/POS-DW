@@ -1,0 +1,33 @@
+flowchart TD
+  start((Mulai))
+  A_A["Pemilik: Buka halaman login"]
+  start --> A_A
+  S_A["Sistem: Tampilkan form login"]
+  A_A --> S_A
+  A_B["Pemilik: Input email dan password"]
+  S_A --> A_B
+  A_C["Pemilik: Klik tombol Login"]
+  A_B --> A_C
+  S_B["Sistem: Validasi format input"]
+  A_C --> S_B
+  D_A{"Format valid?"}
+  S_B --> D_A
+  D_A -->|Tidak| E_A["Sistem: Tampilkan error validasi"]
+  E_A --> A_B
+  D_A -->|Ya| S_C["Sistem: Cek kredensial ke database"]
+  S_C --> D_B{"Kredensial cocok?"}
+  D_B -->|Tidak| E_B["Sistem: Tampilkan error email/password salah"]
+  E_B --> A_B
+  D_B -->|Ya| S_D["Sistem: Cek status 2FA"]
+  S_D --> D_C{"2FA aktif?"}
+  D_C -->|Tidak| S_G
+  D_C -->|Ya| S_E["Sistem: Tampilkan form OTP"]
+  S_E --> A_D["Pemilik: Input kode OTP dari authenticator"]
+  A_D --> A_E["Pemilik: Submit OTP"]
+  A_E --> S_F["Sistem: Validasi OTP"]
+  S_F --> D_D{"OTP valid?"}
+  D_D -->|Tidak| E_C["Sistem: Tampilkan error OTP tidak valid"]
+  E_C --> A_D
+  D_D -->|Ya| S_G["Sistem: Buat session dan redirect ke dashboard"]
+  S_G --> A_F["Pemilik: Masuk ke halaman dashboard"]
+  A_F --> end_success([Selesai])

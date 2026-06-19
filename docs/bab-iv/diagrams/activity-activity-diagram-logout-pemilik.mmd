@@ -1,0 +1,12 @@
+flowchart TD
+  start((Mulai))
+  A_A["Pemilik: Klik menu Logout"]
+  start --> A_A
+  S_A["Sistem: Tampilkan dialog konfirmasi logout"]
+  A_A --> S_A
+  D_A{"Konfirmasi logout?"}
+  S_A --> D_A
+  D_A -->|Tidak| end_cancel([Selesai])
+  D_A -->|Ya| S_B["Sistem: Hapus session user"]
+  S_B --> S_C["Sistem: Redirect ke halaman login"]
+  S_C --> end_success([Selesai])

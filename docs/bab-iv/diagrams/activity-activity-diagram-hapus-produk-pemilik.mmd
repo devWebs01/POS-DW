@@ -1,0 +1,18 @@
+flowchart TD
+  start((Mulai))
+  A_A["Pemilik: Pilih menu Produk"]
+  start --> A_A
+  S_A["Sistem: Tampilkan halaman daftar produk"]
+  A_A --> S_A
+  A_B["Pemilik: Pilih produk yang akan dihapus"]
+  S_A --> A_B
+  A_C["Pemilik: Klik tombol Hapus"]
+  A_B --> A_C
+  S_B["Sistem: Tampilkan dialog konfirmasi"]
+  A_C --> S_B
+  D_A{{"Konfirmasi hapus?"}}
+  S_B --> D_A
+  D_A -->|Tidak| end_cancel([Selesai])
+  D_A -->|Ya| S_C["Sistem: Hapus produk dari database"]
+  S_C --> S_D["Sistem: Tampilkan notifikasi sukses"]
+  S_D --> end_success([Selesai])

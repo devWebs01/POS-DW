@@ -1,0 +1,26 @@
+flowchart TD
+  start((Mulai))
+  A_A["Admin: Pilih menu Produk"]
+  start --> A_A
+  S_A["Sistem: Tampilkan halaman daftar produk"]
+  A_A --> S_A
+  A_B["Admin: Klik tombol Tambah"]
+  S_A --> A_B
+  S_B["Sistem: Tampilkan form tambah produk"]
+  A_B --> S_B
+  A_C["Admin: Isi nama, SKU, harga, stok, kategori"]
+  S_B --> A_C
+  A_D["Admin: Upload gambar produk (opsional)"]
+  A_C --> A_D
+  A_E["Admin: Klik tombol Simpan"]
+  A_D --> A_E
+  S_C["Sistem: Validasi input"]
+  A_E --> S_C
+  D_A{{"Data valid?"}}
+  S_C --> D_A
+  D_A -->|Tidak| E_A["Sistem: Tampilkan error validasi"]
+  E_A --> A_C
+  D_A -->|Ya| S_D["Sistem: Simpan produk ke database"]
+  S_D --> S_E["Sistem: Simpan gambar ke storage"]
+  S_E --> S_F["Sistem: Tampilkan notifikasi sukses"]
+  S_F --> end_success([Selesai])

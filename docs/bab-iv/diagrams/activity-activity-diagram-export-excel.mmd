@@ -1,0 +1,23 @@
+flowchart TD
+  start((Mulai))
+  A_A["Admin: Pada halaman laporan, klik Export Excel"]
+  start --> A_A
+  S_A["Sistem: Generate Excel dengan PhpSpreadsheet"]
+  A_A --> S_A
+  S_B["Sistem: Buat worksheet dan header"]
+  S_A --> S_B
+  S_C["Sistem: Isi data laporan"]
+  S_B --> S_C
+  S_D["Sistem: Format cells, borders, colors"]
+  S_C --> S_D
+  S_E["Sistem: Auto-size column width"]
+  S_D --> S_E
+  S_F["Sistem: Output file XLSX"]
+  S_E --> S_F
+  S_G["Sistem: Download file ke browser"]
+  S_F --> S_G
+  A_B["Admin: Simpan file Excel"]
+  S_G --> A_B
+  A_C["Admin: Buka dan review file"]
+  A_B --> A_C
+  end_success([Selesai])

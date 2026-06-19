@@ -1,0 +1,28 @@
+flowchart TD
+  start((Mulai))
+  A_A["Pemilik: Pilih menu Laporan"]
+  start --> A_A
+  S_A["Sistem: Tampilkan halaman laporan"]
+  A_A --> S_A
+  A_B["Pemilik: Pilih jenis laporan (Penjualan/Stok/Terlaris)"]
+  S_A --> A_B
+  S_B["Sistem: Tampilkan form filter"]
+  A_B --> S_B
+  A_C["Pemilik: Set periode tanggal"]
+  S_B --> A_C
+  A_D["Pemilik: Klik Generate Report"]
+  A_C --> A_D
+  S_C["Sistem: Validasi input"]
+  A_D --> S_C
+  D_A{{"Data filter valid?"}}
+  S_C --> D_A
+  D_A -->|Tidak| E_A["Sistem: Tampilkan error validasi"]
+  E_A --> A_C
+  D_A -->|Ya| S_D["Sistem: Query data dari database"]
+  S_D --> D_B{{"Ada data?"}}
+  D_B -->|Tidak| E_B["Sistem: Tampilkan pesan tidak ada data"]
+  E_B --> end_empty([Selesai])
+  D_B -->|Ya| S_E["Sistem: Format data dan tampilkan tabel"]
+  S_E --> S_F["Sistem: Tampilkan grafik dan summary"]
+  S_F --> A_E["Pemilik: Review hasil laporan"]
+  A_E --> end_success([Selesai])

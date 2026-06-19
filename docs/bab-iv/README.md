@@ -17,7 +17,7 @@ docs/
 ├── 4.5-implementasi-sistem.md              ← Sub-bab 4.5 (Implementasi Sistem)
 ├── 4.6-pengujian-sistem.md                 ← Sub-bab 4.6 (Pengujian Sistem)
 └── bab-iv/
-    ├── diagrams/           ← Diagram PlantUML (10 files)
+    ├── diagrams/           ← Diagram Mermaid (44 files)
     ├── images/             ← Screenshot aplikasi
     └── tables/             ← Tabel-tabel pendukung
 ```
@@ -37,18 +37,15 @@ docs/
 
 ## Diagram Tersedia (di `diagrams/`)
 
-| File | Tipe | Deskripsi |
-|------|------|-----------|
-| `flowchart-sistem.mmd` | Flowchart | Alur sistem keseluruhan |
-| `usecase-diagram.mmd` | Use Case | 23 use case, 2 aktor |
-| `activity-login.mmd` | Activity | Proses login dengan 2FA |
-| `activity-transaksi.mmd` | Activity | Proses transaksi POS |
-| `activity-laporan.mmd` | Activity | Generate dan export laporan |
-| `sequence-login.mmd` | Sequence | Interaksi login (6 objek) |
-| `sequence-transaksi.mmd` | Sequence | Interaksi transaksi (6 objek) |
-| `sequence-laporan.mmd` | Sequence | Interaksi generate laporan |
-| `class-diagram.mmd` | Class | 8 class model + relasi |
-| `erd.mmd` | ERD | 10 entitas database |
+| Direktori/File | Tipe | Jumlah | Deskripsi |
+|----------------|------|--------|-----------|
+| `flowchart-sistem.mmd` | Flowchart | 1 | Alur sistem keseluruhan |
+| `usecase-diagram.mmd` | Use Case | 1 | 23 use case, 2 aktor |
+| `activity-*.mmd` (Admin) | Activity | 20 | Login, Logout, CRUD Kategori, CRUD Produk, Transaksi, Riwayat, CRUD User, Role, Settings, Profil, Password, Laporan, Export |
+| `activity-*.mmd` (Pemilik) | Activity | 14 | Login, Logout, CRUD Kategori, CRUD Produk, Riwayat, Laporan, Export, Profil, Password |
+| `sequence-*.mmd` | Sequence | 3 | Login, Transaksi, Laporan |
+| `class-diagram.mmd` | Class | 1 | 8 class model + relasi |
+| `erd.mmd` | ERD | 1 | 12 entitas database |
 
 ## Cara Render Diagram (Mermaid.js)
 

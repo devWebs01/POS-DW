@@ -1,0 +1,21 @@
+flowchart TD
+  start((Mulai))
+  A_A["Pemilik: Pada halaman laporan, klik Export PDF"]
+  start --> A_A
+  S_A["Sistem: Generate PDF dengan library TCPDF"]
+  A_A --> S_A
+  S_B["Sistem: Set header dengan logo toko"]
+  S_A --> S_B
+  S_C["Sistem: Format tabel laporan"]
+  S_B --> S_C
+  S_D["Sistem: Tambah nomor halaman dan timestamp"]
+  S_C --> S_D
+  S_E["Sistem: Output file PDF"]
+  S_D --> S_E
+  S_F["Sistem: Download file ke browser"]
+  S_E --> S_F
+  A_B["Pemilik: Simpan file PDF"]
+  S_F --> A_B
+  A_C["Pemilik: Buka dan review file"]
+  A_B --> A_C
+  end_success([Selesai])

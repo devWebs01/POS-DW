@@ -1,0 +1,58 @@
+flowchart TD
+  start((Mulai))
+  A_A["Admin: Buka halaman transaksi POS"]
+  start --> A_A
+  S_A["Sistem: Tampilkan interface POS dengan daftar produk"]
+  A_A --> S_A
+  S_B["Sistem: Inisialisasi keranjang kosong"]
+  S_A --> S_B
+  A_B["Admin: Cari produk berdasarkan nama/SKU"]
+  S_B --> A_B
+  S_C["Sistem: Filter produk real-time"]
+  A_B --> S_C
+  S_D["Sistem: Tampilkan hasil pencarian"]
+  S_C --> S_D
+  A_C["Admin: Pilih produk"]
+  S_D --> A_C
+  S_E["Sistem: Cek ketersediaan stok"]
+  A_C --> S_E
+  D_A{{"Stok tersedia?"}}
+  S_E --> D_A
+  D_A -->|Tidak| E_A["Sistem: Tampilkan notifikasi stok habis"]
+  E_A --> A_B
+  D_A -->|Ya| S_F["Sistem: Tambah ke keranjang, quantity = 1"]
+  S_F --> D_B{{"Admin ingin ubah quantity?"}}
+  D_B -->|Tidak| S_I
+  D_B -->|Ya| A_D["Admin: Input quantity baru"]
+  A_D --> S_G["Sistem: Validasi quantity"]
+  S_G --> D_C{{"Quantity <= stok?"}}
+  D_C -->|Tidak| E_B["Sistem: Tampilkan error melebihi stok"]
+  E_B --> A_D
+  D_C -->|Ya| S_H["Sistem: Hitung subtotal"]
+  S_H --> S_I["Sistem: Update total keranjang"]
+  S_I --> D_D{{"Ada produk lain?"}}
+  D_D -->|Ya| A_B
+  D_D -->|Tidak| A_E["Admin: Input nama customer"]
+  A_E --> A_F["Admin: Pilih metode pembayaran"]
+  A_F --> S_J["Sistem: Tampilkan total amount"]
+  S_J --> A_G["Admin: Input jumlah pembayaran"]
+  A_G --> S_K["Sistem: Validasi pembayaran"]
+  S_K --> D_E{{"Pembayaran cukup?"}}
+  D_E -->|Tidak| E_C["Sistem: Tampilkan error pembayaran kurang"]
+  E_C --> A_G
+  D_E -->|Ya| S_L["Sistem: Hitung kembalian"]
+  S_L --> S_M["Sistem: Tampilkan kembalian"]
+  S_M --> A_H["Admin: Konfirmasi transaksi"]
+  A_H --> A_I["Admin: Klik Process Payment"]
+  A_I --> S_N["Sistem: Mulai database transaction"]
+  S_N --> S_O["Sistem: Generate nomor invoice"]
+  S_O --> S_P["Sistem: Simpan data transaksi"]
+  S_P --> S_Q["Sistem: Simpan item transaksi"]
+  S_Q --> S_R["Sistem: Kurangi stok setiap produk"]
+  S_R --> S_S["Sistem: Commit transaction"]
+  S_S --> S_T["Sistem: Generate struk PDF"]
+  S_T --> S_U["Sistem: Tampilkan notifikasi sukses"]
+  S_U --> A_J["Admin: Klik Print untuk mencetak struk"]
+  A_J --> S_V["Sistem: Cetak/download struk"]
+  S_V --> S_W["Sistem: Reset keranjang dan form"]
+  S_W --> end_success([Selesai])
