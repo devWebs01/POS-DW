@@ -14,22 +14,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $admin = User::factory()->create([
-            'name' => 'Admin POS',
+            'name' => 'Admin Toko',
             'email' => 'admin@testing.com',
         ]);
-        $admin->assignRole('super-admin');
+        $admin->assignRole('admin');
 
         $pemilik = User::factory()->create([
-            'name' => 'pemilik Toko',
+            'name' => 'Pemilik Toko',
             'email' => 'pemilik@testing.com',
         ]);
         $pemilik->assignRole('pemilik');
-
-        $kasir = User::factory()->create([
-            'name' => 'Kasir Toko',
-            'email' => 'kasir@testing.com',
-        ]);
-        $kasir->assignRole('kasir');
 
         $this->call([
             CategorySeeder::class,

@@ -40,7 +40,7 @@ docs/
 | File | Tipe | Deskripsi |
 |------|------|-----------|
 | `flowchart-sistem.puml` | Flowchart | Alur sistem keseluruhan |
-| `usecase-diagram.puml` | Use Case | 23 use case, 3 aktor |
+| `usecase-diagram.puml` | Use Case | 23 use case, 2 aktor |
 | `activity-login.puml` | Activity | Proses login dengan 2FA |
 | `activity-transaksi.puml` | Activity | Proses transaksi POS |
 | `activity-laporan.puml` | Activity | Generate dan export laporan |

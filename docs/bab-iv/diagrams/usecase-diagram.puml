@@ -5,8 +5,7 @@ skinparam backgroundColor #FFFFFF
 left to right direction
 
 actor "Admin" as admin
-actor "Kasir" as kasir
-actor "Manager" as manager
+actor "Pemilik" as pemilik
 
 rectangle "Sistem POS DW" {
   
@@ -77,30 +76,18 @@ admin --> UC21
 admin --> UC22
 admin --> UC23
 
-' Kasir relationships
-kasir --> UC01
-kasir --> UC02
-kasir --> UC03
-kasir --> UC08
-kasir --> UC09
-kasir --> UC10
-kasir --> UC11
-kasir --> UC12
-kasir --> UC22
-kasir --> UC23
-
-' Manager relationships
-manager --> UC01
-manager --> UC02
-manager --> UC03
-manager --> UC12
-manager --> UC13
-manager --> UC14
-manager --> UC15
-manager --> UC16
-manager --> UC17
-manager --> UC22
-manager --> UC23
+' Pemilik relationships
+pemilik --> UC01
+pemilik --> UC02
+pemilik --> UC03
+pemilik --> UC12
+pemilik --> UC13
+pemilik --> UC14
+pemilik --> UC15
+pemilik --> UC16
+pemilik --> UC17
+pemilik --> UC22
+pemilik --> UC23
 
 ' Include relationships
 UC08 ..> UC09 : <<include>>

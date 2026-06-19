@@ -2,7 +2,7 @@
 !theme plain
 skinparam backgroundColor #FFFFFF
 
-|Kasir|
+|Admin|
 start
 :Buka halaman transaksi POS;
 
@@ -11,14 +11,14 @@ start
 :Load daftar produk;
 :Inisialisasi keranjang kosong;
 
-|Kasir|
+|Admin|
 :Cari produk (ketik nama/SKU);
 
 |Sistem|
 :Filter produk real-time;
 :Tampilkan hasil pencarian;
 
-|Kasir|
+|Admin|
 :Pilih produk;
 
 |Sistem|
@@ -31,7 +31,7 @@ else (Ya)
   :Tambahkan ke keranjang;
   :Set quantity = 1;
   
-  |Kasir|
+  |Admin|
   if (Ingin ubah quantity?) then (Ya)
     :Input quantity baru;
     
@@ -48,7 +48,7 @@ else (Ya)
   :Tampilkan total;
 endif
 
-|Kasir|
+|Admin|
 if (Ada produk lain?) then (Ya)
   :Pilih produk lagi;
   detach
@@ -61,7 +61,7 @@ endif
 |Sistem|
 :Tampilkan total amount;
 
-|Kasir|
+|Admin|
 :Input paid amount;
 
 |Sistem|
@@ -75,7 +75,7 @@ else (Ya)
   :Tampilkan kembalian;
 endif
 
-|Kasir|
+|Admin|
 :Konfirmasi transaksi;
 :Klik "Process Payment";
 
@@ -95,7 +95,7 @@ partition "Update Stok" {
 :Log transaksi berhasil;
 :Generate struk PDF;
 
-|Kasir|
+|Admin|
 :Review struk;
 :Klik "Print";
 
@@ -105,7 +105,7 @@ partition "Update Stok" {
 :Kosongkan keranjang;
 :Reset form;
 
-|Kasir|
+|Admin|
 :Serahkan struk ke customer;
 
 stop

@@ -35,37 +35,28 @@ class RolePermissionSeeder extends Seeder
             }
         }
 
-        $superAdmin = Role::findOrCreate('super-admin');
-        $superAdmin->syncPermissions($permissions);
+        $admin = Role::findOrCreate('admin');
+        $admin->syncPermissions($permissions);
 
         $pemilik = Role::findOrCreate('pemilik');
         $pemilik->syncPermissions(
-            $permissions->filter(fn ($p) => ! str($p)->startsWith('roles.')
-                && ! str($p)->startsWith('permissions.')
-            )
-        );
-
-        $kasir = Role::findOrCreate('kasir');
-        $kasir->syncPermissions(
-            $permissions->filter(fn ($p) => str($p)->startsWith('transactions.')
-                || $p === 'settings.profile'
+            $permissions->filter(fn ($p) =>
+                str($p)->startsWith('products.')
+                || str($p)->startsWith('categories.')
+                || $p === 'transactions.view'
+                || $p === 'reports.view'
             )
         );
 
         $adminUser = User::where('email', 'admin@testing.com')->first();
-        $pemilikUser = User::where('email', 'admin@testing.com')->first();
-        $kasirUser = User::where('email', 'kasir@testing.com')->first();
+        $pemilikUser = User::where('email', 'pemilik@testing.com')->first();
 
         if ($adminUser) {
-            $adminUser->assignRole('super-admin');
+            $adminUser->assignRole('admin');
         }
 
-        if ($adminUser) {
-            $adminUser->assignRole('pemilik');
-        }
-
-        if ($kasirUser) {
-            $kasirUser->assignRole('kasir');
+        if ($pemilikUser) {
+            $pemilikUser->assignRole('pemilik');
         }
     }
 }

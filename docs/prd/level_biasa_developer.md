@@ -3,14 +3,14 @@
 ## Fitur Utama
 
 1. **Manajemen Produk** — CRUD produk (nama, harga, stok, SKU)
-2. **Transaksi POS** — Kasir cepat dengan pilih produk, hitung total, terima pembayaran
+2. **Transaksi POS** — Admin cepat dengan pilih produk, hitung total, terima pembayaran
 3. **Manajemen Kategori** — Kategorisasi produk sederhana
 4. **Laporan Harian** — Rekap penjualan per hari
-5. **Manajemen Pengguna** — Role: admin dan kasir (dengan Fortify)
+5. **Manajemen Pengguna** — Role: admin dan pemilik (dengan Fortify)
 
 ## User Stories
 
-- Sebagai kasir, saya ingin memilih produk dan memproses pembayaran dengan cepat
+- Sebagai admin, saya ingin memilih produk dan memproses pembayaran dengan cepat
 - Sebagai admin, saya ingin menambah/mengubah produk dan kategorinya
 - Sebagai admin, saya ingin melihat laporan penjualan harian
 - Sebagai pengguna, saya ingin login dengan aman
@@ -23,7 +23,7 @@
 | FR-02 | Sistem dapat memproses transaksi dengan minimal 1 item  | HIGH      |
 | FR-03 | Sistem menghitung total dan kembalian secara otomatis   | HIGH      |
 | FR-04 | Sistem menyimpan riwayat transaksi                      | HIGH      |
-| FR-05 | Sistem mendukung role admin dan kasir                   | HIGH      |
+| FR-05 | Sistem mendukung role admin dan pemilik                   | HIGH      |
 | FR-06 | Sistem dapat menampilkan laporan penjualan harian       | MEDIUM    |
 | FR-07 | Produk dapat difilter berdasarkan kategori              | MEDIUM    |
 | FR-08 | Stok otomatis berkurang saat transaksi                  | HIGH      |

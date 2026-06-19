@@ -2,7 +2,7 @@
 !theme plain
 skinparam backgroundColor #FFFFFF
 
-|User (Manager/Admin)|
+|User (Pemilik/Admin)|
 start
 :Buka halaman laporan;
 

@@ -2,7 +2,7 @@
 !theme plain
 skinparam backgroundColor #FFFFFF
 
-actor Kasir
+actor Admin
 participant Browser
 participant "Livewire\nTransactionComponent" as Livewire
 participant "Transaction\nModel" as TrxModel
@@ -10,7 +10,7 @@ participant "Product\nModel" as ProdModel
 participant "TransactionItem\nModel" as ItemModel
 database MySQL
 
-Kasir -> Browser: Akses halaman POS
+Admin -> Browser: Akses halaman POS
 Browser -> Livewire: Mount component
 Livewire -> ProdModel: Product::with('category')\n->where('is_active', true)\n->get()
 ProdModel -> MySQL: SELECT products.*, categories.*\nWHERE is_active = 1
@@ -18,12 +18,12 @@ MySQL --> ProdModel: Product list
 ProdModel --> Livewire: Collection
 Livewire --> Browser: Render POS interface\n+ product list
 
-Kasir -> Browser: Ketik di search box
+Admin -> Browser: Ketik di search box
 Browser -> Livewire: wire:model.live="search"
 Livewire -> Livewire: Filter products by search term
 Livewire --> Browser: Update product list (real-time)
 
-Kasir -> Browser: Klik produk
+Admin -> Browser: Klik produk
 Browser -> Livewire: wire:click="addToCart($productId)"
 
 Livewire -> ProdModel: Product::find($productId)
@@ -33,28 +33,28 @@ MySQL --> ProdModel: Product data
 Livewire -> Livewire: Check stock availability
 alt Stok habis
   Livewire --> Browser: Emit notification\n"Stok tidak tersedia"
-  Browser --> Kasir: Tampilkan toast error
+  Browser --> Admin: Tampilkan toast error
 else Stok tersedia
   Livewire -> Livewire: Add to $cart array\n$cart[$productId] = [\n  'product' => $product,\n  'qty' => 1,\n  'subtotal' => $price\n]
   Livewire -> Livewire: Calculate total
   Livewire --> Browser: Update cart view\n+ total amount
 end
 
-Kasir -> Browser: Ubah quantity
+Admin -> Browser: Ubah quantity
 Browser -> Livewire: wire:model="cart.*.qty"
 Livewire -> Livewire: Validate qty <= stock
 Livewire -> Livewire: Recalculate subtotal & total
 Livewire --> Browser: Update amounts
 
-Kasir -> Browser: Input customer name
+Admin -> Browser: Input customer name
 Browser -> Livewire: wire:model="customerName"
 
-Kasir -> Browser: Input paid amount
+Admin -> Browser: Input paid amount
 Browser -> Livewire: wire:model="paidAmount"
 Livewire -> Livewire: Calculate change\n$change = $paid - $total
 Livewire --> Browser: Display change amount
 
-Kasir -> Browser: Klik "Process Payment"
+Admin -> Browser: Klik "Process Payment"
 Browser -> Livewire: wire:click="processPayment()"
 
 Livewire -> Livewire: Validate:\n- cart not empty\n- customer name filled\n- paid >= total
@@ -81,11 +81,11 @@ Livewire -> Livewire: Generate invoice PDF
 Livewire -> Livewire: Log transaction
 
 Livewire --> Browser: Emit success\n+ PDF download link
-Browser --> Kasir: Tampilkan notifikasi sukses\n+ auto download struk
+Browser --> Admin: Tampilkan notifikasi sukses\n+ auto download struk
 
-Kasir -> Browser: Klik "Print Struk"
+Admin -> Browser: Klik "Print Struk"
 Browser -> Browser: window.print()
-Browser --> Kasir: Dialog print
+Browser --> Admin: Dialog print
 
 Livewire -> Livewire: Reset cart\nReset form
 Livewire --> Browser: Clear interface\nReady for next transaction
