@@ -1,0 +1,50 @@
+sequenceDiagram
+  actor Pemilik
+  participant Browser
+  participant Livewire as Livewire ReportComponent
+  participant TrxModel as Transaction Model
+  participant ProdModel as Product Model
+  participant PDF as PDF Generator
+  participant XLSX as Excel Generator
+
+  Pemilik->>Browser: Akses halaman laporan
+  Browser->>Livewire: Mount ReportComponent
+  Livewire-->>Browser: Render halaman laporan
+
+  Pemilik->>Browser: Pilih jenis laporan
+  Pemilik->>Browser: Set date range (start_date, end_date)
+  Pemilik->>Browser: Pilih filter kategori (opsional)
+  Pemilik->>Browser: Klik Generate Report
+  Browser->>Livewire: wire:click generateReport(filter)
+  Livewire->>Livewire: validateDateRange()
+  alt Date range tidak valid
+    Livewire-->>Browser: Tampilkan error message
+  else Date range valid
+    alt Laporan Penjualan
+      Livewire->>TrxModel: getSalesReport(start, end, category)
+      TrxModel-->>Livewire: Data laporan penjualan
+    else Laporan Stok
+      Livewire->>ProdModel: getStockReport(category)
+      ProdModel-->>Livewire: Data laporan stok
+    else Laporan Produk Terlaris
+      Livewire->>TrxModel: getBestSellingProducts(start, end)
+      TrxModel-->>Livewire: Data produk terlaris
+    end
+    Livewire-->>Browser: Tampilkan hasil laporan + grafik
+  end
+
+  Pemilik->>Browser: Review hasil laporan
+  alt Pemilik ingin export
+    Pemilik->>Browser: Pilih format export (PDF/Excel)
+    alt Format PDF
+      Browser->>Livewire: wire:click exportPDF()
+      Livewire->>PDF: generate(laporanData)
+      PDF-->>Livewire: File PDF
+      Livewire-->>Browser: Download file PDF
+    else Format Excel
+      Browser->>Livewire: wire:click exportExcel()
+      Livewire->>XLSX: generate(laporanData)
+      XLSX-->>Livewire: File XLSX
+      Livewire-->>Browser: Download file XLSX
+    end
+  end

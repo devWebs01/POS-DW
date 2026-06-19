@@ -1,0 +1,62 @@
+sequenceDiagram
+  actor Admin
+  participant Browser
+  participant Livewire as Livewire TransactionComponent
+  participant TrxModel as Transaction Model
+  participant ProdModel as Product Model
+  participant ItemModel as TransactionItem Model
+  participant DB as MySQL
+
+  Admin->>Browser: Akses halaman POS
+  Browser->>Livewire: Mount TransactionComponent
+  Livewire->>ProdModel: getActiveProductsWithCategories()
+  ProdModel-->>Livewire: Collection produk
+  Livewire-->>Browser: Render interface POS
+
+  Admin->>Browser: Ketik di search box
+  Browser->>Livewire: wire:model.live update
+  Livewire->>Livewire: filterProducts(keyword)
+  Livewire-->>Browser: Update daftar produk
+
+  Admin->>Browser: Klik produk
+  Browser->>Livewire: wire:click addToCart(productId)
+  Livewire->>ProdModel: findOrFail(productId)
+  ProdModel-->>Livewire: Product object
+  Livewire->>Livewire: validateStock(product)
+  alt Stok habis
+    Livewire-->>Browser: Toast error Stok habis
+  else Stok tersedia
+    Livewire->>Livewire: tambah ke cart session
+    Livewire-->>Browser: Update cart + total
+  end
+
+  Admin->>Browser: Ubah quantity
+  Browser->>Livewire: wire:click updateQuantity
+  Livewire->>Livewire: recalculateSubtotal
+  Livewire-->>Browser: Update subtotal + total
+
+  Admin->>Browser: Input customer name
+  Admin->>Browser: Input paid amount
+  Browser->>Livewire: wire:model update fields
+
+  Admin->>Browser: Klik Process Payment
+  Browser->>Livewire: wire:click processPayment()
+  Livewire->>Livewire: validatePayment()
+  alt Pembayaran kurang
+    Livewire-->>Browser: Error Pembayaran kurang
+  else Pembayaran cukup
+    Livewire->>DB: DB::beginTransaction()
+    Livewire->>TrxModel: create(transaction data)
+    TrxModel-->>Livewire: Transaction object
+    loop Setiap item di cart
+      Livewire->>ItemModel: create(item data)
+      Livewire->>ProdModel: decrementStock(productId, qty)
+    end
+    Livewire->>DB: DB::commit()
+    Livewire->>Livewire: generateInvoiceNumber()
+    Livewire->>Livewire: generateReceipt()
+    Livewire-->>Browser: Notifikasi sukses + auto download struk
+  end
+
+  Admin->>Browser: Klik Print Struk
+  Browser-->>Admin: Dialog print

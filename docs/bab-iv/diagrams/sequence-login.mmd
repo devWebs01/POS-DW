@@ -1,0 +1,59 @@
+sequenceDiagram
+  actor User
+  participant Browser
+  participant Router as Laravel Router
+  participant Auth as Fortify AuthController
+  participant Model as User Model
+  participant DB as MySQL
+
+  User->>Browser: Akses halaman login
+  Browser->>Router: GET /login
+  Router->>Browser: Tampilkan form login
+  User->>Browser: Input email & password, Klik Login
+  Browser->>Router: POST /login {email, password, _token}
+  Router->>Auth: Validasi CSRF token
+  Auth->>Auth: Validasi format email
+  Auth->>Auth: Validasi password required
+  Auth->>Model: Attempt login where(email)
+  Model->>DB: SELECT * FROM users WHERE email = ?
+  DB-->>Model: User data
+
+  alt User tidak ditemukan
+    Model-->>Auth: null
+    Auth-->>Browser: 422 Validation Error
+    Browser-->>User: Tampilkan error
+  else User ditemukan
+    Model-->>Auth: User object
+    Auth->>Auth: Hash::check(password, user->password)
+    alt Password salah
+      Auth-->>Browser: 422 Validation Error
+      Browser-->>User: Tampilkan error
+    else Password benar
+      alt 2FA aktif
+        Auth->>DB: SELECT two_factor_secret FROM users
+        DB-->>Auth: Secret exists
+        Auth-->>Browser: Redirect /two-factor-challenge
+        Browser-->>User: Tampilkan form OTP
+        User->>Browser: Input 6-digit OTP
+        Browser->>Router: POST /two-factor-challenge
+        Router->>Auth: Validasi OTP
+        Auth->>Auth: Google2FA::verifyKey(secret, code)
+        alt OTP tidak valid
+          Auth-->>Browser: 422 Validation Error
+          Browser-->>User: Tampilkan error
+        else OTP valid
+          Auth->>Auth: Auth::login(user)
+        end
+      else 2FA tidak aktif
+        Auth->>Auth: Auth::login(user)
+      end
+      Auth->>DB: INSERT INTO sessions
+      DB-->>Auth: Session created
+      Auth->>Auth: Regenerate session ID
+      Auth->>Auth: Log login activity
+      Auth-->>Browser: 302 Redirect /dashboard
+      Browser->>Router: GET /dashboard
+      Router->>Browser: Dashboard view
+      Browser-->>User: Tampilkan dashboard
+    end
+  end

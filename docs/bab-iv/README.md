@@ -39,27 +39,28 @@ docs/
 
 | File | Tipe | Deskripsi |
 |------|------|-----------|
-| `flowchart-sistem.puml` | Flowchart | Alur sistem keseluruhan |
-| `usecase-diagram.puml` | Use Case | 23 use case, 2 aktor |
-| `activity-login.puml` | Activity | Proses login dengan 2FA |
-| `activity-transaksi.puml` | Activity | Proses transaksi POS |
-| `activity-laporan.puml` | Activity | Generate dan export laporan |
-| `sequence-login.puml` | Sequence | Interaksi login (6 objek) |
-| `sequence-transaksi.puml` | Sequence | Interaksi transaksi (6 objek) |
-| `sequence-laporan.puml` | Sequence | Interaksi generate laporan |
-| `class-diagram.puml` | Class | 8 class model + relasi |
-| `erd.puml` | ERD | 10 entitas database |
+| `flowchart-sistem.mmd` | Flowchart | Alur sistem keseluruhan |
+| `usecase-diagram.mmd` | Use Case | 23 use case, 2 aktor |
+| `activity-login.mmd` | Activity | Proses login dengan 2FA |
+| `activity-transaksi.mmd` | Activity | Proses transaksi POS |
+| `activity-laporan.mmd` | Activity | Generate dan export laporan |
+| `sequence-login.mmd` | Sequence | Interaksi login (6 objek) |
+| `sequence-transaksi.mmd` | Sequence | Interaksi transaksi (6 objek) |
+| `sequence-laporan.mmd` | Sequence | Interaksi generate laporan |
+| `class-diagram.mmd` | Class | 8 class model + relasi |
+| `erd.mmd` | ERD | 10 entitas database |
 
-## Cara Render Diagram
+## Cara Render Diagram (Mermaid.js)
 
 ```bash
-# Menggunakan Java (PlantUML standalone)
-java -jar plantuml.jar docs/bab-iv/diagrams/*.puml
+# VS Code: Install extension "Markdown Preview Mermaid Support"
+# Buka file .mmd, preview langsung
 
-# Atau via VS Code: Install extension "PlantUML"
-# Buka file .puml, tekan Alt+D untuk preview
+# Atau via CLI (npx):
+npx @mermaid-js/mermaid-cli docs/bab-iv/diagrams/*.mmd
 
-# Atau via online: https://www.plantuml.com/plantuml/uml/
+# Atau via online: https://mermaid.live/
+# Paste konten .mmd untuk render dan export PNG/SVG
 ```
 
 ---
@@ -68,4 +69,4 @@ java -jar plantuml.jar docs/bab-iv/diagrams/*.puml
 
 - **Format output final:** Copy dari Markdown ke Word/LaTeX dengan penyesuaian template kampus
 - **Screenshot:** Ambil dari aplikasi yang running, simpan di `images/`
-- **Diagram:** Generate PNG dari file .puml untuk dimasukkan ke Word
+- **Diagram:** Render Mermaid (.mmd) via editor atau `npx @mermaid-js/mermaid-cli` untuk export PNG

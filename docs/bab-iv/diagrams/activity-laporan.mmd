@@ -1,0 +1,60 @@
+flowchart TD
+  User1["User (Pemilik/Admin)"]
+  Sistem1["Sistem"]
+  User2["User"]
+  Sistem2["Sistem"]
+  User3["User"]
+  Sistem3["Sistem"]
+  User4["User"]
+  User5["User"]
+  User6["User"]
+  Sistem4["Sistem"]
+  Sistem5["Sistem"]
+
+  User1 --> A1[Buka halaman laporan]
+  A1 --> Sistem1
+  Sistem1 --> B1[Tampilkan interface laporan]
+  B1 --> B2[Tampilkan pilihan jenis laporan]
+  B2 --> User2
+  User2 --> C1{Pilih jenis laporan}
+  C1 -->|Penjualan| C2[Pilih Laporan Penjualan]
+  C1 -->|Stok| C3[Pilih Laporan Stok]
+  C1 -->|Produk Terlaris| C4[Pilih Laporan Produk Terlaris]
+  C2 --> Sistem2
+  C3 --> Sistem2
+  C4 --> Sistem2
+  Sistem2 --> D1[Tampilkan form filter]
+  D1 --> User3
+  User3 --> E1[Set date range]
+  E1 --> E2{Filter kategori?}
+  E2 -->|Ya| E3[Pilih kategori]
+  E2 -->|Tidak| E4{Filter produk?}
+  E3 --> E4
+  E4 -->|Ya| E5[Pilih produk spesifik]
+  E4 -->|Tidak| E6[Klik Generate Report]
+  E5 --> E6
+  E6 --> Sistem3
+  Sistem3 --> F1[Validasi input]
+  F1 --> F2{Date range valid?}
+  F2 -->|Tidak| F3[Tampilkan error<br>Rentang tanggal tidak valid]
+  F3 --> Stop1[stop]
+  F2 -->|Ya| F4[Query & Format data]
+  F4 --> F5{Ada data?}
+  F5 -->|Tidak| F6[Tampilkan pesan<br>Tidak ada data]
+  F6 --> Stop2[stop]
+  F5 -->|Ya| F7[Tampilkan tabel hasil]
+  F7 --> F8[Tampilkan chart & summary]
+  F8 --> User4
+  User4 --> G1[Review hasil laporan]
+  G1 --> G2{Ingin export?}
+  G2 -->|Tidak| Stop3[stop]
+  G2 -->|Ya| G3[Pilih format export]
+  G3 --> H1{Format?}
+  H1 -->|PDF| I1[Generate PDF]
+  I1 --> I2[Download file]
+  H1 -->|Excel| J1[Generate Excel]
+  J1 --> J2[Download file]
+  I2 --> User5
+  J2 --> User5
+  User5 --> K1[Simpan dan review file]
+  K1 --> Stop4[stop]

@@ -155,7 +155,7 @@ Sistem POS DW mengadopsi arsitektur **MVC (Model-View-Controller)** dengan enhan
 ## Catatan Penggunaan
 
 1. **Diagram UML:** Semua diagram sudah tersedia dalam dua format:
-   - **PNG** (siap pakai) di `docs/bab-iv/diagrams/*.png`
+   - **MMD** (Mermaid.js, render via editor/cli) di `docs/bab-iv/diagrams/*.mmd`
    - **PlantUML** (dapat diedit) di `docs/bab-iv/diagrams/*.puml`
 
 2. **Tabel Data:** Tabel-tabel pendukung disimpan di `docs/bab-iv/tables/`:
